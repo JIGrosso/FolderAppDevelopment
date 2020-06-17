@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:card="clr-namespace:FolderApp.Views.ItemsView"
+             mc:Ignorable="d"
+             x:Class="FolderApp.Views.NoticiasPage">
+
+    <NavigationPage.TitleView>
+        <Label Text="Folder App"
+               Style="{StaticResource TitleLabel}"/>
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+            <Frame BackgroundColor="{StaticResource purpleColor}"
+                   CornerRadius="5">
+                <Label Text="Noticias" Style="{StaticResource TitleLabel}"/>
+            </Frame>
+            <ListView x:Name="listView"
+                      HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <card:CardView Margin="5, 10, 5, 10"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
