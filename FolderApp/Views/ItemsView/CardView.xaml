@@ -27,7 +27,7 @@
             <StackLayout Margin="5">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="2"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
@@ -37,7 +37,6 @@
                            FontSize="Medium"
                            FontAttributes="Bold"/>
                     <BoxView Color="Gray"
-                             HeightRequest="2"
                              HorizontalOptions="Fill"
                              Grid.Row="1"/>
                     <Label Grid.Row="2"

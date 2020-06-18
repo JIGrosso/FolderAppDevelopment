@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
+using WordPressPCL;
+using WordPressPCL.Models;
 
 namespace FolderApp.Model
 {
@@ -32,7 +35,7 @@ namespace FolderApp.Model
             set { password = value; }
         }
 
-        public static bool Login(string username, string password)
+        public static async Task<bool> Login(string username, string password)
         {
             bool isUsernameEmpty = string.IsNullOrEmpty(username);
             bool isPasswordEmpty = string.IsNullOrEmpty(password);
@@ -45,8 +48,15 @@ namespace FolderApp.Model
             {
                 //Verifico los datos del usuario contra la BD. Obtengo el objeto usuario y debo verificar las password.
 
-                //Simula la obtención del usuario de la BD
+                // JWT authentication
+                //var client = new WordPressClient("http://192.168.0.7:8080/wp-json/");
+                //client.AuthMethod = AuthMethod.JWT;
+                //await client.RequestJWToken(username, password);
+                //App.client = client;
+
                 var user = new User();
+
+                //Obtener datos de client y crear objeto user
                 user.Username = "Juani";
                 user.Password = "asd";
                 user.Token = "asdasfdsgnsern124123sfa";

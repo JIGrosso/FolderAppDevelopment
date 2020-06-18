@@ -28,7 +28,7 @@ namespace FolderApp.Views
             base.OnAppearing();
 
             var post = new Post();
-            post.Title = "Titulo de prueba";
+            post.Title = "Lanzamiento a producción de la App B2K – Gestya para Brasil";
             post.PostedDate = DateTime.Today;
             post.Section = "RRHHPage";
 

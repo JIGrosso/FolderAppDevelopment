@@ -1,5 +1,6 @@
 ﻿using FolderApp.Model;
 using System;
+using WordPressPCL;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,6 +8,8 @@ namespace FolderApp
 {
     public partial class App : Application
     {
+        public static WordPressClient client;
+
         public static User user = new User();
 
         public App()

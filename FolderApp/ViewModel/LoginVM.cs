@@ -76,7 +76,7 @@ namespace FolderApp.ViewModel
 
         public async void Login()
         {
-            bool loginSuccess = User.Login(User.Username, User.Password);
+            bool loginSuccess = await User.Login(User.Username, User.Password);
 
             if(loginSuccess)
             {
