@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace FolderApp.Views
+namespace FolderApp.Views.SideMenu
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SideMenu : MasterDetailPage
@@ -20,7 +20,7 @@ namespace FolderApp.Views
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var item = e.SelectedItem as SideMenuMasterMenuItem;
+            var item = e.SelectedItem as MasterMenuItem;
             if (item == null)
                 return;
 

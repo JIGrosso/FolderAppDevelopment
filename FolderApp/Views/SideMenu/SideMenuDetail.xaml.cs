@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace FolderApp.Views
+namespace FolderApp.Views.SideMenu
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SideMenuDetail : ContentPage

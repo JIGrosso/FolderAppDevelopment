@@ -1,11 +1,13 @@
 ﻿using FolderApp.Model;
 using FolderApp.Views;
+using FolderApp.Views.SideMenu;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Text;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace FolderApp.ViewModel
 {
@@ -80,7 +82,12 @@ namespace FolderApp.ViewModel
 
             if(loginSuccess)
             {
-                await App.Current.MainPage.Navigation.PushAsync(new NoticiasPage());
+
+                App.Current.MainPage = new MasterDetailPage()
+                {
+                    Master = new SideMenuMaster(),
+                    Detail = new NavigationPage(new NoticiasPage())
+                };
             }
             else
             {

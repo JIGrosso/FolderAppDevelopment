@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FolderApp.Views
+namespace FolderApp.Views.SideMenu
 {
 
-    public class SideMenuMasterMenuItem
+    public class MasterMenuItem
     {
-        public SideMenuMasterMenuItem()
+        public MasterMenuItem()
         {
-            TargetType = typeof(SideMenuMasterMenuItem);
+            TargetType = typeof(MasterMenuItem);
         }
         public int Id { get; set; }
         public string Title { get; set; }

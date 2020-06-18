@@ -4,24 +4,44 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="FolderApp.LoginPage">
+             x:Class="FolderApp.LoginPage"
+             Title="">
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="CenterAndExpand" 
-                     VerticalOptions="Center"
-                     Margin="20">
+        <StackLayout VerticalOptions="Center">
             <Label Text="Folder App"
-                   FontSize="28"
-                   FontFamily="Raleway"/>
-            <Label Text="Acceso a la cuenta"/>
-            <Entry Placeholder="Nombre de usuario"
+                   FontSize="38"
+                   FontFamily=""
+                   HorizontalOptions="Center"/>
+            <StackLayout HorizontalOptions="CenterAndExpand" 
+                     VerticalOptions="Center"
+                     Margin="0">
+                <Frame CornerRadius="10"
+                       BackgroundColor="{StaticResource purpleColor}">
+                    <Label Text="Acceso a la cuenta"
+                           Style="{StaticResource TitleLabel}"/>
+                </Frame>
+                <Frame>
+                    <StackLayout Margin="10">
+                        <Entry Placeholder="Nombre de usuario"
                    Text="{Binding Username, Mode=TwoWay}"/>
-            <Entry Placeholder="Contraseña"
+                        <Entry Placeholder="Contraseña"
                    IsPassword="True"
                    Text="{Binding Password, Mode=TwoWay}"/>
-            <CheckBox />
-            <Button x:Name="loginButton"
-                    Text="Acceder"
-                    Clicked="loginButton_Clicked"/>
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox Color="{StaticResource purpleColor}"/>
+                            <Label Text="Recuerdame"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="Medium"/>
+                        </StackLayout>
+                        <Button x:Name="loginButton"
+                                Text="Acceder"
+                                Clicked="loginButton_Clicked"
+                                BackgroundColor="{StaticResource purpleColor}"
+                                TextColor="White"
+                                CornerRadius="10"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

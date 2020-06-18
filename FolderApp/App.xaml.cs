@@ -1,4 +1,6 @@
 ﻿using FolderApp.Model;
+using FolderApp.Views;
+using FolderApp.Views.SideMenu;
 using System;
 using WordPressPCL;
 using Xamarin.Forms;
@@ -16,7 +18,13 @@ namespace FolderApp
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new LoginPage();
+            //MainPage = new MasterDetailPage()
+            //{
+            //    Master = new SideMenuDetail(),
+            //    Detail = new NavigationPage(new LoginPage())
+            //};
+
         }
 
         protected override void OnStart()

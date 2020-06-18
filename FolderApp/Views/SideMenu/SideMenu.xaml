@@ -4,8 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="FolderApp.Views.SideMenu"
-             xmlns:pages="clr-namespace:FolderApp.Views">
+             x:Class="FolderApp.Views.SideMenu.SideMenu"
+             xmlns:pages="clr-namespace:FolderApp.Views.SideMenu">
   <MasterDetailPage.Master>
     <pages:SideMenuMaster x:Name="MasterPage" />
   </MasterDetailPage.Master>

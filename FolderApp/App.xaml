@@ -10,7 +10,7 @@
             <Color x:Key="purpleColor">#6f1850</Color>
 
             <Style x:Key="TitleLabel" TargetType="Label">
-                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontSize" Value="20" />
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
