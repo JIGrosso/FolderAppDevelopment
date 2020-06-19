@@ -5,6 +5,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="FolderApp.Views.SocialPage">
+
+    <NavigationPage.TitleView>
+        <Label Text="Social"
+               Style="{StaticResource TitleLabel}"/>
+    </NavigationPage.TitleView>
+
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Noticias de Sociales"

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace FolderApp.Model
 {
@@ -49,6 +50,18 @@ namespace FolderApp.Model
                 content = value;
             }
         }
+
+        private Image postImage;
+
+        public Image PostImage
+        {
+            get { return postImage; }
+            set
+            {
+                postImage = value;
+            }
+        }
+
 
 
     }

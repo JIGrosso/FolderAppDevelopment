@@ -16,21 +16,33 @@ namespace FolderApp.Views.SideMenu
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SideMenuMaster : ContentPage
     {
-        public ListView ListView;
+        SideMenuMasterVM viewModel;
 
         public SideMenuMaster()
         {
+
             InitializeComponent();
 
-            BindingContext = new SideMenuMasterVM();
-            ListView = MenuItemsListView;
-        }
+            viewModel = new SideMenuMasterVM();
 
+            BindingContext = viewModel;
+        }
 
         private void MenuItemsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var aux = e.SelectedItem;
-            //(App.Current.MainPage as MasterDetailPage).Detail.Navigation.PushAsync();
+            var item = e.SelectedItem as MasterMenuItem;
+
+            if(item != null)
+            {
+                viewModel.Navigate(item);
+                MenuItemsList.SelectedItem = null;
+            }
+
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new LoginPage();
         }
     }
 

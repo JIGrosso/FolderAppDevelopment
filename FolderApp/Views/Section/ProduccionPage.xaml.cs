@@ -14,6 +14,8 @@ namespace FolderApp.Views
     {
         public ProduccionPage()
         {
+            ((App.Current.MainPage as MasterDetailPage).Detail as NavigationPage).BarBackgroundColor = Color.FromHex("#F6B109");
+
             InitializeComponent();
         }
     }

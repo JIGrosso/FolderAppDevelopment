@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,14 +9,18 @@ using WordPressPCL.Models;
 
 namespace FolderApp.Model
 {
-    public class User
+    public class User : INotifyPropertyChanged
     {
         private string token;
 
         public string Token
         {
             get { return token; }
-            set { token = value; }
+            set
+            {
+                token = value;
+                OnPropertyChanged("Token");
+            }
         }
 
 
@@ -24,7 +29,11 @@ namespace FolderApp.Model
         public string Username
         {
             get { return username; }
-            set { username = value; }
+            set
+            {
+                username = value;
+                OnPropertyChanged("Username");
+            }
         }
 
         private string password;
@@ -32,8 +41,21 @@ namespace FolderApp.Model
         public string Password
         {
             get { return password; }
-            set { password = value; }
+            set
+            {
+                password = value;
+                OnPropertyChanged("Password");
+            }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if(PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
 
         public static async Task<bool> Login(string username, string password)
         {

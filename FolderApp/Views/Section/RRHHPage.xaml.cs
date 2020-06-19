@@ -14,6 +14,8 @@ namespace FolderApp.Views
     {
         public RRHHPage()
         {
+            ((App.Current.MainPage as MasterDetailPage).Detail as NavigationPage).BarBackgroundColor = Color.FromHex("#6F1850");
+
             InitializeComponent();
         }
     }

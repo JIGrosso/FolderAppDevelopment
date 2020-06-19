@@ -14,6 +14,8 @@ namespace FolderApp.Views
     {
         public SocialPage()
         {
+            ((App.Current.MainPage as MasterDetailPage).Detail as NavigationPage).BarBackgroundColor = Color.FromHex("#51AC4F");
+
             InitializeComponent();
         }
     }

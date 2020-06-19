@@ -14,12 +14,13 @@
 
     <ContentPage.Content>
         <StackLayout Margin="10">
-            <Frame BackgroundColor="{StaticResource purpleColor}"
+            <Frame BackgroundColor="{StaticResource greyColor}"
                    CornerRadius="5">
                 <Label Text="Noticias" Style="{StaticResource TitleLabel}"/>
             </Frame>
             <ListView x:Name="listView"
-                      HasUnevenRows="True">
+                      HasUnevenRows="True"
+                      ItemsSource="{Binding Posts}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

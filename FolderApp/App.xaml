@@ -8,6 +8,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="purpleColor">#6f1850</Color>
+            <Color x:Key="greyColor">#686868</Color>
 
             <Style x:Key="TitleLabel" TargetType="Label">
                 <Setter Property="FontSize" Value="20" />

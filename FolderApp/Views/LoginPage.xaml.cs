@@ -21,7 +21,6 @@ namespace FolderApp
         {
             InitializeComponent();
 
-            var assembly = typeof(LoginPage);
             viewModel = new LoginVM();
             BindingContext = viewModel;
 
