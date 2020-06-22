@@ -1,4 +1,5 @@
 ﻿using FolderApp.Model;
+using FolderApp.ViewModel.Section;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace FolderApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CapacitacionesPage : ContentPage
     {
-        Post post;
+        CapacitacionesVM viewModel;
 
         public CapacitacionesPage()
         {
@@ -21,8 +22,8 @@ namespace FolderApp.Views
 
             InitializeComponent();
 
-            post = new Post();
-            BindingContext = post;
+            viewModel = new CapacitacionesVM();
+            BindingContext = viewModel;
         }
 
         protected override void OnAppearing()

@@ -1,4 +1,5 @@
 ﻿using FolderApp.Model;
+using FolderApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -49,6 +50,10 @@ namespace FolderApp.ViewModel
                 }
             }
         }
-        
+
+        public void Expand(object item)
+        {
+            (App.Current.MainPage as MasterDetailPage).Detail.Navigation.PushAsync(new PostPage(item as Post));
+        }
     }
 }

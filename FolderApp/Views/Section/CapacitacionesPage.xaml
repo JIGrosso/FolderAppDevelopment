@@ -13,9 +13,10 @@
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="5, 10">
             <ListView x:Name="CapacitacionesListView"
-                      HasUnevenRows="True">
+                      HasUnevenRows="True"
+                      ItemsSource="{Binding PostsCapacitaciones}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

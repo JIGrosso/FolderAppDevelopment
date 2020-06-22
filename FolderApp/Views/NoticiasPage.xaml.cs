@@ -31,5 +31,10 @@ namespace FolderApp.Views
             viewModel.UpdatePosts();
             
         }
+
+        private void listView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            viewModel.Expand(e.Item);
+        }
     }
 }

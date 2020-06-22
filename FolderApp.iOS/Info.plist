@@ -34,5 +34,10 @@
     <string>FolderApp</string>
     <key>XSAppIconAssets</key>
     <string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Fonts/Raleway-Italic.ttf</string>
+		<string>Fonts/Raleway-Bold.ttf</string>
+	</array>
 </dict>
 </plist>

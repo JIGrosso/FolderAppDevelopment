@@ -12,6 +12,7 @@
                Style="{StaticResource TitleLabel}"/>
     </NavigationPage.TitleView>
 
+
     <ContentPage.Content>
         <StackLayout Margin="10">
             <Frame BackgroundColor="{StaticResource greyColor}"
@@ -20,7 +21,8 @@
             </Frame>
             <ListView x:Name="listView"
                       HasUnevenRows="True"
-                      ItemsSource="{Binding Posts}">
+                      ItemsSource="{Binding Posts}"
+                      ItemTapped="listView_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

@@ -10,7 +10,7 @@
         <StackLayout VerticalOptions="Center">
             <Label Text="Folder App"
                    FontSize="38"
-                   FontFamily=""
+                   FontFamily="{StaticResource RalewayBold}"
                    HorizontalOptions="Center"/>
             <StackLayout HorizontalOptions="CenterAndExpand" 
                      VerticalOptions="Center"

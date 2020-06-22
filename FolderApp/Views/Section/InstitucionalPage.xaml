@@ -14,7 +14,7 @@
 
     <ContentPage.Content>
         <StackLayout Margin="5, 10">
-            <ListView x:Name="CapacitacionesListView"
+            <ListView x:Name="InstitucionalesListView"
                       HasUnevenRows="True"
                       ItemsSource="{Binding PostsInstitucionales}">
                 <ListView.ItemTemplate>

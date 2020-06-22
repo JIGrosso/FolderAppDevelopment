@@ -6,14 +6,21 @@
              mc:Ignorable="d"
              x:Class="FolderApp.Views.PostPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="TITULO" />
-            <Frame>
-                <Label Text="Seccion"/>
-            </Frame>
-            <Label Text="Descripcion"/>
-            <Label Text="Fecha"/>
+        <StackLayout HorizontalOptions="CenterAndExpand"
+                     Margin="5,10">
+            <Image Source="{Binding PostImage.Source}" 
+                   HeightRequest="150"
+                   Aspect="AspectFit"/>
+            <Label Text="{Binding Title, Mode=TwoWay}" 
+                   Style="{StaticResource PostTitle}"/>
+            <Label Text="{Binding Section, Mode=TwoWay}"
+                   Style="{StaticResource SectionTitle}"/>
+            <Label Text="{Binding Content, Mode=TwoWay}"/>
+            <Label Text="{Binding PostedDate}"/>
             <Label Text="Comentarios"/>
+            <ListView x:Name="CommentsListView">
+                
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
