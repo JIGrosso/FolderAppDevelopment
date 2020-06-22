@@ -67,24 +67,36 @@ namespace FolderApp.Model
                 return false;
             }
             else
-            {
-                //Verifico los datos del usuario contra la BD. Obtengo el objeto usuario y debo verificar las password.
+            {           
+                try
+                {
+                    // JWT authentication
+                    var client = new WordPressClient("http://192.168.0.7:8080/wp-json/");
+                    client.AuthMethod = AuthMethod.JWT;
+                    await client.RequestJWToken(username, password);
+                    var isValidToken = await client.IsValidJWToken();
+                    if (isValidToken)
+                    {
+                        App.client = client;
 
-                // JWT authentication
-                //var client = new WordPressClient("http://192.168.0.7:8080/wp-json/");
-                //client.AuthMethod = AuthMethod.JWT;
-                //await client.RequestJWToken(username, password);
-                //App.client = client;
+                        var user = new User();
 
-                var user = new User();
+                        //Obtener datos de client y crear objeto user
+                        user.Username = "Juani";
+                        user.Password = "asd";
+                        user.Token = "asdasfdsgnsern124123sfa";
+                        App.user = user;
 
-                //Obtener datos de client y crear objeto user
-                user.Username = "Juani";
-                user.Password = "asd";
-                user.Token = "asdasfdsgnsern124123sfa";
-                App.user = user;
-
-                return true;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                } catch(Exception ex)
+                {
+                    return false;
+                }
             }
         }
 

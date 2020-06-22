@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace FolderApp.Model
@@ -63,6 +64,29 @@ namespace FolderApp.Model
         }
 
 
+        public static async Task<List<Post>> UpdatePosts()
+        {
+            try
+            {
+                List<Post> returningPosts = new List<Post>();
+
+                var posts = await App.client.Posts.GetAll();
+
+                foreach(var aux in posts)
+                {
+                    //Obtengo todos los datos del post y los agrego a returningPosts
+
+                }
+
+                return returningPosts;
+
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "Ok");
+                return null;
+            }
+        }
 
     }
 }

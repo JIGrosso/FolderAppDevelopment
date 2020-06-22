@@ -18,9 +18,15 @@ namespace FolderApp.ViewModel
             Posts = new ObservableCollection<Post>();
         }
 
-        public void UpdatePosts()
+        public async void UpdatePosts()
         {
             ((App.Current.MainPage as MasterDetailPage).Detail as NavigationPage).BarBackgroundColor = Color.FromHex("#6F1850");
+
+            List<Post> posts = new List<Post>();
+
+            posts = await Post.UpdatePosts();
+
+            //Provisional
 
             var post = new Post();
             post.Title = "Lanzamiento a producción de la App B2K – Gestya para Brasil";
@@ -37,9 +43,10 @@ namespace FolderApp.ViewModel
             post2.PostedDate = DateTime.Today;
             post2.Section = "RRHHPage";
 
-            List<Post> posts = new List<Post>();
             posts.Add(post);
             posts.Add(post2);
+
+            //Agrego a la ObservableCollection
 
             if(posts != null)
             {
@@ -48,6 +55,10 @@ namespace FolderApp.ViewModel
                 {
                     Posts.Add(x);
                 }
+            }
+            else // == null => Error
+            {
+                //Vuelva a intentarlo
             }
         }
 
