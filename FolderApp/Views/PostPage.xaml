@@ -3,24 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:comment="clr-namespace:FolderApp.Views.ItemsView"
              mc:Ignorable="d"
              x:Class="FolderApp.Views.PostPage">
+
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="CenterAndExpand"
-                     Margin="5,10">
-            <Image Source="{Binding PostImage.Source}" 
-                   HeightRequest="150"
-                   Aspect="AspectFit"/>
-            <Label Text="{Binding Title, Mode=TwoWay}" 
-                   Style="{StaticResource PostTitle}"/>
-            <Label Text="{Binding Section, Mode=TwoWay}"
-                   Style="{StaticResource SectionTitle}"/>
-            <Label Text="{Binding Content, Mode=TwoWay}"/>
-            <Label Text="{Binding PostedDate}"/>
-            <Label Text="Comentarios"/>
-            <ListView x:Name="CommentsListView">
-                
-            </ListView>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout HorizontalOptions="CenterAndExpand"
+                         Margin="5,10">
+                <Image Source="{Binding PostImage.Source}" 
+                       HeightRequest="150"
+                       Aspect="AspectFit"/>
+                <Label Text="{Binding Title, Mode=TwoWay}"
+                       Style="{StaticResource PostTitle}"/>
+                <Label Text="{Binding Section, Mode=TwoWay}"
+                       Style="{StaticResource SectionTitle}"/>
+                <Label Text="{Binding Content, Mode=TwoWay}"
+                       VerticalOptions="FillAndExpand"/>
+                <Label Text="{Binding PostedDate}"
+                       HorizontalOptions="EndAndExpand"/>
+                <Label Text="Comentarios"
+                       Style="{StaticResource SectionTitle}"/>
+                <ListView x:Name="CommentsListView"
+                          HasUnevenRows="True"
+                          ItemsSource="{Binding CommentsList}"
+                          HeightRequest="{Binding Height}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <comment:CommentView Margin="5, 10" />
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <StackLayout Orientation="Horizontal">
+                    <Entry Placeholder="Escriba un comentario"
+                           HorizontalOptions="FillAndExpand"/>
+                    <Button Text="Comentar" />
+                </StackLayout>             
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
+
+
 </ContentPage>

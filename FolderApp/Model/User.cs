@@ -71,13 +71,13 @@ namespace FolderApp.Model
                 try
                 {
                     // JWT authentication
-                    var client = new WordPressClient("http://192.168.0.7:8080/wp-json/");
-                    client.AuthMethod = AuthMethod.JWT;
-                    await client.RequestJWToken(username, password);
-                    var isValidToken = await client.IsValidJWToken();
-                    if (isValidToken)
-                    {
-                        App.client = client;
+                    //var client = new WordPressClient("http://192.168.0.7:8080/wp-json/");
+                    //client.AuthMethod = AuthMethod.JWT;
+                    //await client.RequestJWToken(username, password);
+                    //var isValidToken = await client.IsValidJWToken();
+                    //if (isValidToken)
+                    //{
+                    //    App.client = client;
 
                         var user = new User();
 
@@ -88,11 +88,11 @@ namespace FolderApp.Model
                         App.user = user;
 
                         return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    //}
+                    //else
+                    //{
+                    //    return false;
+                    //}
                 } catch(Exception ex)
                 {
                     return false;

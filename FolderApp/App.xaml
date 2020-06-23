@@ -39,12 +39,14 @@
             <!--Posts-->
             <Style x:Key="PostTitle" TargetType="Label">
                 <Setter Property="FontSize" Value="Title" />
-                <Setter Property="FontAttributes" Value="Bold" />
+                <!--<Setter Property="FontAttributes" Value="Bold" />-->
+                <Setter Property="FontFamily" Value="{StaticResource RalewayBold}" />
             </Style>
 
             <Style x:Key="SectionTitle" TargetType="Label">
                 <Setter Property="FontSize" Value="Subtitle" />
-                <Setter Property="FontAttributes" Value="Italic" />
+                <!--<Setter Property="FontAttributes" Value="Italic" />-->
+                <Setter Property="FontFamily" Value="{StaticResource RalewayItalic}" />
             </Style>
 
         </ResourceDictionary>

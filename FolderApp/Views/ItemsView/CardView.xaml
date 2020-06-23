@@ -28,10 +28,10 @@
                     <BoxView Color="Gray"
                              HorizontalOptions="Fill"
                              Grid.Row="1"/>
-                    <Label Grid.Row="2"
-                           Text="{Binding Title}"
+                    <Label Text="{Binding Title}"
                            FontSize="Medium"
-                           FontAttributes="Bold"/>
+                           FontAttributes="Bold"
+                           Grid.Row="2"/>
                     <BoxView Color="Gray"
                              HorizontalOptions="Fill"
                              Grid.Row="3"/>

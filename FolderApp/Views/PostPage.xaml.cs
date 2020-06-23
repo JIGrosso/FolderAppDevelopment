@@ -1,5 +1,6 @@
 ﻿using FolderApp.Model;
 using FolderApp.ViewModel;
+using FolderApp.Views.ItemsView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +28,8 @@ namespace FolderApp.Views
             //TODO: Por ahora muestra bien el elemento con ese BindingContext, pero lo ideal sería utilizar el viewModel con el id del post a mostrar.
             //Traerlo desde la BD, y asignar las propiedades al VM, de esta forma se pueden manejar los cambios en los comentarios.
 
-            viewModel = new PostVM();
-            BindingContext = selectedPost;
+            viewModel = new PostVM(selectedPost);
+            BindingContext = viewModel;
         }
     }
 }

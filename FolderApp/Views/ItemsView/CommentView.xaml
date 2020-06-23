@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FolderApp.Views.ItemsView.CommentView">
+    
+    <ContentView.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="2" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Frame Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.RowSpan="4"
+                       CornerRadius="50"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center">
+                    <Image Source="{Binding ProfileIcon}" />
+                </Frame>
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       Text="{Binding AuthorName}" 
+                       HorizontalOptions="Start"/>
+                <Label Grid.Row="0"
+                       Grid.Column="2"
+                       Text="{Binding CommentDate}" 
+                       HorizontalOptions="End"/>
+                <BoxView Grid.Row="1"
+                         Grid.Column="1"
+                         Grid.ColumnSpan="2"
+                         Color="Gray"
+                         HorizontalOptions="Fill" />
+                <Label Grid.Row="2"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Text="{Binding Content}" />
+            </Grid>       
+        </StackLayout>
+    </ContentView.Content>
+    
+</ContentView>
