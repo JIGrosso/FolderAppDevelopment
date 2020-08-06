@@ -1,4 +1,5 @@
-﻿using FolderApp.ViewModel.SideMenu;
+﻿using FolderApp.Model;
+using FolderApp.ViewModel.SideMenu;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -42,7 +43,7 @@ namespace FolderApp.Views.SideMenu
 
         private async void Logout_TappedAsync(object sender, EventArgs e)
         {
-            //Logica de cierre de sesión
+            User.Logout();
 
             bool answer = await DisplayAlert("Cerrar sesión", "Esta seguro que desea cerrar sesión?", "Si", "No");
             if (answer) {

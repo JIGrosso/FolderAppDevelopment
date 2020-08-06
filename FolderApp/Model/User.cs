@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WordPressPCL;
 using WordPressPCL.Models;
+using Xamarin.Forms;
 
 namespace FolderApp.Model
 {
@@ -71,7 +72,7 @@ namespace FolderApp.Model
                 try     
                 {
                     //JWT authentication
-                    var client = new WordPressClient("http://192.168.100.14/wp-json/");
+                    var client = App.client;
                     await client.RequestJWToken(username, password);
                     bool isValidToken = await client.IsValidJWToken();
                     if (isValidToken)
@@ -86,13 +87,14 @@ namespace FolderApp.Model
                         user.Token = client.GetToken();
                         App.user = user;
 
+                        Application.Current.Properties["token"] = user.Token;
+
                         return true;
                     }
                     else
                     {
                         return false;
                     }
-                    return true;
                 } catch(Exception ex)
                 {
                     await App.Current.MainPage.DisplayAlert("Error", ex.Message, "Ok");
@@ -100,6 +102,12 @@ namespace FolderApp.Model
                     return false;
                 }
             }
+        }
+
+        public static void Logout()
+        {
+            Application.Current.Properties.Remove("token");
+            App.user = null;
         }
 
     }
