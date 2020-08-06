@@ -40,9 +40,14 @@ namespace FolderApp.Views.SideMenu
 
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private async void Logout_TappedAsync(object sender, EventArgs e)
         {
-            App.Current.MainPage = new LoginPage();
+            //Logica de cierre de sesión
+
+            bool answer = await DisplayAlert("Cerrar sesión", "Esta seguro que desea cerrar sesión?", "Si", "No");
+            if (answer) {
+                App.Current.MainPage = new LoginPage();
+            }
         }
     }
 

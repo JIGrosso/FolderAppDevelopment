@@ -47,15 +47,15 @@
                 </Grid>
             </ListView.Header>
         </ListView>
-        <Label x:Name="Cerrar"
-               Text="Cerrar" 
+        <Label x:Name="Logout"
+               Text="Cerrar Sesión" 
                FontSize="Large"
                VerticalOptions="End"
                HorizontalOptions="StartAndExpand"
                Margin="10"
-               TextColor="MediumVioletRed">
+               TextColor="Gray">
             <Label.GestureRecognizers>
-                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"
+                <TapGestureRecognizer Tapped="Logout_TappedAsync"
                                       NumberOfTapsRequired="1" />
             </Label.GestureRecognizers>
         </Label>

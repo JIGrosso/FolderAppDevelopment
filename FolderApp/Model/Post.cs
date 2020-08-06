@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace FolderApp.Model
 {
-    public class Post 
+    public class Post
     {
         private string title;
 
@@ -72,9 +72,21 @@ namespace FolderApp.Model
 
                 var posts = await App.client.Posts.GetAll();
 
-                foreach(var aux in posts)
+                foreach (var aux in posts)
                 {
-                    //Obtengo todos los datos del post y los agrego a returningPosts
+                    var image = await App.client.Media.GetByID(aux.FeaturedMedia, true, true);
+
+                    returningPosts.Add(new Post()
+                    {
+                        Title = aux.Title.Rendered,
+                        Content = aux.Content.Rendered,
+                        PostedDate = aux.Date,
+                        PostImage = new Image
+                        {
+                            Source = ImageSource.FromUri(new Uri(image.Link))
+                        },
+                        Section = aux.Categories[0].ToString() //TODO: revisar asignación de sección
+                    });
 
                 }
 

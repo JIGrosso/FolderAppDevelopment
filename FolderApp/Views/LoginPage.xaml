@@ -1,44 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="FolderApp.LoginPage"
-             Title="">
+<ContentPage
+    x:Class="FolderApp.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title=""
+    mc:Ignorable="d">
     <ContentPage.Content>
         <StackLayout VerticalOptions="Center">
-            <Label Text="Folder App"
-                   FontSize="38"
-                   FontFamily="{StaticResource RalewayBold}"
-                   HorizontalOptions="Center"/>
-            <StackLayout HorizontalOptions="CenterAndExpand" 
-                     VerticalOptions="Center"
-                     Margin="0">
-                <Frame CornerRadius="10"
-                       BackgroundColor="{StaticResource purpleColor}">
-                    <Label Text="Acceso a la cuenta"
-                           Style="{StaticResource TitleLabel}"/>
+            <Label
+                FontFamily="{StaticResource RalewayBold}"
+                FontSize="38"
+                HorizontalOptions="Center"
+                Text="Folder App" />
+            <StackLayout
+                Margin="0"
+                Padding="50,20,50,20"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Center">
+                <Frame BackgroundColor="{StaticResource purpleColor}" CornerRadius="10">
+                    <Label Style="{StaticResource TitleLabel}" Text="Acceso a la cuenta" />
                 </Frame>
                 <Frame>
-                    <StackLayout Margin="10">
-                        <Entry Placeholder="Nombre de usuario"
-                   Text="{Binding Username, Mode=TwoWay}"/>
-                        <Entry Placeholder="Contraseña"
-                   IsPassword="True"
-                   Text="{Binding Password, Mode=TwoWay}"/>
-                        <StackLayout Orientation="Horizontal">
-                            <CheckBox Color="{StaticResource purpleColor}"/>
-                            <Label Text="Recuerdame"
-                                   VerticalTextAlignment="Center"
-                                   FontSize="Medium"/>
+                    <StackLayout Margin="5">
+                        <Entry Placeholder="Nombre de usuario" Text="{Binding Username, Mode=TwoWay}" />
+                        <Entry
+                            IsPassword="True"
+                            Placeholder="Contraseña"
+                            Text="{Binding Password, Mode=TwoWay}" />
+                        <StackLayout Padding="0,30,0,0" Orientation="Horizontal">
+                            <CheckBox Color="{StaticResource purpleColor}" />
+                            <Label
+                                FontSize="Medium"
+                                Text="Recuérdame"
+                                VerticalTextAlignment="Center" />
                         </StackLayout>
-                        <Button x:Name="loginButton"
-                                Text="Acceder"
-                                Clicked="loginButton_Clicked"
-                                BackgroundColor="{StaticResource purpleColor}"
-                                TextColor="White"
-                                CornerRadius="10"/>
+                        <Button
+                            x:Name="loginButton"
+                            BackgroundColor="{StaticResource purpleColor}"
+                            Clicked="loginButton_Clicked"
+                            CornerRadius="10"
+                            Text="Acceder"
+                            TextColor="White" />
                     </StackLayout>
                 </Frame>
             </StackLayout>

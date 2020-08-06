@@ -67,32 +67,31 @@ namespace FolderApp.Model
                 return false;
             }
             else
-            {           
-                try
+            { 
+                try     
                 {
                     //JWT authentication
-                    //var client = new WordPressClient("http://192.168.0.1:8080/wp-json/");
-                    //client.AuthMethod = AuthMethod.JWT;
-                    //await client.RequestJWToken(username, password);
-                    //bool isValidToken = await client.IsValidJWToken();
-                    //if (isValidToken)
-                    //{
-                    //    App.client = client;
+                    var client = new WordPressClient("http://192.168.100.14/wp-json/");
+                    await client.RequestJWToken(username, password);
+                    bool isValidToken = await client.IsValidJWToken();
+                    if (isValidToken)
+                    {
+                        App.client = client;
 
-                    //    var user = new User();
+                        var user = new User();
 
-                    //    //Obtener datos de client y crear objeto user
-                    //    user.Username = "Juani";
-                    //    user.Password = "asd";
-                    //    user.Token = "asdasfdsgnsern124123sfa";
-                    //    App.user = user;
+                        //Obtener datos de client y crear objeto user
+                        user.Username = username;
+                        user.Password = password;
+                        user.Token = client.GetToken();
+                        App.user = user;
 
-                    //    return true;
-                    //}
-                    //else
-                    //{
-                    //    return false;
-                    //}
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                     return true;
                 } catch(Exception ex)
                 {
