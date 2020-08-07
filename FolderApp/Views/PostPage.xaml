@@ -1,46 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:comment="clr-namespace:FolderApp.Views.ItemsView"
-             mc:Ignorable="d"
-             x:Class="FolderApp.Views.PostPage">
+<ContentPage
+    x:Class="FolderApp.Views.PostPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:comment="clr-namespace:FolderApp.Views.ItemsView"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
 
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout HorizontalOptions="CenterAndExpand"
-                         Margin="5,10">
-                <Image Source="{Binding PostImage.Source}" 
-                       HeightRequest="150"
-                       Aspect="AspectFit"/>
-                <Label Text="{Binding Title, Mode=TwoWay}"
-                       Style="{StaticResource PostTitle}"/>
-                <Label Text="{Binding Section, Mode=TwoWay}"
-                       Style="{StaticResource SectionTitle}"/>
-                <Label Text="{Binding Content, Mode=TwoWay}"
-                       VerticalOptions="FillAndExpand"/>
-                <Label Text="{Binding PostedDate}"
-                       HorizontalOptions="EndAndExpand"/>
-                <Label Text="Comentarios"
-                       Style="{StaticResource SectionTitle}"/>
-                <ListView x:Name="CommentsListView"
-                          HasUnevenRows="True"
-                          ItemsSource="{Binding CommentsList}"
-                          HeightRequest="{Binding Height}">
-                    <ListView.ItemTemplate>
+            <StackLayout
+                Margin="5,10"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="Start">
+                <Image
+                    Aspect="AspectFit"
+                    HeightRequest="120"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding Post.IsImageNotNull}"
+                    Source="{Binding Post.PostImage.Source}" />
+                <Label Style="{StaticResource PostTitle}" Text="{Binding Title, Mode=TwoWay}" />
+                <Label Style="{StaticResource SectionTitle}" Text="{Binding Section, Mode=TwoWay}" />
+                <Label Text="{Binding Content, Mode=TwoWay}" VerticalOptions="FillAndExpand" />
+                <Label HorizontalOptions="EndAndExpand" Text="{Binding PostedDate}" />
+                <Label Style="{StaticResource SectionTitle}" Text="Comentarios" />
+                <StackLayout
+                    BindableLayout.ItemsSource="{Binding CommentsList}"
+                    Orientation="Vertical"
+                    VerticalOptions="StartAndExpand">
+                    <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
-                                <comment:CommentView Margin="5, 10" />
-                            </ViewCell>
+                            <comment:CommentView Margin="5,10" />
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <StackLayout Orientation="Horizontal">
-                    <Entry Placeholder="Escriba un comentario"
-                           HorizontalOptions="FillAndExpand"/>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" VerticalOptions="End">
+                    <Entry HorizontalOptions="FillAndExpand" Placeholder="Escriba un comentario" />
                     <Button Text="Comentar" />
-                </StackLayout>             
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

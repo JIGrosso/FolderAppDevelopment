@@ -8,60 +8,17 @@ namespace FolderApp.Model
 {
     public class Post
     {
-        private string title;
+        public int Id { get; set; }
 
-        public string Title
-        {
-            get { return title; }
-            set
-            {
-                title = value;
-            }
-        }
+        public string Title { get; set; }
 
-        private DateTime postedDate;
+        public DateTime PostedDate { get; set; }
 
-        public DateTime PostedDate
-        {
-            get { return postedDate; }
-            set
-            {
-                postedDate = value;
-            }
-        }
+        public string Section { get; set; }
 
-        private string section;
+        public string Content { get; set; }
 
-        public string Section
-        {
-            get { return section; }
-            set
-            {
-                section = value;
-            }
-        }
-
-        private string content;
-
-        public string Content
-        {
-            get { return content; }
-            set
-            {
-                content = value;
-            }
-        }
-
-        private Image postImage;
-
-        public Image PostImage
-        {
-            get { return postImage; }
-            set
-            {
-                postImage = value;
-            }
-        }
+        public Image PostImage { get; set; }
 
         public bool IsImageNotNull
         {
@@ -91,6 +48,7 @@ namespace FolderApp.Model
 
                     returningPosts.Add(new Post()
                     {
+                        Id = aux.Id,
                         Title = aux.Title.Rendered,
                         Content = aux.Content.Rendered,
                         PostedDate = aux.Date,

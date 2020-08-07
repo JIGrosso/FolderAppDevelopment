@@ -13,40 +13,25 @@ namespace FolderApp.ViewModel
 {
     public class PostVM : INotifyPropertyChanged
     {
+        public int ListHeight { get; set; }
 
         public ObservableCollection<Comment> CommentsList { get; set; }
 
-        int count;
-
-        public PostVM ()
+        public PostVM()
         {
             CommentsList = new ObservableCollection<Comment>();
         }
 
         public PostVM(Post selectedPost)
         {
-            CommentsList = new ObservableCollection<Comment>();
-
             Post = selectedPost;
 
-            ReadComments(selectedPost.Title);
+            CommentsList = new ObservableCollection<Comment>();
 
-            Height = CommentsList.Count * 60;
-
-            ChangeListViewSizeCommand = new Command(ChangeListViewSize);
+            ReadComments(selectedPost.Id);
         }
 
-        private int height;
 
-        public int Height
-        {
-            get { return height; }
-            set
-            {
-                height = value;
-                OnPropertyChanged("Height");
-            }
-        }
 
         private Post post;
 
@@ -85,7 +70,7 @@ namespace FolderApp.ViewModel
             {
                 section = value;
                 OnPropertyChanged("Section");
-            }            
+            }
         }
 
         private string content;
@@ -102,7 +87,7 @@ namespace FolderApp.ViewModel
 
         private DateTime postedDate;
 
-        public DateTime PostedDate      
+        public DateTime PostedDate
         {
             get { return postedDate; }
             set
@@ -127,44 +112,15 @@ namespace FolderApp.ViewModel
             //Buscar post en BD
         }
 
-        public void ReadComments(string postId)
+        public async void ReadComments(int postId)
         {
-            //client.Comments.GetCommentsFor Post(postId)
-            var c1 = new Comment();
-            c1.AuthorName = "Juani";
-            c1.Content = "Comentario de prueba";
-            c1.CommentDate = DateTime.Today;
-
-            var c2 = new Comment();
-            c2.AuthorName = "Juani";
-            c2.Content = "Comentario de prueba";
-            c2.CommentDate = DateTime.Today;
-
-            var c3 = new Comment();
-            c3.AuthorName = "Juani";
-            c3.Content = "Comentario de prueba";
-            c3.CommentDate = DateTime.Today;
-
-            var c4 = new Comment();
-            c4.AuthorName = "Juani";
-            c4.Content = "Comentario de prueba";
-            c4.CommentDate = DateTime.Today;
-
-            CommentsList.Add(c1);
-            CommentsList.Add(c2);
-            CommentsList.Add(c3);
-            CommentsList.Add(c4);
-
-        }
-
-        public ICommand ChangeListViewSizeCommand { get; }
-
-        void ChangeListViewSize()
-        {
-            count = CommentsList.Count + 1;
-            //CommentsList.Add(new Comment() {});
-            Height = (CommentsList.Count * 40);
-            //(CommentsList.Count * 10)
+            var comments = await Comment.GetCommentsForPost(postId);
+            foreach (Comment comment in comments)
+            {
+                CommentsList.Add(comment);
+            }
+            ListHeight = (CommentsList.Count * 70) + (CommentsList.Count * 10);
+            OnPropertyChanged("ListHeight");
         }
     }
 }
