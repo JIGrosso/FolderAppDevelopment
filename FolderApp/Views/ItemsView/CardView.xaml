@@ -1,45 +1,52 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Name="this"
-             x:Class="FolderApp.Views.ItemsView.CardView">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="FolderApp.Views.ItemsView.CardView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="this"
+    mc:Ignorable="d">
 
     <ContentView.Content>
-        <Frame CornerRadius="10"
-               BorderColor="Gray"
-               Padding="8">
+        <Frame
+            Padding="8"
+            BorderColor="Gray"
+            CornerRadius="10">
             <StackLayout Margin="5">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="2"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="2"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="2" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="2" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Image Source="{Binding PostImage.Source}"
-                           Aspect="AspectFit"
-                           HorizontalOptions="FillAndExpand"
-                           HeightRequest="120"/>
-                    <BoxView Color="Gray"
-                             HorizontalOptions="Fill"
-                             Grid.Row="1"/>
-                    <Label Text="{Binding Title}"
-                           FontSize="Medium"
-                           FontAttributes="Bold"
-                           Grid.Row="2"/>
-                    <BoxView Color="Gray"
-                             HorizontalOptions="Fill"
-                             Grid.Row="3"/>
-                    <Label Grid.Row="4"
-                           Text="{Binding Section}"
-                           FontAttributes="Bold"/>
-                    <Label Grid.Row="5"
-                           Text="{Binding PostedDate}" />
+                    <Image
+                        Aspect="AspectFit"
+                        HeightRequest="120"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding IsImageNotNull}"
+                        Source="{Binding PostImage.Source}" />
+                    <BoxView
+                        Grid.Row="1"
+                        HorizontalOptions="Fill"
+                        Color="Gray" />
+                    <Label
+                        Grid.Row="2"
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        Text="{Binding Title}" />
+                    <BoxView
+                        Grid.Row="3"
+                        HorizontalOptions="Fill"
+                        Color="Gray" />
+                    <Label
+                        Grid.Row="4"
+                        FontAttributes="Bold"
+                        Text="{Binding Section}" />
+                    <Label Grid.Row="5" Text="{Binding PostedDate}" />
                 </Grid>
             </StackLayout>
         </Frame>

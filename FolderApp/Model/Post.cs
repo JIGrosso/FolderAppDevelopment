@@ -63,6 +63,11 @@ namespace FolderApp.Model
             }
         }
 
+        public bool IsImageNotNull
+        {
+            get { return PostImage != null; }
+        }
+
 
         public static async Task<List<Post>> UpdatePosts()
         {
@@ -74,18 +79,23 @@ namespace FolderApp.Model
 
                 foreach (var aux in posts)
                 {
-                    var image = await App.client.Media.GetByID(aux.FeaturedMedia, true, true);
+                    Image image = null;
+                    if (aux.FeaturedMedia != null && aux.FeaturedMedia != 0)
+                    {
+                        var media = await App.client.Media.GetByID(aux.FeaturedMedia, true, true);
+                        image = new Image
+                        {
+                            Source = ImageSource.FromUri(new Uri(media.SourceUrl))
+                        };
+                    }
 
                     returningPosts.Add(new Post()
                     {
                         Title = aux.Title.Rendered,
                         Content = aux.Content.Rendered,
                         PostedDate = aux.Date,
-                        PostImage = new Image
-                        {
-                            Source = ImageSource.FromUri(new Uri(image.Link))
-                        },
-                        Section = aux.Categories[0].ToString() //TODO: revisar asignación de sección
+                        PostImage = image
+                        //Section = aux.Categories[0].ToString() //TODO: revisar asignación de sección
                     });
 
                 }

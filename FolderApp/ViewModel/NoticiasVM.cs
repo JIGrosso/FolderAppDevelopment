@@ -24,7 +24,9 @@ namespace FolderApp.ViewModel
 
             List<Post> posts = new List<Post>();
 
-            //posts = await Post.UpdatePosts();
+            posts = await Post.UpdatePosts();
+
+            /*
 
             //Provisional
 
@@ -61,6 +63,8 @@ namespace FolderApp.ViewModel
 
             posts.Add(post);
             posts.Add(post2);
+
+            */
 
             //Agrego a la ObservableCollection
 
