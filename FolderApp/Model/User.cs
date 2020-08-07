@@ -10,53 +10,13 @@ using Xamarin.Forms;
 
 namespace FolderApp.Model
 {
-    public class User : INotifyPropertyChanged
+    public class User
     {
-        private string token;
+        public string Token { get; set; }
 
-        public string Token
-        {
-            get { return token; }
-            set
-            {
-                token = value;
-                OnPropertyChanged("Token");
-            }
-        }
+        public string Username { get; set; }
 
-
-        private string username;
-
-        public string Username
-        {
-            get { return username; }
-            set
-            {
-                username = value;
-                OnPropertyChanged("Username");
-            }
-        }
-
-        private string password;
-
-        public string Password
-        {
-            get { return password; }
-            set
-            {
-                password = value;
-                OnPropertyChanged("Password");
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            if(PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
+        public string Password { get; set; }
 
         public static async Task<bool> Login(string username, string password)
         {

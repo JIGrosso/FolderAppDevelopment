@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FolderApp.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,8 +50,8 @@ namespace FolderApp.Model
                     returningPosts.Add(new Post()
                     {
                         Id = aux.Id,
-                        Title = aux.Title.Rendered,
-                        Content = aux.Content.Rendered,
+                        Title = StringHelper.RemoveHtml(aux.Title.Rendered),
+                        Content = StringHelper.RemoveHtml(aux.Content.Rendered),
                         PostedDate = aux.Date,
                         PostImage = image
                         //Section = aux.Categories[0].ToString() //TODO: revisar asignación de sección

@@ -1,30 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="FolderApp.App">
+<Application
+    x:Class="FolderApp.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
     <Application.Resources>
         <ResourceDictionary>
-            
-            <!--Fonts-->
+
+            <!--  Fonts  -->
             <OnPlatform x:Key="RalewayItalic" x:TypeArguments="x:String">
                 <On Platform="Android" Value="Raleway-Italic.ttf#Raleway-Italic" />
             </OnPlatform>
             <OnPlatform x:Key="RalewayBold" x:TypeArguments="x:String">
                 <On Platform="Android" Value="Raleway-Bold.ttf#Raleway-Bold" />
             </OnPlatform>
-            
-            <!--Color by section-->
+
+            <!--  Color by section  -->
             <Color x:Key="purpleColor">#6f1850</Color>
             <Color x:Key="greyColor">#686868</Color>
             <Color x:Key="redColor">#B20207</Color>
             <Color x:Key="blueColor">#27818E</Color>
             <Color x:Key="yellowColor">#F6B109</Color>
             <Color x:Key="greenColor">#51AC4F</Color>
+            <Color x:Key="whiteColor">#FFFFFF</Color>
 
-            <!--Pages-->
+            <!--  Pages  -->
             <Style x:Key="TitleLabel" TargetType="Label">
                 <Setter Property="FontSize" Value="20" />
                 <Setter Property="TextColor" Value="White" />
@@ -33,10 +35,10 @@
             </Style>
 
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource purpleColor}"/>
+                <Setter Property="BarBackgroundColor" Value="{StaticResource purpleColor}" />
             </Style>
-            
-            <!--Posts-->
+
+            <!--  Posts  -->
             <Style x:Key="PostTitle" TargetType="Label">
                 <Setter Property="FontSize" Value="Title" />
                 <!--<Setter Property="FontAttributes" Value="Bold" />-->
@@ -50,6 +52,6 @@
             </Style>
 
         </ResourceDictionary>
-        
+
     </Application.Resources>
 </Application>

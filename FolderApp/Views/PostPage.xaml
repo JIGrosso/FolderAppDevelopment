@@ -15,6 +15,7 @@
                 HorizontalOptions="CenterAndExpand"
                 VerticalOptions="Start">
                 <Image
+                    Margin="10"
                     Aspect="AspectFit"
                     HeightRequest="120"
                     HorizontalOptions="FillAndExpand"
