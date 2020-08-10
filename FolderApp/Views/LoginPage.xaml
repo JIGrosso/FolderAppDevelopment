@@ -30,7 +30,7 @@
                             Placeholder="Contraseña"
                             Text="{Binding Password, Mode=TwoWay}" />
                         <StackLayout Padding="0,30,0,0" Orientation="Horizontal">
-                            <CheckBox Color="{StaticResource purpleColor}" />
+                            <CheckBox IsChecked="{Binding RecuerdameChecked}" Color="{StaticResource purpleColor}" />
                             <Label
                                 FontSize="Medium"
                                 Text="Recuérdame"

@@ -3,6 +3,7 @@ using FolderApp.Views;
 using FolderApp.Views.SideMenu;
 using System;
 using WordPressPCL;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,7 +23,7 @@ namespace FolderApp
 
             try
             {
-                var currentToken = (string) Application.Current.Properties["token"];
+                var currentToken = SecureStorage.GetAsync("jwt_token").Result;
                 if (currentToken != null)
                 {
                     client.SetJWToken(currentToken);

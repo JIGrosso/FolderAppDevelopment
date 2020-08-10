@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WordPressPCL;
 using WordPressPCL.Models;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace FolderApp.Model
@@ -18,7 +19,7 @@ namespace FolderApp.Model
 
         public string Password { get; set; }
 
-        public static async Task<bool> Login(string username, string password)
+        public static async Task<bool> Login(string username, string password, bool recuerdame)
         {
             bool isUsernameEmpty = string.IsNullOrEmpty(username);
             bool isPasswordEmpty = string.IsNullOrEmpty(password);
@@ -47,7 +48,17 @@ namespace FolderApp.Model
                         user.Token = client.GetToken();
                         App.user = user;
 
-                        Application.Current.Properties["token"] = user.Token;
+                        if (recuerdame)
+                        {
+                            try
+                            {
+                                await SecureStorage.SetAsync("jwt_token", user.Token);
+                            }
+                            catch (Exception ex)
+                            {
+                                // Possible that device doesn't support secure storage on device.
+                            }
+                        }
 
                         return true;
                     }

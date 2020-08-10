@@ -13,17 +13,7 @@ namespace FolderApp.ViewModel
 {
     public class LoginVM : INotifyPropertyChanged
     {
-        private User user;
-
-        public User User
-        {
-            get { return user; }
-            set 
-            {
-                user = value;
-                OnPropertyChanged("User");
-            }
-        }
+        public User User { get; set; }
 
         private string username;
 
@@ -59,10 +49,13 @@ namespace FolderApp.ViewModel
             }
         }
 
+        public bool RecuerdameChecked { get; set; }
+
 
         public LoginVM()
         {
             User = new User();
+            RecuerdameChecked = false;
         }
 
 
@@ -78,7 +71,7 @@ namespace FolderApp.ViewModel
 
         public async void Login()
         {
-            bool loginSuccess = await User.Login(User.Username, User.Password);
+            bool loginSuccess = await User.Login(User.Username, User.Password, RecuerdameChecked);
 
             if(loginSuccess)
             {
