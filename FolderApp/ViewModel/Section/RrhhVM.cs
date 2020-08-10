@@ -1,19 +1,16 @@
-﻿using FolderApp.Model;
-using FolderApp.Views;
-using System;
+﻿using FolderApp.Common;
+using FolderApp.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Text;
 using Xamarin.Forms;
 
-namespace FolderApp.ViewModel
+namespace FolderApp.ViewModel.Secciones
 {
-    class NoticiasVM
+    class RrhhVM
     {
         public ObservableCollection<Post> Posts { get; set; }
 
-        public NoticiasVM ()
+        public RrhhVM()
         {
             Posts = new ObservableCollection<Post>();
         }
@@ -24,11 +21,11 @@ namespace FolderApp.ViewModel
 
             List<Post> posts = new List<Post>();
 
-            posts = await Post.UpdatePosts();
+            posts = await Post.UpdatePostBySection((int)CategoriesEnum.RRHH);
 
             //Agrego a la ObservableCollection
 
-            if(posts != null)
+            if (posts != null)
             {
                 Posts.Clear();
                 foreach (var x in posts)
@@ -40,11 +37,6 @@ namespace FolderApp.ViewModel
             {
                 //Vuelva a intentarlo
             }
-        }
-
-        public void Expand(object item)
-        {
-            (App.Current.MainPage as MasterDetailPage).Detail.Navigation.PushAsync(new PostPage(item as Post));
         }
     }
 }

@@ -1,11 +1,4 @@
-﻿using FolderApp.Model;
-using FolderApp.ViewModel.Section;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using FolderApp.ViewModel.Section;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -30,7 +23,7 @@ namespace FolderApp.Views
         {
             base.OnAppearing();
 
-            //Traer todos los post de la sección capacitaciones.
+            viewModel.UpdatePosts();
         }
     }
 }

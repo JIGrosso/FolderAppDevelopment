@@ -1,46 +1,42 @@
-﻿using FolderApp.Model;
-using System;
+﻿using FolderApp.Common;
+using FolderApp.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using Xamarin.Forms;
 
 namespace FolderApp.ViewModel.Section
 {
     class CapacitacionesVM
     {
-        public ObservableCollection<Post> PostsCapacitaciones { get; set; }
+        public ObservableCollection<Post> Posts { get; set; }
 
         public CapacitacionesVM()
         {
-            PostsCapacitaciones = new ObservableCollection<Post>();
+            Posts = new ObservableCollection<Post>();
         }
 
-        public void UpdatePostsCapacitaciones()
+        public async void UpdatePosts()
         {
-            var post = new Post();
-            post.Title = "Renovamos Nuestro Blog Técnico";
-            post.PostedDate = DateTime.Today;
-            post.Section = "Capacitaciones";
-            post.PostImage = new Image
-            {
-                Source = ImageSource.FromUri(
-                    new Uri("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Papio_anubis_%28Serengeti%2C_2009%29.jpg/200px-Papio_anubis_%28Serengeti%2C_2009%29.jpg"))
-            };
-
+            ((App.Current.MainPage as MasterDetailPage).Detail as NavigationPage).BarBackgroundColor = Color.FromHex("#6F1850");
 
             List<Post> posts = new List<Post>();
-            posts.Add(post);
+
+            posts = await Post.UpdatePostBySection((int)CategoriesEnum.Capacitaciones);
+
+            //Agrego a la ObservableCollection
 
             if (posts != null)
             {
-                PostsCapacitaciones.Clear();
+                Posts.Clear();
                 foreach (var x in posts)
                 {
-                    PostsCapacitaciones.Add(x);
+                    Posts.Add(x);
                 }
             }
-
+            else // == null => Error
+            {
+                //Vuelva a intentarlo
+            }
         }
     }
 }

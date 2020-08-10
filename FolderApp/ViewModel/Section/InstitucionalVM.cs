@@ -1,44 +1,41 @@
-﻿using FolderApp.Model;
-using System;
+﻿using FolderApp.Common;
+using FolderApp.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using Xamarin.Forms;
 
 namespace FolderApp.ViewModel.Secciones
 {
     class InstitucionalVM
     {
-        public ObservableCollection<Post> PostsInstitucionales { get; set; }
+        public ObservableCollection<Post> Posts { get; set; }
 
         public InstitucionalVM()
         {
-            PostsInstitucionales = new ObservableCollection<Post>();
+            Posts = new ObservableCollection<Post>();
         }
 
-        public void UpdatePostsInstitucionales()
+        public async void UpdatePosts()
         {
-            var post = new Post();
-            post.Title = "Covid-19 Coronavirus. Protegete, protegé.";
-            post.PostedDate = DateTime.Today;
-            post.Section = "Institucional";
-            post.PostImage = new Image
-            {
-                Source = ImageSource.FromUri(
-                    new Uri("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Papio_anubis_%28Serengeti%2C_2009%29.jpg/200px-Papio_anubis_%28Serengeti%2C_2009%29.jpg"))
-            };
-
+            ((App.Current.MainPage as MasterDetailPage).Detail as NavigationPage).BarBackgroundColor = Color.FromHex("#6F1850");
 
             List<Post> posts = new List<Post>();
-            posts.Add(post);
+
+            posts = await Post.UpdatePostBySection((int)CategoriesEnum.Direccion);
+
+            //Agrego a la ObservableCollection
 
             if (posts != null)
             {
-                PostsInstitucionales.Clear();
+                Posts.Clear();
                 foreach (var x in posts)
                 {
-                    PostsInstitucionales.Add(x);
+                    Posts.Add(x);
                 }
+            }
+            else // == null => Error
+            {
+                //Vuelva a intentarlo
             }
         }
     }
