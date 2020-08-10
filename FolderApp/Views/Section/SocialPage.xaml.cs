@@ -1,4 +1,5 @@
-﻿using FolderApp.ViewModel.Secciones;
+﻿using FolderApp.Common;
+using FolderApp.ViewModel.Section;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,7 +9,7 @@ namespace FolderApp.Views
     public partial class SocialPage : ContentPage
     {
 
-        SocialVM viewModel;
+        SectionVM viewModel;
 
         public SocialPage()
         {
@@ -16,7 +17,7 @@ namespace FolderApp.Views
 
             InitializeComponent();
 
-            viewModel = new SocialVM();
+            viewModel = new SectionVM(CategoriesEnum.Social);
             BindingContext = viewModel;
         }
 

@@ -2,26 +2,24 @@
 using FolderApp.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Xamarin.Forms;
 
-namespace FolderApp.ViewModel.Secciones
+namespace FolderApp.ViewModel.Section
 {
-    class RrhhVM
+    class SectionVM
     {
+        public CategoriesEnum Category;
+
         public ObservableCollection<Post> Posts { get; set; }
 
-        public RrhhVM()
+        public SectionVM(CategoriesEnum category)
         {
             Posts = new ObservableCollection<Post>();
+            Category = category;
         }
 
         public async void UpdatePosts()
         {
-            ((App.Current.MainPage as MasterDetailPage).Detail as NavigationPage).BarBackgroundColor = Color.FromHex("#6F1850");
-
-            List<Post> posts = new List<Post>();
-
-            posts = await Post.UpdatePostBySection((int)CategoriesEnum.RRHH);
+            List<Post> posts = await Post.UpdatePostBySection((int)Category);
 
             //Agrego a la ObservableCollection
 

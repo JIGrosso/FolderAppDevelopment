@@ -1,4 +1,5 @@
-﻿using FolderApp.ViewModel.Secciones;
+﻿using FolderApp.Common;
+using FolderApp.ViewModel.Section;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,7 +9,7 @@ namespace FolderApp.Views
     public partial class ProduccionPage : ContentPage
     {
 
-        ProduccionVM viewModel;
+        SectionVM viewModel;
 
         public ProduccionPage()
         {
@@ -16,7 +17,7 @@ namespace FolderApp.Views
 
             InitializeComponent();
 
-            viewModel = new ProduccionVM();
+            viewModel = new SectionVM(CategoriesEnum.Produccion);
             BindingContext = viewModel;
         }
 

@@ -1,4 +1,5 @@
-﻿using FolderApp.ViewModel.Secciones;
+﻿using FolderApp.Common;
+using FolderApp.ViewModel.Section;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,7 +8,7 @@ namespace FolderApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class InstitucionalPage : ContentPage
     {
-        InstitucionalVM viewModel;
+        SectionVM viewModel;
 
         public InstitucionalPage()
         {
@@ -15,7 +16,7 @@ namespace FolderApp.Views
 
             InitializeComponent();
 
-            viewModel = new InstitucionalVM();
+            viewModel = new SectionVM(CategoriesEnum.Direccion);
             BindingContext = viewModel;
 
         }
