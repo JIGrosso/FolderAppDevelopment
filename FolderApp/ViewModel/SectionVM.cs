@@ -1,7 +1,9 @@
 ﻿using FolderApp.Common;
 using FolderApp.Model;
+using FolderApp.Views;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Xamarin.Forms;
 
 namespace FolderApp.ViewModel.Section
 {
@@ -9,12 +11,18 @@ namespace FolderApp.ViewModel.Section
     {
         public CategoriesEnum Category;
 
+        public Color TitleBackgroundColor { get; set; }
+
+        public string TitleText { get; set; }
+
         public ObservableCollection<Post> Posts { get; set; }
 
         public SectionVM(CategoriesEnum category)
         {
             Posts = new ObservableCollection<Post>();
             Category = category;
+            TitleBackgroundColor = SectionParameters.GetSectionColor(category);
+            TitleText = SectionParameters.GetSectionTitle(category);
         }
 
         public async void UpdatePosts()
@@ -35,6 +43,10 @@ namespace FolderApp.ViewModel.Section
             {
                 //Vuelva a intentarlo
             }
+        }
+        public void Expand(object item)
+        {
+            (App.Current.MainPage as MasterDetailPage).Detail.Navigation.PushAsync(new PostPage(item as Post));
         }
     }
 }

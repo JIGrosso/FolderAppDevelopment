@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
-using WordPressPCL;
-using WordPressPCL.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 

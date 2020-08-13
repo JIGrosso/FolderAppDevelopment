@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FolderApp.Common;
+using System;
 
 namespace FolderApp.Views.SideMenu
 {
@@ -14,8 +11,11 @@ namespace FolderApp.Views.SideMenu
             TargetType = typeof(MasterMenuItem);
         }
         public int Id { get; set; }
+        
         public string Title { get; set; }
 
         public Type TargetType { get; set; }
+
+        public CategoriesEnum Category { get; set; }
     }
 }

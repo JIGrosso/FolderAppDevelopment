@@ -19,7 +19,7 @@ namespace FolderApp
         {
             InitializeComponent();
 
-            client = new WordPressClient("http://192.168.100.14/wp-json/");
+            client = new WordPressClient("https://intranet.folderit.net/wp-json/");
 
             try
             {

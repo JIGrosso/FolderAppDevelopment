@@ -1,27 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="FolderApp.Views.InstitucionalPage"
+    x:Class="FolderApp.Views.SectionPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:card="clr-namespace:FolderApp.Views.ItemsView"
-    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:card="clr-namespace:FolderApp.Views.ItemsView">
 
     <NavigationPage.TitleView>
-        <Label Style="{StaticResource TitleLabel}" Text="Institucionales" />
+        <Label Style="{StaticResource TitleLabel}" Text="{Binding TitleText}" />
     </NavigationPage.TitleView>
 
+
     <ContentPage.Content>
-        <StackLayout Margin="5,10">
+        <StackLayout Margin="10">
             <ListView
-                x:Name="InstitucionalesListView"
+                x:Name="listView"
                 HasUnevenRows="True"
+                ItemTapped="listView_ItemTapped"
                 ItemsSource="{Binding Posts}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <card:CardView />
+                            <card:CardView Margin="5,10,5,10" />
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

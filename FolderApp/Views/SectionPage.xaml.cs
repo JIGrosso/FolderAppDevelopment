@@ -6,19 +6,17 @@ using Xamarin.Forms.Xaml;
 namespace FolderApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class InstitucionalPage : ContentPage
+    public partial class SectionPage : ContentPage
     {
         SectionVM viewModel;
 
-        public InstitucionalPage()
+        public SectionPage(CategoriesEnum category)
         {
-            ((App.Current.MainPage as MasterDetailPage).Detail as NavigationPage).BarBackgroundColor = Color.FromHex("#B20207");
-
             InitializeComponent();
 
-            viewModel = new SectionVM(CategoriesEnum.Direccion);
+            viewModel = new SectionVM(category);
             BindingContext = viewModel;
-
+            ((App.Current.MainPage as MasterDetailPage).Detail as NavigationPage).BarBackgroundColor = viewModel.TitleBackgroundColor;
         }
 
         protected override void OnAppearing()
@@ -26,7 +24,12 @@ namespace FolderApp.Views
             base.OnAppearing();
 
             viewModel.UpdatePosts();
+
         }
 
+        private void listView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            viewModel.Expand(e.Item);
+        }
     }
 }

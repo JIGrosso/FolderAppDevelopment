@@ -22,9 +22,7 @@ namespace FolderApp.ViewModel
         {
             ((App.Current.MainPage as MasterDetailPage).Detail as NavigationPage).BarBackgroundColor = Color.FromHex("#6F1850");
 
-            List<Post> posts = new List<Post>();
-
-            posts = await Post.UpdatePosts();
+            List<Post> posts = await Post.UpdatePosts();
 
             //Agrego a la ObservableCollection
 

@@ -45,6 +45,7 @@
                     <Label
                         Grid.Row="4"
                         FontAttributes="Bold"
+                        IsVisible="{Binding IsSectionNotNull}"
                         Text="{Binding Section}" />
                     <Label Grid.Row="5" Text="{Binding PostedDate}" />
                 </Grid>

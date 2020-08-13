@@ -1,8 +1,10 @@
-﻿using FolderApp.Common;
+﻿using ExtensionMethods;
+using FolderApp.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using WordPressPCL.Utility;
 using Xamarin.Forms;
 
 namespace FolderApp.Model
@@ -21,6 +23,11 @@ namespace FolderApp.Model
 
         public Image PostImage { get; set; }
 
+        public bool IsSectionNotNull
+        {
+            get { return Section != null && Section != ""; }
+        }
+
         public bool IsImageNotNull
         {
             get { return PostImage != null; }
@@ -33,7 +40,10 @@ namespace FolderApp.Model
             {
                 List<Post> returningPosts = new List<Post>();
 
-                var posts = await App.client.Posts.GetAll();
+                var queryBuilder = new PostsQueryBuilder();
+                queryBuilder.PerPage = 5;
+                queryBuilder.Page = 1;
+                var posts = await App.client.Posts.Query(queryBuilder);
 
                 foreach (var aux in posts)
                 {
@@ -54,9 +64,8 @@ namespace FolderApp.Model
                         Content = StringHelper.RemoveHtml(aux.Content.Rendered),
                         PostedDate = aux.Date,
                         PostImage = image,
-                        Section = aux.Categories[0].ToString()
+                        Section = ((CategoriesEnum)aux.Categories[0]).GetDescription()
                     });
-
                 }
 
                 return returningPosts;

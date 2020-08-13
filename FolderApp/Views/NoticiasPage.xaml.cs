@@ -1,11 +1,4 @@
-﻿using FolderApp.Model;
-using FolderApp.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using FolderApp.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
