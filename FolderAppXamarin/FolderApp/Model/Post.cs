@@ -41,8 +41,8 @@ namespace FolderApp.Model
                 List<Post> returningPosts = new List<Post>();
 
                 var queryBuilder = new PostsQueryBuilder();
-                queryBuilder.PerPage = 5;
-                queryBuilder.Page = 1;
+                queryBuilder.PerPage = 1;
+                queryBuilder.Page = 4;
                 var posts = await App.client.Posts.Query(queryBuilder);
 
                 foreach (var aux in posts)
