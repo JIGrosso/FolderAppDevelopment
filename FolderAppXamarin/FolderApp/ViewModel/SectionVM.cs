@@ -3,19 +3,36 @@ using FolderApp.Model;
 using FolderApp.Views;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Xamarin.Forms;
 
 namespace FolderApp.ViewModel.Section
 {
-    class SectionVM
+    class SectionVM : INotifyPropertyChanged
     {
         public CategoriesEnum Category;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Color TitleBackgroundColor { get; set; }
 
         public string TitleText { get; set; }
 
         public ObservableCollection<Post> Posts { get; set; }
+
+        private bool activityInticatorVisible = true;
+        public bool ActivityIndicatorVisible
+        {
+            get
+            {
+                return activityInticatorVisible;
+            }
+            set
+            {
+                activityInticatorVisible = value;
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(ActivityIndicatorVisible)));
+            }
+        }
 
         public SectionVM(CategoriesEnum category)
         {
@@ -28,6 +45,8 @@ namespace FolderApp.ViewModel.Section
         public async void UpdatePosts()
         {
             List<Post> posts = await Post.UpdatePostBySection((int)Category);
+
+            ActivityIndicatorVisible = false;
 
             //Agrego a la ObservableCollection
 

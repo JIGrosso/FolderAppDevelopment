@@ -1,36 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:card="clr-namespace:FolderApp.Views.ItemsView"
-             mc:Ignorable="d"
-             x:Class="FolderApp.Views.NoticiasPage">
+<ContentPage
+    x:Class="FolderApp.Views.NoticiasPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:card="clr-namespace:FolderApp.Views.ItemsView"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
 
     <NavigationPage.TitleView>
-        <Label Text="Folder App"
-               Style="{StaticResource TitleLabel}"/>
+        <Label Style="{StaticResource TitleLabel}" Text="Folder App" />
     </NavigationPage.TitleView>
 
 
     <ContentPage.Content>
-        <StackLayout Margin="10">
-            <Frame BackgroundColor="{StaticResource greyColor}"
-                   CornerRadius="5">
-                <Label Text="Noticias" Style="{StaticResource TitleLabel}"/>
+        <StackLayout
+            Margin="10"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="StartAndExpand">
+            <Frame BackgroundColor="{StaticResource greyColor}" CornerRadius="5">
+                <Label Style="{StaticResource TitleLabel}" Text="Noticias" />
             </Frame>
-            <ListView x:Name="listView"
-                      HasUnevenRows="True"
-                      ItemsSource="{Binding Posts}"
-                      ItemTapped="listView_ItemTapped">
+            <ListView
+                x:Name="listView"
+                HasUnevenRows="True"
+                ItemTapped="listView_ItemTapped"
+                ItemsSource="{Binding Posts}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <card:CardView Margin="5, 10, 5, 10" />
+                            <card:CardView Margin="5,10,5,10" />
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <ActivityIndicator
+                Margin="20"
+                IsRunning="True"
+                IsVisible="{Binding ActivityIndicatorVisible}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

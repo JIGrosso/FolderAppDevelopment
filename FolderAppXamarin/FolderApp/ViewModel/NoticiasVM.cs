@@ -1,22 +1,36 @@
 ﻿using FolderApp.Model;
 using FolderApp.Views;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Text;
 using Xamarin.Forms;
 
 namespace FolderApp.ViewModel
 {
-    class NoticiasVM
+    class NoticiasVM : INotifyPropertyChanged
     {
         public ObservableCollection<Post> Posts { get; set; }
+
+        private bool activityInticatorVisible = true;
+        public bool ActivityIndicatorVisible
+        {
+            get
+            {
+                return activityInticatorVisible;
+            }
+            set
+            {
+                activityInticatorVisible = value;
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(ActivityIndicatorVisible)));
+            }
+        }
 
         public NoticiasVM ()
         {
             Posts = new ObservableCollection<Post>();
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public async void UpdatePosts()
         {
@@ -24,9 +38,11 @@ namespace FolderApp.ViewModel
 
             List<Post> posts = await Post.UpdatePosts();
 
+            ActivityIndicatorVisible = false;
+
             //Agrego a la ObservableCollection
 
-            if(posts != null)
+            if (posts != null)
             {
                 Posts.Clear();
                 foreach (var x in posts)

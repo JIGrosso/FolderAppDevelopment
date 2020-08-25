@@ -2,7 +2,6 @@
 using FolderApp.Common;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using WordPressPCL.Utility;
 using Xamarin.Forms;
@@ -41,8 +40,8 @@ namespace FolderApp.Model
                 List<Post> returningPosts = new List<Post>();
 
                 var queryBuilder = new PostsQueryBuilder();
-                queryBuilder.PerPage = 1;
-                queryBuilder.Page = 4;
+                queryBuilder.PerPage = 5;
+                queryBuilder.Page = 1;
                 var posts = await App.client.Posts.Query(queryBuilder);
 
                 foreach (var aux in posts)

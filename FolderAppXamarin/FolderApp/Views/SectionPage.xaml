@@ -25,6 +25,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <ActivityIndicator
+                Margin="20"
+                IsRunning="True"
+                IsVisible="{Binding ActivityIndicatorVisible}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
