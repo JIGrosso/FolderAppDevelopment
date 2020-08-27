@@ -9,9 +9,12 @@ namespace FolderApp.ViewModel
 {
     class NoticiasVM : INotifyPropertyChanged
     {
-        public ObservableCollection<Post> Posts { get; set; }
+        public int CurrentPage { get; set; } = 0;
+
+        public ObservableCollection<Post> Posts { get; set; } = new ObservableCollection<Post>();
 
         private bool activityInticatorVisible = true;
+
         public bool ActivityIndicatorVisible
         {
             get
@@ -25,35 +28,34 @@ namespace FolderApp.ViewModel
             }
         }
 
-        public NoticiasVM ()
-        {
-            Posts = new ObservableCollection<Post>();
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public async void UpdatePosts()
+        public async void UpdatePosts(int page = 1)
         {
-            ((App.Current.MainPage as MasterDetailPage).Detail as NavigationPage).BarBackgroundColor = Color.FromHex("#6F1850");
-
-            List<Post> posts = await Post.UpdatePosts();
-
-            ActivityIndicatorVisible = false;
-
-            //Agrego a la ObservableCollection
-
-            if (posts != null)
+            if(page > CurrentPage)
             {
-                Posts.Clear();
-                foreach (var x in posts)
+                CurrentPage = page;
+
+                ActivityIndicatorVisible = true;
+
+                List<Post> posts = await Post.GetPosts(page: page, prevCount: Posts.Count);
+
+                ActivityIndicatorVisible = false;
+
+                //Agrego a la ObservableCollection
+
+                if (posts != null)
                 {
-                    Posts.Add(x);
+                    foreach (var x in posts)
+                    {
+                        Posts.Add(x);
+                    }
                 }
-            }
-            else // == null => Error
-            {
-                //Vuelva a intentarlo
-            }
+                else // == null => Error
+                {
+                    //Vuelva a intentarlo
+                }
+            }   
         }
 
         public void Expand(object item)

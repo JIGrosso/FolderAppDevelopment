@@ -24,6 +24,7 @@
             <ListView
                 x:Name="listView"
                 HasUnevenRows="True"
+                ItemAppearing="listView_ItemAppearing"
                 ItemTapped="listView_ItemTapped"
                 ItemsSource="{Binding Posts}">
                 <ListView.ItemTemplate>

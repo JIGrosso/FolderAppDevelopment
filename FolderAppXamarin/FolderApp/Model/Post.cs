@@ -10,6 +10,8 @@ namespace FolderApp.Model
 {
     public class Post
     {
+        public int Index { get; set; }
+
         public int Id { get; set; }
 
         public string Title { get; set; }
@@ -33,39 +35,22 @@ namespace FolderApp.Model
         }
 
 
-        public static async Task<List<Post>> UpdatePosts()
+        public static async Task<List<Post>> GetPosts(int? sectionId = null, int page = 1, int prevCount = 0)
         {
             try
             {
                 List<Post> returningPosts = new List<Post>();
 
                 var queryBuilder = new PostsQueryBuilder();
-                queryBuilder.PerPage = 5;
-                queryBuilder.Page = 1;
+                queryBuilder.PerPage = 7;
+                queryBuilder.Page = page;
+                if (sectionId != null)
+                {
+                    queryBuilder.Categories = new int[] { (int)sectionId };
+                }
                 var posts = await App.client.Posts.Query(queryBuilder);
 
-                foreach (var aux in posts)
-                {
-                    Image image = null;
-                    if (aux.FeaturedMedia != null && aux.FeaturedMedia != 0)
-                    {
-                        var media = await App.client.Media.GetByID(aux.FeaturedMedia, true, true);
-                        image = new Image
-                        {
-                            Source = ImageSource.FromUri(new Uri(media.SourceUrl))
-                        };
-                    }
-
-                    returningPosts.Add(new Post()
-                    {
-                        Id = aux.Id,
-                        Title = StringHelper.RemoveHtml(aux.Title.Rendered),
-                        Content = StringHelper.RemoveHtml(aux.Content.Rendered),
-                        PostedDate = aux.Date,
-                        PostImage = image,
-                        Section = ((CategoriesEnum)aux.Categories[0]).GetDescription()
-                    });
-                }
+                returningPosts = await ListPosts(posts, prevCount);
 
                 return returningPosts;
 
@@ -77,47 +62,35 @@ namespace FolderApp.Model
             }
         }
 
-        public static async Task<List<Post>> UpdatePostBySection(int sectionId)
+        private static async Task<List<Post>> ListPosts(IEnumerable<WordPressPCL.Models.Post> posts, int prevCount)
         {
-            try
+            var returningPosts = new List<Post>();
+
+            foreach (var aux in posts)
             {
-                List<Post> returningPosts = new List<Post>();
-
-                var posts = await App.client.Posts.GetPostsByCategory(sectionId);
-
-                foreach (var aux in posts)
+                Image image = null;
+                if (aux.FeaturedMedia != null && aux.FeaturedMedia != 0)
                 {
-                    Image image = null;
-                    if (aux.FeaturedMedia != null && aux.FeaturedMedia != 0)
+                    var media = await App.client.Media.GetByID(aux.FeaturedMedia, true, true);
+                    image = new Image
                     {
-                        var media = await App.client.Media.GetByID(aux.FeaturedMedia, true, true);
-                        image = new Image
-                        {
-                            Source = ImageSource.FromUri(new Uri(media.SourceUrl))
-                        };
-                    }
-
-                    returningPosts.Add(new Post()
-                    {
-                        Id = aux.Id,
-                        Title = StringHelper.RemoveHtml(aux.Title.Rendered),
-                        Content = StringHelper.RemoveHtml(aux.Content.Rendered),
-                        PostedDate = aux.Date,
-                        PostImage = image,
-                        Section = aux.Categories[0].ToString()
-                    });
-
+                        Source = ImageSource.FromUri(new Uri(media.SourceUrl))
+                    };
                 }
 
-                return returningPosts;
+                returningPosts.Add(new Post()
+                {
+                    Index = prevCount + returningPosts.Count,
+                    Id = aux.Id,
+                    Title = StringHelper.RemoveHtml(aux.Title.Rendered),
+                    Content = StringHelper.RemoveHtml(aux.Content.Rendered),
+                    PostedDate = aux.Date,
+                    PostImage = image,
+                    Section = ((CategoriesEnum)aux.Categories[0]).GetDescription()
+                });
+            }
 
-            }
-            catch (Exception ex)
-            {
-                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "Ok");
-                return null;
-            }
+            return returningPosts;
         }
-
     }
 }

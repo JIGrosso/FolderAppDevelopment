@@ -10,6 +10,8 @@ namespace FolderApp.ViewModel.Section
 {
     class SectionVM : INotifyPropertyChanged
     {
+        public int CurrentPage { get; set; } = 0;
+
         public CategoriesEnum Category;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -42,25 +44,31 @@ namespace FolderApp.ViewModel.Section
             TitleText = SectionParameters.GetSectionTitle(category);
         }
 
-        public async void UpdatePosts()
+        public async void UpdatePosts(int page = 1)
         {
-            List<Post> posts = await Post.UpdatePostBySection((int)Category);
-
-            ActivityIndicatorVisible = false;
-
-            //Agrego a la ObservableCollection
-
-            if (posts != null)
+            if (page > CurrentPage)
             {
-                Posts.Clear();
-                foreach (var x in posts)
+                CurrentPage = page;
+
+                ActivityIndicatorVisible = true;
+
+                List<Post> posts = await Post.GetPosts(sectionId: (int)Category, page: page, prevCount: Posts.Count);
+
+                ActivityIndicatorVisible = false;
+
+                //Agrego a la ObservableCollection
+
+                if (posts != null)
                 {
-                    Posts.Add(x);
+                    foreach (var x in posts)
+                    {
+                        Posts.Add(x);
+                    }
                 }
-            }
-            else // == null => Error
-            {
-                //Vuelva a intentarlo
+                else // == null => Error
+                {
+                    //Vuelva a intentarlo
+                }
             }
         }
         public void Expand(object item)
