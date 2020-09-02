@@ -1,62 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="FolderApp.Views.SideMenu.SideMenuMaster"
-             Title="Master">
-    
+<ContentPage
+    x:Class="FolderApp.Views.SideMenu.SideMenuMaster"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Master"
+    Visual="Material"
+    mc:Ignorable="d">
+
     <StackLayout>
-        <ListView x:Name="MenuItemsList"
-              SeparatorVisibility="None"
-              HasUnevenRows="true"
-              ItemsSource="{Binding MenuItems}"
-              ItemSelected="MenuItemsListView_ItemSelected">
+        <ListView
+            x:Name="MenuItemsList"
+            HasUnevenRows="true"
+            ItemSelected="MenuItemsListView_ItemSelected"
+            ItemsSource="{Binding MenuItems}"
+            SeparatorVisibility="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand">
-                            <Label VerticalOptions="FillAndExpand" 
-                                   VerticalTextAlignment="Center" 
-                                   Text="{Binding Title}"
-                                   FontSize="20"/>
+                            <Label
+                                FontSize="20"
+                                Text="{Binding Title}"
+                                VerticalOptions="FillAndExpand"
+                                VerticalTextAlignment="Center" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-          
+
             <ListView.Header>
                 <Grid BackgroundColor="{StaticResource purpleColor}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="80"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
                     </Grid.RowDefinitions>
                     <Label
-                      Grid.Column="1"
-                      Grid.Row="2"
-                      Text="Folder IT"
-                      Style="{StaticResource TitleLabel}"/>
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Style="{StaticResource TitleLabel}"
+                        Text="Folder IT" />
                 </Grid>
             </ListView.Header>
         </ListView>
-        <Label x:Name="Logout"
-               Text="Cerrar Sesión" 
-               FontSize="Large"
-               VerticalOptions="End"
-               HorizontalOptions="StartAndExpand"
-               Margin="10"
-               TextColor="Gray">
+        <Label
+            x:Name="Logout"
+            Margin="10"
+            FontSize="Large"
+            HorizontalOptions="StartAndExpand"
+            Text="Cerrar Sesión"
+            TextColor="Gray"
+            VerticalOptions="End">
             <Label.GestureRecognizers>
-                <TapGestureRecognizer Tapped="Logout_TappedAsync"
-                                      NumberOfTapsRequired="1" />
+                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Logout_TappedAsync" />
             </Label.GestureRecognizers>
         </Label>
     </StackLayout>

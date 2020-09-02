@@ -1,5 +1,4 @@
-﻿using FolderApp.Model;
-using FolderApp.ViewModel;
+﻿using FolderApp.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,7 +15,7 @@ namespace FolderApp.Views
 
             viewModel = new NoticiasVM();
             BindingContext = viewModel;
-            viewModel.UpdatePosts();
+            viewModel.UpdatePostsGeneric();
         }
 
         protected override void OnAppearing()
@@ -25,18 +24,9 @@ namespace FolderApp.Views
             ((App.Current.MainPage as MasterDetailPage).Detail as NavigationPage).BarBackgroundColor = Color.FromHex("#6F1850");
         }
 
-        private void listView_ItemTapped(object sender, ItemTappedEventArgs e)
+        void OnCollectionViewScrolled(object sender, ItemsViewScrolledEventArgs e)
         {
-            viewModel.Expand(e.Item);
-        }
-
-        private void listView_ItemAppearing(object sender, ItemVisibilityEventArgs e)
-        {
-            var post = e.Item as Post;
-            if(post.Index == viewModel.Posts.Count - 1 && !viewModel.ActivityIndicatorVisible)
-            {
-                viewModel.UpdatePosts(page: viewModel.CurrentPage + 1);
-            }
+            viewModel.ScrolledDown = e.VerticalDelta > 0;
         }
     }
 }

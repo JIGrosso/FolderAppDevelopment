@@ -14,31 +14,25 @@
 
 
     <ContentPage.Content>
-        <StackLayout
-            Margin="10"
-            HorizontalOptions="CenterAndExpand"
-            VerticalOptions="StartAndExpand">
+        <StackLayout Margin="10">
             <Frame BackgroundColor="{StaticResource greyColor}" CornerRadius="5">
                 <Label Style="{StaticResource TitleLabel}" Text="Noticias" />
             </Frame>
-            <ListView
-                x:Name="listView"
-                HasUnevenRows="True"
-                ItemAppearing="listView_ItemAppearing"
-                ItemTapped="listView_ItemTapped"
-                ItemsSource="{Binding Posts}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <card:CardView Margin="5,10,5,10" />
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <ActivityIndicator
-                Margin="20"
-                IsRunning="True"
-                IsVisible="{Binding ActivityIndicatorVisible}" />
+            <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+                <CollectionView
+                    ItemsSource="{Binding Posts}"
+                    RemainingItemsThreshold="3"
+                    RemainingItemsThresholdReachedCommand="{Binding LoadMorePostsCommand}"
+                    Scrolled="OnCollectionViewScrolled"
+                    SelectedItem="{Binding SelectedItem}"
+                    SelectionChangedCommand="{Binding ItemTapped}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <card:CardView Padding="5,10,5,10" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
