@@ -34,7 +34,6 @@ namespace FolderApp.Model
             get { return PostImage != null; }
         }
 
-
         public static async Task<List<Post>> GetPosts(int? sectionId = null, int page = 1, int prevCount = 0)
         {
             try

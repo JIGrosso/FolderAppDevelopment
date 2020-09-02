@@ -1,12 +1,7 @@
 ﻿using FolderApp.Model;
 using FolderApp.Views;
 using FolderApp.Views.SideMenu;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Text;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace FolderApp.ViewModel

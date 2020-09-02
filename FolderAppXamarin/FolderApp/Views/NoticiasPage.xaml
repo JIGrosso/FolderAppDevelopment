@@ -3,9 +3,9 @@
     x:Class="FolderApp.Views.NoticiasPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:card="clr-namespace:FolderApp.Views.ItemsView"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:FolderApp.Views"
     mc:Ignorable="d">
 
     <NavigationPage.TitleView>
@@ -18,21 +18,7 @@
             <Frame BackgroundColor="{StaticResource greyColor}" CornerRadius="5">
                 <Label Style="{StaticResource TitleLabel}" Text="Noticias" />
             </Frame>
-            <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
-                <CollectionView
-                    ItemsSource="{Binding Posts}"
-                    RemainingItemsThreshold="3"
-                    RemainingItemsThresholdReachedCommand="{Binding LoadMorePostsCommand}"
-                    Scrolled="OnCollectionViewScrolled"
-                    SelectedItem="{Binding SelectedItem}"
-                    SelectionChangedCommand="{Binding ItemTapped}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <card:CardView Padding="5,10,5,10" />
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </RefreshView>
+            <views:PostList />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

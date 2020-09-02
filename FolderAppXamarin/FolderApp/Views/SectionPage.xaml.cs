@@ -20,9 +20,9 @@ namespace FolderApp.Views
             viewModel.UpdatePostsGeneric();
         }
 
-        void OnCollectionViewScrolled(object sender, ItemsViewScrolledEventArgs e)
+        public void OnCollectionViewScrolled(double verticalDelta)
         {
-            viewModel.ScrolledDown = e.VerticalDelta > 0;
+            throw new System.NotImplementedException();
         }
     }
 }

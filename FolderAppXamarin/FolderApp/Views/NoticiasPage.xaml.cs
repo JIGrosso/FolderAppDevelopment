@@ -23,10 +23,5 @@ namespace FolderApp.Views
             base.OnAppearing();
             ((App.Current.MainPage as MasterDetailPage).Detail as NavigationPage).BarBackgroundColor = Color.FromHex("#6F1850");
         }
-
-        void OnCollectionViewScrolled(object sender, ItemsViewScrolledEventArgs e)
-        {
-            viewModel.ScrolledDown = e.VerticalDelta > 0;
-        }
     }
 }
