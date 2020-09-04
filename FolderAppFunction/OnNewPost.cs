@@ -40,7 +40,7 @@ namespace FolderApp
                 "{\"aps\":{\"alert\":\"" + body + "\", \"badge\":" + badgeValue + ", \"sound\":\"default\"},"
                 + "\"inAppMessage\":\"" + body + "\"}";
 
-            //hub.SendAppleNativeNotificationAsync(iOSalert).Wait();
+            hub.SendAppleNativeNotificationAsync(iOSalert).Wait();
 
             // Define an Anroid alert.
 
