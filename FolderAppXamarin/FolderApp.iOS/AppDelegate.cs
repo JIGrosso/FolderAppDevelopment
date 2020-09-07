@@ -39,7 +39,7 @@ namespace FolderApp.iOS
             // register for remote notifications based on system version
             if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
             {
-                UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert |
+               UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert |
                     UNAuthorizationOptions.Sound |
                     UNAuthorizationOptions.Sound,
                     (granted, error) =>
@@ -98,6 +98,11 @@ namespace FolderApp.iOS
                     }
                 });
             });
+        }
+
+        public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
+        {
+            new UIAlertView("Registration failed", error.LocalizedDescription, null, "OK", null).Show();
         }
     }
 }
