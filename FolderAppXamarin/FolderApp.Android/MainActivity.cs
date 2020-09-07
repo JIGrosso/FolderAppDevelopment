@@ -4,6 +4,7 @@ using Android.Runtime;
 using Android.OS;
 using Android.Gms.Common;
 using Android.Util;
+using System;
 
 namespace FolderApp.Droid
 {
@@ -28,7 +29,10 @@ namespace FolderApp.Droid
                 }
             }
 
-            IsPlayServicesAvailable();
+            if (!IsPlayServicesAvailable())
+            {
+                throw new Exception("This device does not have Google Play Services and cannot receive push notifications.");
+            }
             CreateNotificationChannel();
 
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -68,25 +72,22 @@ namespace FolderApp.Droid
             return true;
         }
 
-        private void CreateNotificationChannel()
+        void CreateNotificationChannel()
         {
-            if (Build.VERSION.SdkInt < BuildVersionCodes.O)
+            // Notification channels are new as of "Oreo".
+            // There is no need to create a notification channel on older versions of Android.
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
             {
-                // Notification channels are new in API 26 (and not a part of the
-                // support library). There is no need to create a notification
-                // channel on older versions of Android.
-                return;
+                var channelName = AppConstants.NotificationChannelName;
+                var channelDescription = String.Empty;
+                var channel = new NotificationChannel(channelName, channelName, NotificationImportance.Default)
+                {
+                    Description = channelDescription
+                };
+
+                var notificationManager = (NotificationManager)GetSystemService(NotificationService);
+                notificationManager.CreateNotificationChannel(channel);
             }
-
-            var channelName = CHANNEL_ID;
-            var channelDescription = string.Empty;
-            var channel = new NotificationChannel(CHANNEL_ID, channelName, NotificationImportance.Default)
-            {
-                Description = channelDescription
-            };
-
-            var notificationManager = (NotificationManager)GetSystemService(NotificationService);
-            notificationManager.CreateNotificationChannel(channel);
         }
     }
 }
