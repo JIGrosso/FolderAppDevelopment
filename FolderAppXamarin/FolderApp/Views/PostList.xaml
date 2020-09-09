@@ -12,8 +12,9 @@
                     RemainingItemsThreshold="3"
                     RemainingItemsThresholdReachedCommand="{Binding LoadMorePostsCommand}"
                     Scrolled="OnCollectionViewScrolled"
-                    SelectedItem="{Binding SelectedItem}"
-                    SelectionChangedCommand="{Binding ItemTapped}">
+                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                    SelectionChangedCommand="{Binding ItemTapped}"
+                    SelectionMode="Single">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <itemsviews:CardView Padding="5,10,5,10" />

@@ -1,12 +1,8 @@
-﻿using FolderApp.Common;
+﻿using static ExtensionMethods.MyExtensions;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace FolderApp.Model
 {
@@ -28,30 +24,13 @@ namespace FolderApp.Model
             var clientComments = await App.client.Comments.GetCommentsForPost(postId);
             foreach (WordPressPCL.Models.Comment comment in clientComments)
             {
-                Image image;
-                if(comment.AuthorAvatarUrls.Size48 != null && !comment.AuthorAvatarUrls.Size48.Contains("gravatar"))
-                {
-                    image = new Image()
-                    {
-                        Source = ImageSource.FromUri(new Uri(comment.AuthorAvatarUrls.Size48))
-                    };
-                } else
-                {
-                    var urlString = ("https://ui-avatars.com/api/?name=" + comment.AuthorName +
-                        "&background=6f1850" +
-                        "&rounded=true" +
-                        "&color=FFFFFF").Replace(' ', '+');
-                    image = new Image()
-                    {
-                        Source = ImageSource.FromUri(new Uri(urlString))
-                    };
-                }
+                var image = GetAvatarOrDefault(comment.AuthorAvatarUrls.Size48, comment.AuthorName);
 
                 comments.Add(new Comment
                 {
                     AuthorName = comment.AuthorName,
                     CommentDate = comment.Date,
-                    Content = StringHelper.RemoveHtml(comment.Content.Rendered),
+                    Content = comment.Content.Rendered.RemoveHtml(),
                     ProfileIcon = image
                 });
             }

@@ -12,13 +12,12 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="2" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Frame
                     Grid.Row="0"
@@ -33,7 +32,7 @@
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="CenterAndExpand"
                     WidthRequest="40">
-                    <Image Aspect="AspectFill" Source="https://ui-avatars.com/api/?background=0D8ABC&amp;color=fff" />
+                    <Image Aspect="AspectFill" Source="{Binding ProfileIcon.Source}" />
                 </Frame>
                 <Label
                     Grid.Row="0"

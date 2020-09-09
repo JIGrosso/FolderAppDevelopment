@@ -10,51 +10,64 @@
     mc:Ignorable="d">
 
     <StackLayout>
+        <Grid
+            Padding="10"
+            BackgroundColor="{StaticResource purpleColor}"
+            ColumnSpacing="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Frame
+                Grid.Row="0"
+                Grid.RowSpan="4"
+                Grid.Column="0"
+                Padding="0"
+                BackgroundColor="Gray"
+                CornerRadius="50"
+                HasShadow="False"
+                HeightRequest="100"
+                WidthRequest="100">
+                <Image Aspect="AspectFill" Source="{Binding Avatar.Source}" />
+            </Frame>
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource TitleLabel}"
+                Text="Folder IT" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource NameLabel}"
+                Text="{Binding Name}" />
+        </Grid>
         <ListView
             x:Name="MenuItemsList"
-            HasUnevenRows="true"
+            HorizontalOptions="Start"
             ItemSelected="MenuItemsListView_ItemSelected"
             ItemsSource="{Binding MenuItems}"
             SeparatorVisibility="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand">
-                            <Label
-                                FontSize="20"
-                                Text="{Binding Title}"
-                                VerticalOptions="FillAndExpand"
-                                VerticalTextAlignment="Center" />
+                        <StackLayout Padding="10">
+                            <Label FontSize="20" Text="{Binding Title}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
-            <ListView.Header>
-                <Grid BackgroundColor="{StaticResource purpleColor}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="10" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30" />
-                        <RowDefinition Height="80" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="10" />
-                    </Grid.RowDefinitions>
-                    <Label
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Style="{StaticResource TitleLabel}"
-                        Text="Folder IT" />
-                </Grid>
-            </ListView.Header>
         </ListView>
         <Label
             x:Name="Logout"
             Margin="10"
-            FontSize="Large"
+            FontSize="Medium"
             HorizontalOptions="StartAndExpand"
             Text="Cerrar Sesión"
             TextColor="Gray"

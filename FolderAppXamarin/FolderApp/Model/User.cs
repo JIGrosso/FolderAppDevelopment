@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using WordPressPCL;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -12,6 +13,10 @@ namespace FolderApp.Model
         public string Username { get; set; }
 
         public string Password { get; set; }
+
+        public string CompleteName { get; set; }
+
+        public string AvatarUrl { get; set; }
 
         public static async Task<bool> Login(string username, string password, bool recuerdame)
         {
@@ -34,21 +39,15 @@ namespace FolderApp.Model
                     {
                         App.client = client;
 
-                        var user = new User();
-
-                        //Obtener datos de client y crear objeto user
-                        user.Username = username;
-                        user.Password = password;
-                        user.Token = client.GetToken();
-                        App.user = user;
+                        App.User = GetUserFromClient(client);
 
                         if (recuerdame)
                         {
                             try
                             {
-                                await SecureStorage.SetAsync("jwt_token", user.Token);
+                                await SecureStorage.SetAsync("jwt_token", App.User.Token);
                             }
-                            catch (Exception ex)
+                            catch (Exception)
                             {
                                 // Possible that device doesn't support secure storage on device.
                             }
@@ -71,8 +70,30 @@ namespace FolderApp.Model
 
         public static void Logout()
         {
-            Application.Current.Properties.Remove("token");
-            App.user = null;
+            SecureStorage.Remove("jwt_token");
+            App.User = null;
+        }
+
+        public static User GetUserFromClient(WordPressClient client)
+        {
+            var user = new User();
+
+            //Obtener datos de client y crear objeto user
+            var clientUser = client.Users.GetCurrentUser().Result;
+            user.AvatarUrl = clientUser.AvatarUrls.Size48;
+            user.Username = clientUser.UserName;
+            user.Token = client.GetToken();
+
+            if (string.IsNullOrEmpty(clientUser.Name))
+            {
+                user.CompleteName = user.Username;
+            }
+            else
+            {
+                user.CompleteName = clientUser.Name;
+            }
+
+            return user;
         }
 
     }

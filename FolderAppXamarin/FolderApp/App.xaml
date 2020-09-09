@@ -26,6 +26,14 @@
             <Color x:Key="greenColor">#51AC4F</Color>
             <Color x:Key="whiteColor">#FFFFFF</Color>
 
+
+            <!--  SideBar  -->
+            <Style x:Key="NameLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="17" />
+                <Setter Property="TextColor" Value="Beige" />
+                <Setter Property="FontFamily" Value="{StaticResource RalewayBold}" />
+            </Style>
+
             <!--  Pages  -->
             <Style x:Key="TitleLabel" TargetType="Label">
                 <Setter Property="FontSize" Value="20" />

@@ -81,8 +81,8 @@ namespace FolderApp.Model
                 {
                     Index = prevCount + returningPosts.Count,
                     Id = aux.Id,
-                    Title = StringHelper.RemoveHtml(aux.Title.Rendered),
-                    Content = StringHelper.RemoveHtml(aux.Content.Rendered),
+                    Title = aux.Title.Rendered.RemoveHtml(),
+                    Content = aux.Content.Rendered.RemoveHtml(),
                     PostedDate = aux.Date,
                     PostImage = image,
                     Section = ((CategoriesEnum)aux.Categories[0]).GetDescription()

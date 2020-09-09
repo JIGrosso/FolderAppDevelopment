@@ -16,7 +16,19 @@ namespace FolderApp.ViewModel
 
         public int CurrentPage { get; set; } = 0;
 
-        public Post SelectedItem { get; set; }
+        private Post selectedItem { get; set; }
+        public Post SelectedItem
+        {
+            get
+            {
+                return selectedItem;
+            }
+            set
+            {
+                selectedItem = value;
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedItem)));
+            }
+        }
 
         public bool ScrolledDown = true;
 

@@ -6,67 +6,17 @@ using Xamarin.Forms;
 
 namespace FolderApp.ViewModel
 {
-    public class LoginVM : INotifyPropertyChanged
+    public class LoginVM
     {
-        public User User { get; set; }
+        public string Username { get; set; }
 
-        private string username;
+        public string Password { get; set; }
 
-        public string Username
-        {
-            get { return username; }
-            set 
-            { 
-                username = value;
-                User = new User()
-                {
-                    Username = this.Username,
-                    Password = this.Password
-                };
-                OnPropertyChanged("Username");
-            }
-        }
-
-        private string password;
-
-        public string Password
-        {
-            get { return password; }
-            set 
-            { 
-                password = value;
-                User = new User()
-                {
-                    Username = this.Username,
-                    Password = this.Password
-                };
-                OnPropertyChanged("Password");
-            }
-        }
-
-        public bool RecuerdameChecked { get; set; }
-
-
-        public LoginVM()
-        {
-            User = new User();
-            RecuerdameChecked = false;
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            if(PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+        public bool RecuerdameChecked { get; set; } = false;
 
         public async void Login()
         {
-            bool loginSuccess = await User.Login(User.Username, User.Password, RecuerdameChecked);
+            bool loginSuccess = await User.Login(Username, Password, RecuerdameChecked);
 
             if(loginSuccess)
             {

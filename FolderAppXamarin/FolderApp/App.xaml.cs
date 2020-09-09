@@ -13,7 +13,7 @@ namespace FolderApp
     {
         public static WordPressClient client;
 
-        public static User user = new User();
+        public static User User = new User();
 
         public App()
         {
@@ -29,6 +29,9 @@ namespace FolderApp
                     client.SetJWToken(currentToken);
                     if (client.IsValidJWToken().Result)
                     {
+
+                        User = User.GetUserFromClient(client);
+
                         Current.MainPage = new MasterDetailPage()
                         {
                             Master = new SideMenuMaster(),
@@ -44,24 +47,7 @@ namespace FolderApp
             {
                 MainPage = new LoginPage();
             }
-            //MainPage = new MasterDetailPage()
-            //{
-            //    Master = new SideMenuDetail(),
-            //    Detail = new NavigationPage(new LoginPage())
-            //};
 
-        }
-
-        protected override void OnStart()
-        {
-        }
-
-        protected override void OnSleep()
-        {
-        }
-
-        protected override void OnResume()
-        {
         }
     }
 }
