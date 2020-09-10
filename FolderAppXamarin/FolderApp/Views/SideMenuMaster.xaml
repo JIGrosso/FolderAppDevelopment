@@ -5,12 +5,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Master"
+    Title="Menu"
     Visual="Material"
     mc:Ignorable="d">
 
-    <StackLayout>
+    <Grid VerticalOptions="Fill">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="195"/>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid
+            Grid.Row="0"
             Padding="10"
             BackgroundColor="{StaticResource purpleColor}"
             ColumnSpacing="15">
@@ -24,7 +33,6 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
             <Frame
                 Grid.Row="0"
                 Grid.RowSpan="4"
@@ -48,33 +56,42 @@
                 Style="{StaticResource NameLabel}"
                 Text="{Binding Name}" />
         </Grid>
-        <ListView
-            x:Name="MenuItemsList"
+        <CollectionView
+            Grid.Row="1"
             HorizontalOptions="Start"
-            ItemSelected="MenuItemsListView_ItemSelected"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+            SelectionChangedCommand="{Binding ItemTapped}"
             ItemsSource="{Binding MenuItems}"
-            SeparatorVisibility="None">
-            <ListView.ItemTemplate>
+            SelectionMode="Single"
+            VerticalOptions="Start">
+            <CollectionView.Header>
+                <Label Text="Categorías" FontSize="20" Padding="15,0"/>
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label FontSize="20" Text="{Binding Title}" />
-                        </StackLayout>
-                    </ViewCell>
+                    <StackLayout Padding="25,5">
+                        <Label FontSize="18" Text="{Binding Title}" />
+                    </StackLayout>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Label
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <BoxView Grid.Row="2"
+            HeightRequest="1"
+                 HorizontalOptions="Fill"
+                 Color="{StaticResource purpleColor}" VerticalOptions="Start"/>
+        <Label Text="Equipos - Proyectos" FontSize="20" Padding="15,0" Grid.Row="3"/>
+        <Label Text="Carga Bono Recreativo" FontSize="20" Padding="15,0" Grid.Row="4"/>
+        <Label Grid.Row="5"
+               Padding="15,10"
             x:Name="Logout"
-            Margin="10"
             FontSize="Medium"
             HorizontalOptions="StartAndExpand"
+               VerticalOptions="End"
             Text="Cerrar Sesión"
-            TextColor="Gray"
-            VerticalOptions="End">
+            TextColor="Gray">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Logout_TappedAsync" />
             </Label.GestureRecognizers>
         </Label>
-    </StackLayout>
+    </Grid>
 </ContentPage>

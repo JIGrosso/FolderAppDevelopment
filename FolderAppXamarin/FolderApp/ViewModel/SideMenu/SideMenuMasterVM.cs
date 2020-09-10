@@ -4,16 +4,32 @@ using FolderApp.Views;
 using FolderApp.Views.SideMenu;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
+using System.ComponentModel;
+using System.Windows.Input;
 
 namespace FolderApp.ViewModel.SideMenu
 {
-    public class SideMenuMasterVM
+    public class SideMenuMasterVM : INotifyPropertyChanged
     {
         public string Name { get; set; } = App.User.CompleteName;
 
         public Image Avatar { get; set; }
 
         public ObservableCollection<MasterMenuItem> MenuItems { get; set; }
+
+        private MasterMenuItem selectedItem { get; set; }
+        public MasterMenuItem SelectedItem
+        {
+            get
+            {
+                return selectedItem;
+            }
+            set
+            {
+                selectedItem = value;
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedItem)));
+            }
+        }
 
         public SideMenuMasterVM()
         {
@@ -27,7 +43,24 @@ namespace FolderApp.ViewModel.SideMenu
             });
 
             Avatar = GetAvatarOrDefault(App.User.AvatarUrl, Name);
+       }
+
+        public ICommand ItemTapped
+        {
+            get
+            {
+                return new Command(_ =>
+                {
+                    if (SelectedItem == null)
+                        return;
+
+                    Navigate(SelectedItem);
+                    SelectedItem = null;
+                });
+            }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public async void Navigate(MasterMenuItem selectedItem)
         {

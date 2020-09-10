@@ -1,11 +1,9 @@
 ﻿using FolderApp.Model;
 using FolderApp.Views;
 using FolderApp.Views.SideMenu;
-using System;
 using WordPressPCL;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace FolderApp
 {
@@ -32,11 +30,12 @@ namespace FolderApp
 
                         User = User.GetUserFromClient(client);
 
-                        Current.MainPage = new MasterDetailPage()
+                        Current.MainPage = new MainView()
                         {
                             Master = new SideMenuMaster(),
                             Detail = new NavigationPage(new NoticiasPage())
                         };
+
                         return;
                     }
                 }
@@ -48,6 +47,6 @@ namespace FolderApp
                 MainPage = new LoginPage();
             }
 
-        }
+       }
     }
 }

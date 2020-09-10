@@ -21,18 +21,6 @@ namespace FolderApp.Views.SideMenu
             BindingContext = viewModel;
         }
 
-        private void MenuItemsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            var item = e.SelectedItem as MasterMenuItem;
-
-            if(item != null)
-            {
-                viewModel.Navigate(item);
-                MenuItemsList.SelectedItem = null;
-            }
-
-        }
-
         private async void Logout_TappedAsync(object sender, EventArgs e)
         {
             User.Logout();
