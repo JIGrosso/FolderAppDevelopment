@@ -10,9 +10,9 @@
     mc:Ignorable="d">
 
     <ContentPage.Content>
-        <StackLayout Margin="10">
-            <Frame BackgroundColor="{StaticResource greyColor}" CornerRadius="5">
-                <Label Style="{StaticResource TitleLabel}" Text="Noticias" />
+        <StackLayout Margin="10,10,10,0">
+            <Frame BackgroundColor="{StaticResource greyColor}" CornerRadius="10">
+                <Label Style="{StaticResource TitleLabel}" Text="Noticias"/>
             </Frame>
             <views:PostList />
         </StackLayout>

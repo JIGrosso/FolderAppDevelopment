@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sidebar="clr-namespace:FolderApp.Views.Siderbar"
     Title="Menu"
     Visual="Material"
     mc:Ignorable="d">
@@ -12,50 +13,13 @@
     <Grid VerticalOptions="Fill">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="195"/>
+            <RowDefinition Height="200"/>
             <RowDefinition Height="1"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid
-            Grid.Row="0"
-            Padding="10"
-            BackgroundColor="{StaticResource purpleColor}"
-            ColumnSpacing="15">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Frame
-                Grid.Row="0"
-                Grid.RowSpan="4"
-                Grid.Column="0"
-                Padding="0"
-                BackgroundColor="Gray"
-                CornerRadius="50"
-                HasShadow="False"
-                HeightRequest="100"
-                WidthRequest="100">
-                <Image Aspect="AspectFill" Source="{Binding Avatar.Source}" />
-            </Frame>
-            <Label
-                Grid.Row="0"
-                Grid.Column="1"
-                Style="{StaticResource TitleLabel}"
-                Text="Folder IT" />
-            <Label
-                Grid.Row="1"
-                Grid.Column="1"
-                Style="{StaticResource NameLabel}"
-                Text="{Binding Name}" />
-        </Grid>
+            <sidebar:HeaderView Grid.Row="0"/>
         <CollectionView
             Grid.Row="1"
             HorizontalOptions="Start"
@@ -69,8 +33,8 @@
             </CollectionView.Header>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="25,5">
-                        <Label FontSize="18" Text="{Binding Title}" />
+                    <StackLayout Padding="25,7">
+                        <Label FontSize="15" Text="{Binding Title}" TextColor="{StaticResource purpleColor}" TextTransform="Uppercase" FontAttributes="Bold"/>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -79,8 +43,8 @@
             HeightRequest="1"
                  HorizontalOptions="Fill"
                  Color="{StaticResource purpleColor}" VerticalOptions="Start"/>
-        <Label Text="Equipos - Proyectos" FontSize="20" Padding="15,0" Grid.Row="3"/>
-        <Label Text="Carga Bono Recreativo" FontSize="20" Padding="15,0" Grid.Row="4"/>
+        <Label Text="Equipos - Proyectos" FontSize="18" Padding="15,5" Grid.Row="3" TextColor="{StaticResource purpleColor}" TextTransform="Uppercase" FontAttributes="Bold"/>
+        <Label Text="Carga Bono Recreativo" FontSize="18" Padding="15,5" Grid.Row="4" TextColor="{StaticResource purpleColor}" TextTransform="Uppercase" FontAttributes="Bold"/>
         <Label Grid.Row="5"
                Padding="15,10"
             x:Name="Logout"
@@ -88,6 +52,8 @@
             HorizontalOptions="StartAndExpand"
                VerticalOptions="End"
             Text="Cerrar Sesión"
+               TextTransform="Uppercase"
+               FontAttributes="Bold"
             TextColor="Gray">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Logout_TappedAsync" />

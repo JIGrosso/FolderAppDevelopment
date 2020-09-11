@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FolderApp.Views.Siderbar.HeaderView">
+  <ContentView.Content>
+        <Grid
+            Padding="10"
+            BackgroundColor="{StaticResource purpleColor}"
+            ColumnSpacing="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0"
+                Grid.RowSpan="4"
+                Grid.Column="0"
+                  Padding="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Frame
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Padding="2"
+                CornerRadius="50"
+                HasShadow="False"
+                HeightRequest="100"
+                WidthRequest="100"
+                BorderColor="Beige"
+                >
+                    <Image Aspect="AspectFill" Source="{Binding Avatar.Source}"/>
+                </Frame>
+                <Frame Grid.Row="1" HorizontalOptions="Center"
+                       Padding="10,5" CornerRadius="15" HasShadow="True">
+                    <Label Text="Mi Perfil" FontFamily="{StaticResource RalewayBold}" TextColor="{StaticResource purpleColor}"/>
+                </Frame>
+            </Grid>
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource TitleLabel}"
+                Text="Folder IT" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource NameLabel}"
+                Text="{Binding Name}" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>
