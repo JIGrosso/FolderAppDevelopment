@@ -17,6 +17,9 @@ namespace FolderApp.Droid
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+
+            Window.SetStatusBarColor(Android.Graphics.Color.Black);
+
             if (Intent.Extras != null)
             {
                 foreach (var key in Intent.Extras.KeySet())

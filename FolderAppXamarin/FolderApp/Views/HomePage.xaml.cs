@@ -12,7 +12,6 @@ namespace FolderApp.Views
         {
             BindingContext = new HomeVM();
             InitializeComponent();
-            //((App.Current.MainPage as MasterDetailPage).Detail as NavigationPage).BarBackgroundColor = SectionColorEnum.Noticias;
         }
 
         protected override void OnAppearing()
