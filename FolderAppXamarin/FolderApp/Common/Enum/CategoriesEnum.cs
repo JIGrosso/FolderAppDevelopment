@@ -4,6 +4,9 @@ namespace FolderApp.Common
 {
     public enum CategoriesEnum
     {
+        [Description("Noticias")]
+        Noticias = -1,
+
         [Description("Capacitaciones")]
         Capacitaciones = 21,
 

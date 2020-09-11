@@ -118,7 +118,7 @@ namespace FolderApp.ViewModel
 
             List<Post> posts;
 
-            if (category != null)
+            if ((int)category > 0)
             {
                 posts = await Post.GetPosts(sectionId: (int)category, page: 1, prevCount: Posts.Count);
             }

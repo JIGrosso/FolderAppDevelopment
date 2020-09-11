@@ -24,7 +24,7 @@ namespace FolderApp.ViewModel
                 App.Current.MainPage = new MasterDetailPage()
                 {
                     Master = new SideMenuMaster(),
-                    Detail = new NavigationPage(new NoticiasPage())
+                    Detail = new NavigationPage(new HomePage())
                 };
             }
             else

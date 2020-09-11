@@ -13,23 +13,28 @@
     <Grid VerticalOptions="Fill">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="200"/>
             <RowDefinition Height="1"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="200"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
             <sidebar:HeaderView Grid.Row="0"/>
+        <Label Grid.Row="1" Text="Noticias" FontSize="18" Padding="15,0" TextTransform="Uppercase" FontAttributes="Bold" TextColor="{StaticResource purpleColor}">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Noticias_TappedAsync" />
+            </Label.GestureRecognizers>
+        </Label>
         <CollectionView
-            Grid.Row="1"
+            Grid.Row="2"
             HorizontalOptions="Start"
             SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
             SelectionChangedCommand="{Binding ItemTapped}"
-            ItemsSource="{Binding MenuItems}"
+            ItemsSource="{Binding Categories}"
             SelectionMode="Single"
             VerticalOptions="Start">
             <CollectionView.Header>
-                <Label Text="Categorías" FontSize="20" Padding="15,0"/>
+                <Label Text="Categorías" FontSize="18" Padding="15,0" TextTransform="Uppercase"/>
             </CollectionView.Header>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -39,12 +44,26 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <BoxView Grid.Row="2"
+        <BoxView Grid.Row="3"
             HeightRequest="1"
                  HorizontalOptions="Fill"
                  Color="{StaticResource purpleColor}" VerticalOptions="Start"/>
-        <Label Text="Equipos - Proyectos" FontSize="18" Padding="15,5" Grid.Row="3" TextColor="{StaticResource purpleColor}" TextTransform="Uppercase" FontAttributes="Bold"/>
-        <Label Text="Carga Bono Recreativo" FontSize="18" Padding="15,5" Grid.Row="4" TextColor="{StaticResource purpleColor}" TextTransform="Uppercase" FontAttributes="Bold"/>
+        <CollectionView
+            Grid.Row="4"
+            HorizontalOptions="Start"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+            SelectionChangedCommand="{Binding ItemTapped}"
+            ItemsSource="{Binding MenuItems}"
+            SelectionMode="Single"
+            VerticalOptions="Start">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding Title}" FontSize="18" Padding="15,5" TextColor="{StaticResource purpleColor}" TextTransform="Uppercase" FontAttributes="Bold"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
         <Label Grid.Row="5"
                Padding="15,10"
             x:Name="Logout"

@@ -10,6 +10,8 @@ namespace FolderApp.Common
         public static Color GetSectionColor(CategoriesEnum category)
         {
             switch (category) {
+                case CategoriesEnum.Noticias:
+                    return SectionColorEnum.Noticias;
                 case CategoriesEnum.Capacitaciones:
                     return SectionColorEnum.Capacitaciones;
                 case CategoriesEnum.Direccion:
@@ -29,6 +31,8 @@ namespace FolderApp.Common
         {
             switch (category)
             {
+                case CategoriesEnum.Noticias:
+                    return SectionTitleEnum.Noticias;
                 case CategoriesEnum.Capacitaciones:
                     return SectionTitleEnum.Capacitaciones;
                 case CategoriesEnum.Direccion:

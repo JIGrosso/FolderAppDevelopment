@@ -1,4 +1,5 @@
-﻿using FolderApp.Model;
+﻿using FolderApp.Common;
+using FolderApp.Model;
 using FolderApp.ViewModel.SideMenu;
 using System;
 using Xamarin.Forms;
@@ -29,6 +30,12 @@ namespace FolderApp.Views.SideMenu
             if (answer) {
                 App.Current.MainPage = new LoginPage();
             }
+        }
+
+        private async void Noticias_TappedAsync(object sender, EventArgs e)
+        {
+            await (App.Current.MainPage as MasterDetailPage).Detail.Navigation.PushAsync(new SectionPage(CategoriesEnum.Noticias));
+            (App.Current.MainPage as MasterDetailPage).IsPresented = false;
         }
     }
 

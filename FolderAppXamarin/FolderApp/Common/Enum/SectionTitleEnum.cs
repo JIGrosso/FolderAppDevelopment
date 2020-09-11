@@ -2,6 +2,8 @@
 {
     class SectionTitleEnum
     {
+        public static string Noticias = "Noticias";
+
         public static string Capacitaciones = "Capacitaciones";
 
         public static string Direccion = "Institucional";

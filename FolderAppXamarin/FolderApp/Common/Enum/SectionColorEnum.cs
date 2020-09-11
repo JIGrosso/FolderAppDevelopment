@@ -12,6 +12,8 @@ namespace FolderApp.Common.Enum
 
         public static Color RRHH = Color.FromHex("#6F1850");
 
+        public static Color Noticias = Color.FromHex("#6F1850");
+
         public static Color Social = Color.FromHex("#51AC4F");
     }
 }

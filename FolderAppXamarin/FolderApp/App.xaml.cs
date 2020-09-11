@@ -33,7 +33,7 @@ namespace FolderApp
                         Current.MainPage = new MainView()
                         {
                             Master = new SideMenuMaster(),
-                            Detail = new NavigationPage(new NoticiasPage())
+                            Detail = new NavigationPage(new HomePage())
                         };
 
                         return;
