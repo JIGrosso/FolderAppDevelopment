@@ -55,7 +55,7 @@
                     VerticalOptions="StartAndExpand">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <comment:CommentView Margin="5,10" />
+                            <comment:CommentView />
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
                 </StackLayout>

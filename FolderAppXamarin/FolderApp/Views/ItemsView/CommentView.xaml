@@ -8,53 +8,45 @@
     mc:Ignorable="d">
 
     <ContentView.Content>
-        <StackLayout>
-            <Grid>
+        <StackLayout Margin="10">
+            <Grid ColumnSpacing="15">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Frame
                     Grid.Row="0"
-                    Grid.RowSpan="3"
+                    Grid.RowSpan="2"
                     Grid.Column="0"
-                    Margin="5"
                     Padding="0"
-                    BackgroundColor="Gray"
-                    CornerRadius="50"
+                    CornerRadius="30"
                     HasShadow="False"
-                    HeightRequest="40"
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="CenterAndExpand"
-                    WidthRequest="40">
+                    VerticalOptions="Fill"
+                    WidthRequest="60">
                     <Image Aspect="AspectFill" Source="{Binding ProfileIcon.Source}" />
                 </Frame>
                 <Label
                     Grid.Row="0"
                     Grid.Column="1"
+                    FontAttributes="Bold"
                     HorizontalOptions="Start"
                     Text="{Binding AuthorName}" />
                 <Label
                     Grid.Row="0"
                     Grid.Column="2"
                     HorizontalOptions="End"
-                    Text="{Binding CommentDate}" />
-                <BoxView
+                    Text="{Binding CommentDate}"
+                    TextColor="Gray" />
+                <Label
                     Grid.Row="1"
                     Grid.Column="1"
-                    Grid.ColumnSpan="2"
-                    HorizontalOptions="Fill"
-                    Color="Gray" />
-                <Label
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Grid.ColumnSpan="2"
-                    Text="{Binding Content}" />
+                    Text="{Binding Content}"
+                    VerticalOptions="Start" />
             </Grid>
         </StackLayout>
     </ContentView.Content>
