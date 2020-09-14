@@ -112,7 +112,7 @@ namespace FolderApp.ViewModel
                 {
                     return;
                 }
-            }
+           }
 
             CurrentPage = page;
 
@@ -120,11 +120,11 @@ namespace FolderApp.ViewModel
 
             if ((int)category > 0)
             {
-                posts = await Post.GetPosts(sectionId: (int)category, page: 1, prevCount: Posts.Count);
+                posts = await Post.GetPosts(sectionId: (int)category, page: CurrentPage, prevCount: Posts.Count);
             }
             else
             {
-                posts = await Post.GetPosts(page: 1, prevCount: Posts.Count);
+                posts = await Post.GetPosts(page: CurrentPage, prevCount: Posts.Count);
             }
 
             IsRefreshing = false;
