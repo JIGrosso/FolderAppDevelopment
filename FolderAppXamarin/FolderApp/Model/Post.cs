@@ -41,7 +41,7 @@ namespace FolderApp.Model
                 List<Post> returningPosts = new List<Post>();
 
                 var queryBuilder = new PostsQueryBuilder();
-                queryBuilder.PerPage = 7;
+                queryBuilder.PerPage = 10;
                 queryBuilder.Page = page;
                 if (sectionId != null)
                 {

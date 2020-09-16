@@ -5,49 +5,66 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    BackgroundColor="White"
     Title=""
+    BackgroundColor="White"
     Visual="Material"
     mc:Ignorable="d">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="Center">
-            <Label
-                FontFamily="{StaticResource RalewayBold}"
-                FontSize="38"
-                HorizontalOptions="Center"
-                Text="Folder App" />
+        <AbsoluteLayout>
             <StackLayout
-                Margin="0"
-                Padding="50,20,50,20"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="Center">
-                <Frame BackgroundColor="{StaticResource purpleColor}" CornerRadius="10">
-                    <Label Style="{StaticResource TitleLabel}" Text="Acceso a la cuenta" />
-                </Frame>
-                <Frame>
-                    <StackLayout Margin="5">
-                        <Entry Placeholder="Nombre de usuario" Text="{Binding Username, Mode=TwoWay}" />
-                        <Entry
-                            IsPassword="True"
-                            Placeholder="Contraseña"
-                            Text="{Binding Password, Mode=TwoWay}" />
-                        <StackLayout Padding="0,30,0,0" Orientation="Horizontal">
-                            <CheckBox IsChecked="{Binding RecuerdameChecked}" Color="{StaticResource purpleColor}" />
-                            <Label
-                                FontSize="Medium"
-                                Text="Recuérdame"
-                                VerticalTextAlignment="Center" />
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                VerticalOptions="CenterAndExpand">
+                <Label
+                    FontFamily="{StaticResource RalewayBold}"
+                    FontSize="38"
+                    HorizontalOptions="Center"
+                    Text="Folder App" />
+                <StackLayout
+                    Margin="0"
+                    Padding="50,20,50,20"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Center">
+                    <Frame BackgroundColor="{StaticResource purpleColor}" CornerRadius="10">
+                        <Label Style="{StaticResource TitleLabel}" Text="Acceso a la cuenta" />
+                    </Frame>
+                    <Frame>
+                        <StackLayout Margin="5">
+                            <Entry Placeholder="Nombre de usuario" Text="{Binding Username, Mode=TwoWay}" />
+                            <Entry
+                                IsPassword="True"
+                                Placeholder="Contraseña"
+                                Text="{Binding Password, Mode=TwoWay}" />
+                            <StackLayout Padding="0,30,0,0" Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding RecuerdameChecked}" Color="{StaticResource purpleColor}" />
+                                <Label
+                                    FontSize="Medium"
+                                    Text="Recuérdame"
+                                    VerticalTextAlignment="Center" />
+                            </StackLayout>
+                            <Button
+                                x:Name="loginButton"
+                                BackgroundColor="{StaticResource purpleColor}"
+                                Clicked="loginButton_Clicked"
+                                CornerRadius="10"
+                                Text="Acceder"
+                                TextColor="White" />
                         </StackLayout>
-                        <Button
-                            x:Name="loginButton"
-                            BackgroundColor="{StaticResource purpleColor}"
-                            Clicked="loginButton_Clicked"
-                            CornerRadius="10"
-                            Text="Acceder"
-                            TextColor="White" />
-                    </StackLayout>
-                </Frame>
+                    </Frame>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                BackgroundColor="Black"
+                IsVisible="{Binding ActivityViewVisible, Mode=TwoWay}"
+                Opacity="0.5"
+                VerticalOptions="Fill">
+                <ActivityIndicator
+                    IsRunning="True"
+                    Opacity="1"
+                    VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

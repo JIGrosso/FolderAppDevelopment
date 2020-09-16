@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WordPressPCL;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace FolderApp.Model
 {
@@ -17,6 +17,8 @@ namespace FolderApp.Model
         public string CompleteName { get; set; }
 
         public string AvatarUrl { get; set; }
+
+        public List<string> Roles { get; set; }
 
         public static async Task<bool> Login(string username, string password, bool recuerdame)
         {
@@ -80,8 +82,10 @@ namespace FolderApp.Model
 
             //Obtener datos de client y crear objeto user
             var clientUser = client.Users.GetCurrentUser().Result;
+            //var user2 = client.Users.GetByID(clientUser.Id).Result;
             user.AvatarUrl = clientUser.AvatarUrls.Size48;
             user.Username = clientUser.UserName;
+            user.Roles = (List<string>)clientUser.Roles;
             user.Token = client.GetToken();
 
             if (string.IsNullOrEmpty(clientUser.Name))
