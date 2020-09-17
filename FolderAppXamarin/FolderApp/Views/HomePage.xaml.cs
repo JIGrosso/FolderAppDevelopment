@@ -27,5 +27,10 @@ namespace FolderApp.Views
             Task.Run(() => viewModel.GetActivities());
 
         }
+
+        void OnCollectionViewScrolled(object sender, ItemsViewScrolledEventArgs e)
+        {
+            (BindingContext as HomeVM).ScrolledDown = e.VerticalDelta > 0;
+        }
     }
 }

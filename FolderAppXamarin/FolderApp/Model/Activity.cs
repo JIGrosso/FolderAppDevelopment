@@ -9,6 +9,8 @@ namespace FolderApp.Model
     {
         public int Id { get; set; }
 
+        public string Title { get; set; }
+
         public static async Task<List<Activity>> GetActivities(int page, int prevCount)
         {
             try
@@ -18,7 +20,7 @@ namespace FolderApp.Model
                 var bpClient = App.client.BuddyPressClient;
 
                 var queryBuilder = new ActivitiesQueryBuilder();
-                queryBuilder.PerPage = 10;
+                queryBuilder.PerPage = 17;
                 queryBuilder.Page = page;
 
                 var activities = await bpClient.Activities.Query(queryBuilder, true);
@@ -57,7 +59,8 @@ namespace FolderApp.Model
 
                 returningActivities.Add(new Activity()
                 {
-                    Id = aux.Id
+                    Id = aux.Id,
+                    Title = aux.Title
                 });
             }
 
