@@ -21,7 +21,8 @@ namespace FolderApp.Model
         internal static async Task<List<Comment>> GetCommentsForPost(int postId)
         {
             var comments = new List<Comment>();
-            var clientComments = await App.client.Comments.GetCommentsForPost(postId);
+            var wpClient = App.client.WordPressClient;
+            var clientComments = await wpClient.Comments.GetCommentsForPost(postId);
             foreach (WordPressPCL.Models.Comment comment in clientComments)
             {
                 var image = GetAvatarOrDefault(comment.AuthorAvatarUrls.Size48, comment.AuthorName);

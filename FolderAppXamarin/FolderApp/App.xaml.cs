@@ -1,7 +1,7 @@
 ﻿using FolderApp.Model;
 using FolderApp.Views;
 using FolderApp.Views.SideMenu;
-using WordPressPCL;
+using FolderAppServices;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -9,7 +9,7 @@ namespace FolderApp
 {
     public partial class App : Application
     {
-        public static WordPressClient client;
+        public static FolderWPClient client;
 
         public static User User = new User();
 
@@ -17,7 +17,7 @@ namespace FolderApp
         {
             InitializeComponent();
 
-            client = new WordPressClient("https://intranet.folderit.net/wp-json/");
+            client = new FolderWPClient();
 
             try
             {

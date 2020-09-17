@@ -40,6 +40,8 @@ namespace FolderApp.Model
             {
                 List<Post> returningPosts = new List<Post>();
 
+                var wpClient = App.client.WordPressClient;
+
                 var queryBuilder = new PostsQueryBuilder();
                 queryBuilder.PerPage = 10;
                 queryBuilder.Page = page;
@@ -47,7 +49,7 @@ namespace FolderApp.Model
                 {
                     queryBuilder.Categories = new int[] { (int)sectionId };
                 }
-                var posts = await App.client.Posts.Query(queryBuilder);
+                var posts = await wpClient.Posts.Query(queryBuilder);
 
                 returningPosts = await ListPosts(posts, prevCount);
 
@@ -65,12 +67,14 @@ namespace FolderApp.Model
         {
             var returningPosts = new List<Post>();
 
+            var wpClient = App.client.WordPressClient;
+
             foreach (var aux in posts)
             {
                 Image image = null;
                 if (aux.FeaturedMedia != null && aux.FeaturedMedia != 0)
                 {
-                    var media = await App.client.Media.GetByID(aux.FeaturedMedia, true, true);
+                    var media = await wpClient.Media.GetByID(aux.FeaturedMedia, true, true);
                     image = new Image
                     {
                         Source = ImageSource.FromUri(new Uri(media.SourceUrl))

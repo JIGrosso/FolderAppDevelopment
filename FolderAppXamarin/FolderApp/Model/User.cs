@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FolderAppServices;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WordPressPCL;
@@ -39,6 +40,8 @@ namespace FolderApp.Model
                     bool isValidToken = await client.IsValidJWToken();
                     if (isValidToken)
                     {
+                        client.BuddyPressClient.SetJWToken(client.WordPressClient.GetToken());
+
                         App.client = client;
 
                         App.User = GetUserFromClient(client);
@@ -76,12 +79,14 @@ namespace FolderApp.Model
             App.User = null;
         }
 
-        public static User GetUserFromClient(WordPressClient client)
+        public static User GetUserFromClient(FolderWPClient client)
         {
             var user = new User();
 
+            var wpClient = client.WordPressClient;
+
             //Obtener datos de client y crear objeto user
-            var clientUser = client.Users.GetCurrentUser().Result;
+            var clientUser = wpClient.Users.GetCurrentUser().Result;
             //var user2 = client.Users.GetByID(clientUser.Id).Result;
             user.AvatarUrl = clientUser.AvatarUrls.Size48;
             user.Username = clientUser.UserName;
