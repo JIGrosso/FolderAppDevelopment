@@ -10,7 +10,7 @@ namespace FolderApp.ViewModel
 {
     class HomeVM : INotifyPropertyChanged
     {
-        public ObservableCollection<Activity> Activities { get; set; } = new ObservableCollection<Activity>();
+        public ObservableCollection<Activity> Activities { get; set; } = App.ActivitiesCache;
 
         public int CurrentPage { get; set; } = 0;
 
@@ -86,21 +86,20 @@ namespace FolderApp.ViewModel
                 {
                     if (!ScrolledDown)
                     {
-                        Task.Run(() => GetActivities(page: 1, deletePrevious: true));
+                        Task.Run(() => GetActivities(page: 1, isRefresh: true));
                     }
                 });
             }
         }
 
-        public async Task GetActivities(int page = 1, bool deletePrevious = false)
+        public async Task GetActivities(int page = 1, bool isRefresh = false)
         {
             IsRefreshing = true;
 
-            if (deletePrevious)
+            if (isRefresh)
             {
                 ScrolledDown = false;
 
-                Activities.Clear();
             }
 
             else
@@ -113,7 +112,7 @@ namespace FolderApp.ViewModel
 
             CurrentPage = page;
 
-            List<Activity> activities;
+            ObservableCollection<Activity> activities;
 
             activities = await Activity.GetActivities(page: CurrentPage, prevCount: Activities.Count);
 

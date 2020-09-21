@@ -2,6 +2,8 @@
 using FolderApp.Views;
 using FolderApp.Views.SideMenu;
 using FolderAppServices;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -12,6 +14,8 @@ namespace FolderApp
         public static FolderWPClient client;
 
         public static User User = new User();
+
+        public static ObservableCollection<Activity> ActivitiesCache = new ObservableCollection<Activity>();
 
         public App()
         {

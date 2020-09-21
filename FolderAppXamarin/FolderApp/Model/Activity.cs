@@ -1,31 +1,38 @@
 ﻿using FolderAppServices.BuddyPress.Utility;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using WordPressPCL.Models;
 
 namespace FolderApp.Model
 {
-    class Activity
+    public class Activity
     {
         public int Id { get; set; }
-
+        
         public string Title { get; set; }
 
-        public static async Task<List<Activity>> GetActivities(int page, int prevCount)
+        public string Content { get; set; }
+
+        public static async Task<ObservableCollection<Activity>> GetActivities(int page, int prevCount)
         {
             try
             {
-                List<Activity> returningActivities = new List<Activity>();
+                ObservableCollection<Activity> returningActivities = new ObservableCollection<Activity>();
 
                 var bpClient = App.client.BuddyPressClient;
 
                 var queryBuilder = new ActivitiesQueryBuilder();
-                queryBuilder.PerPage = 17;
+                queryBuilder.PerPage = 15;
                 queryBuilder.Page = page;
+                queryBuilder.OrderBy = Order.DESC;
 
                 var activities = await bpClient.Activities.Query(queryBuilder, true);
 
-                returningActivities = await ListActivities(activities, prevCount);
+                returningActivities = await ListActivities(activities);
+
+                App.ActivitiesCache = returningActivities;
 
                 return returningActivities;
 
@@ -37,9 +44,9 @@ namespace FolderApp.Model
             }
         }
 
-        private static async Task<List<Activity>> ListActivities(IEnumerable<FolderAppServices.BuddyPress.Models.Activity> posts, int prevCount)
+        private static async Task<ObservableCollection<Activity>> ListActivities(IEnumerable<FolderAppServices.BuddyPress.Models.Activity> posts)
         {
-            var returningActivities = new List<Activity>();
+            var returningActivities = new ObservableCollection<Activity>();
 
             //var bpClient = App.client.BuddyPressClient;
 
@@ -60,7 +67,8 @@ namespace FolderApp.Model
                 returningActivities.Add(new Activity()
                 {
                     Id = aux.Id,
-                    Title = aux.Title
+                    Title = aux.Title,
+                    Content = aux.Content.Rendered
                 });
             }
 
