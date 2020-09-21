@@ -4,29 +4,51 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentView.Content>
-        <StackLayout>
-            <Grid Margin="10">
+        <StackLayout Spacing="0">
+            <Grid
+                Padding="10"
+                ColumnSpacing="14"
+                RowSpacing="5">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+                <Frame
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="0"
+                    Padding="0"
+                    CornerRadius="25"
+                    HasShadow="False"
+                    HeightRequest="50"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="50">
+                    <Image Aspect="AspectFill" Source="{Binding UserThumbnail.Source}" />
+                </Frame>
                 <Label
                     Grid.Row="0"
+                    Grid.RowSpan="{Binding TitleRowSpan}"
                     Grid.Column="1"
+                    FontAttributes="Bold"
                     Text="{Binding Title}"
-                    TextType="Html" FontAttributes="Bold"/>
-                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Content}" TextType="Html"/>
+                    TextType="Html"
+                    VerticalOptions="CenterAndExpand" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="{Binding Content}"
+                    TextType="Html" />
             </Grid>
             <BoxView
+                Margin="0"
                 BackgroundColor="{StaticResource purpleColor}"
                 HeightRequest="1"
                 Opacity="0.7"
-                VerticalOptions="End" />
+                VerticalOptions="Center" />
         </StackLayout>
     </ContentView.Content>
 </ContentView>

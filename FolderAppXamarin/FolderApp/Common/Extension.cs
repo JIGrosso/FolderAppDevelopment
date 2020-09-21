@@ -1,8 +1,10 @@
-﻿using System;
+﻿using FolderApp;
+using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ExtensionMethods
@@ -48,29 +50,62 @@ namespace ExtensionMethods
             return resultString;
         }
 
+
+        //Remove htmt content from string to show it as plain text
+        public static string RemoveParagraph(this string source)
+        {
+
+            //get rid of HTML tags
+            var resultString = Regex.Replace(source, "<[^>]*p>", string.Empty);
+
+            resultString = resultString.Trim();
+
+            if (resultString.Length > 1)
+            {
+                resultString = resultString.Substring(0, resultString.Length);
+            }
+
+            resultString = Regex.Replace(resultString, "\n\n", "\n");
+
+            return resultString;
+        }
+
         //Get avatar from uri if available or gravatar by default given url or username
         public static Image GetAvatarOrDefault(string url, string username)
         {
-            Image image;
-            if (!string.IsNullOrWhiteSpace(url) && !url.Contains("gravatar"))
+            if (string.IsNullOrWhiteSpace(url) || url.Contains("gravatar"))
             {
-                image = new Image()
-                {
-                    Source = ImageSource.FromUri(new Uri(url))
-                };
-            }
-            else
-            {
-                var urlString = ("https://ui-avatars.com/api/?name=" + username +
+                url = ("https://ui-avatars.com/api/?name=" + username +
                     "&background=6f1850" +
                     "&rounded=true" +
                     "&color=FFFFFF").Replace(' ', '+');
-                image = new Image()
-                {
-                    Source = ImageSource.FromUri(new Uri(urlString))
-                };
             }
+            var image = new Image()
+            {
+                Source = new UriImageSource
+                {
+                    Uri = new Uri(url),
+                    CachingEnabled = true,
+                    CacheValidity = new TimeSpan(7, 0, 0, 0)
+                }
+            };
             return image;
+        }
+
+        //Get avatar from uri if available or gravatar by default given userId
+        public static async Task<Image> GetAvatarOrDefault(int id)
+        {
+            var user = await App.client.WordPressClient.Users.GetByID(id, false, true);
+            string username;
+            if (string.IsNullOrEmpty(user.Name))
+            {
+                username = user.UserName;
+            }
+            else
+            {
+                username = user.Name;
+            }
+            return GetAvatarOrDefault(user.AvatarUrls.Size48, username);
         }
     }
 }

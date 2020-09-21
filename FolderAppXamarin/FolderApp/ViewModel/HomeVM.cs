@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -10,7 +11,7 @@ namespace FolderApp.ViewModel
 {
     class HomeVM : INotifyPropertyChanged
     {
-        public ObservableCollection<Activity> Activities { get; set; } = App.ActivitiesCache;
+        public ObservableCollection<Activity> Activities { get; set; } = new ObservableCollection<Activity>();
 
         public int CurrentPage { get; set; } = 0;
 
@@ -94,6 +95,11 @@ namespace FolderApp.ViewModel
 
         public async Task GetActivities(int page = 1, bool isRefresh = false)
         {
+            if (page <= CurrentPage)
+            {
+                return;
+            }
+
             IsRefreshing = true;
 
             if (isRefresh)
@@ -102,25 +108,26 @@ namespace FolderApp.ViewModel
 
             }
 
-            else
-            {
-                if (page <= CurrentPage)
-                {
-                    return;
-                }
-            }
-
             CurrentPage = page;
 
             ObservableCollection<Activity> activities;
 
-            activities = await Activity.GetActivities(page: CurrentPage, prevCount: Activities.Count);
-
-            IsRefreshing = false;
+            activities = await Activity.GetActivities(page: CurrentPage, existent: App.AppCache.Activities.Keys.ToArray());
 
             foreach (var x in activities)
             {
                 Activities.Add(x);
+            }
+
+            IsRefreshing = false;
+
+        }
+
+        public HomeVM()
+        {
+            foreach(Activity aux in App.AppCache.Activities.Values.OrderByDescending(x => x.Date))
+            {
+                Activities.Add(aux);
             }
 
         }

@@ -10,7 +10,7 @@
             <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
                 <CollectionView
                     ItemsSource="{Binding Activities}"
-                    RemainingItemsThreshold="3"
+                    RemainingItemsThreshold="5"
                     RemainingItemsThresholdReachedCommand="{Binding LoadMoreActivitiesCommand}"
                     Scrolled="OnCollectionViewScrolled"
                     SelectedItem="{Binding SelectedItem, Mode=TwoWay}"

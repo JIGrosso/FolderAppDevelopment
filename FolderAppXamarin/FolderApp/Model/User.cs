@@ -1,15 +1,18 @@
-﻿using FolderAppServices;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using WordPressPCL;
 using Xamarin.Essentials;
+using Xamarin.Forms;
+using static ExtensionMethods.MyExtensions;
 
 namespace FolderApp.Model
 {
     public class User
     {
         public string Token { get; set; }
+
+        public int Id { get; set; }
 
         public string Username { get; set; }
 
@@ -44,7 +47,7 @@ namespace FolderApp.Model
 
                         App.client = client;
 
-                        App.User = GetUserFromClient(client);
+                        App.User = await GetUserFromClient();
 
                         if (recuerdame)
                         {
@@ -79,19 +82,20 @@ namespace FolderApp.Model
             App.User = null;
         }
 
-        public static User GetUserFromClient(FolderWPClient client)
+        public static async Task<User> GetUserFromClient()
         {
             var user = new User();
 
-            var wpClient = client.WordPressClient;
+            var wpClient = App.client.WordPressClient;
 
             //Obtener datos de client y crear objeto user
-            var clientUser = wpClient.Users.GetCurrentUser().Result;
+            var clientUser = await wpClient.Users.GetCurrentUser();
             //var user2 = client.Users.GetByID(clientUser.Id).Result;
             user.AvatarUrl = clientUser.AvatarUrls.Size48;
             user.Username = clientUser.UserName;
+            user.Id = clientUser.Id;
             user.Roles = (List<string>)clientUser.Roles;
-            user.Token = client.GetToken();
+            user.Token = App.client.GetToken();
 
             if (string.IsNullOrEmpty(clientUser.Name))
             {
@@ -105,5 +109,16 @@ namespace FolderApp.Model
             return user;
         }
 
+        //STATIC Get user thumbnail given UserId
+        public static async Task<Image> GetUserThumbnail(int id)
+        {
+            return await GetAvatarOrDefault(id);
+        }
+
+        //Get user thumbnail for User instance
+        public async Task<Image> GetUserThumbnail()
+        {
+            return GetAvatarOrDefault(AvatarUrl, CompleteName);
+        }
     }
 }

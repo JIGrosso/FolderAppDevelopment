@@ -1,9 +1,8 @@
-﻿using FolderApp.Model;
+﻿using FolderApp.Common;
+using FolderApp.Model;
 using FolderApp.Views;
 using FolderApp.Views.SideMenu;
 using FolderAppServices;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -15,7 +14,7 @@ namespace FolderApp
 
         public static User User = new User();
 
-        public static ObservableCollection<Activity> ActivitiesCache = new ObservableCollection<Activity>();
+        public static AppCache AppCache = new AppCache();
 
         public App()
         {
@@ -32,7 +31,7 @@ namespace FolderApp
                     if (client.IsValidJWToken().Result)
                     {
 
-                        User = User.GetUserFromClient(client);
+                        User = User.GetUserFromClient().Result;
 
                         Current.MainPage = new MainView()
                         {
