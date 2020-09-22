@@ -1,8 +1,9 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FolderApp.Views.Siderbar.HeaderView">
-  <ContentView.Content>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="FolderApp.Views.Siderbar.HeaderView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentView.Content>
         <Grid
             Padding="10"
             BackgroundColor="{StaticResource purpleColor}"
@@ -17,29 +18,45 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0"
+            <Grid
+                Grid.Row="0"
                 Grid.RowSpan="4"
                 Grid.Column="0"
-                  Padding="0">
+                Padding="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Frame
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Padding="2"
-                CornerRadius="50"
-                HasShadow="False"
-                HeightRequest="100"
-                WidthRequest="100"
-                BorderColor="Beige"
-                >
-                    <Image Aspect="AspectFill" Source="{Binding Avatar.Source}"/>
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Margin="0"
+                    Padding="0"
+                    BackgroundColor="Beige"
+                    CornerRadius="50"
+                    HeightRequest="100"
+                    WidthRequest="100">
+                    <Frame
+                        Margin="0"
+                        Padding="0"
+                        CornerRadius="49"
+                        HeightRequest="98"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="98">
+                        <Image Aspect="AspectFill" Source="{Binding Avatar.Source}" />
+                    </Frame>
                 </Frame>
-                <Frame Grid.Row="1" HorizontalOptions="Center"
-                       Padding="10,5" CornerRadius="15" HasShadow="True">
-                    <Label Text="Mi Perfil" FontFamily="{StaticResource RalewayBold}" TextColor="{StaticResource purpleColor}"/>
+                <Frame
+                    Grid.Row="1"
+                    Padding="10,5"
+                    CornerRadius="15"
+                    HasShadow="True"
+                    HorizontalOptions="Center">
+                    <Label
+                        FontFamily="{StaticResource RalewayBold}"
+                        Text="Mi Perfil"
+                        TextColor="{StaticResource purpleColor}" />
                 </Frame>
             </Grid>
             <Label

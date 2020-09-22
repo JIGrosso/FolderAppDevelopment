@@ -1,6 +1,7 @@
 ﻿using FolderApp.Common;
 using FolderApp.Model;
 using FolderApp.Views;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -12,7 +13,34 @@ namespace FolderApp.ViewModel
 {
     abstract class PostListVM : INotifyPropertyChanged
     {
-        public ObservableCollection<Post> Posts { get; set; } = new ObservableCollection<Post>();
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ObservableCollection<Post> Posts
+        {
+            get
+            {
+                return IsQueryList ? QueryPosts : ChronologicalPosts;
+            }
+        }
+
+        protected ObservableCollection<Post> QueryPosts { get; set; } = new ObservableCollection<Post>();
+
+        protected ObservableCollection<Post> ChronologicalPosts { get; set; } = new ObservableCollection<Post>();
+
+        public string Filter { get; set; }
+
+        private bool isQueryList { get; set; } = false;
+        public bool IsQueryList { 
+            get
+            {
+                return isQueryList;
+            }
+            set
+            {
+                isQueryList = value;
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(Posts)));
+            }
+        }
 
         public int CurrentPage { get; set; } = 0;
 
@@ -33,8 +61,6 @@ namespace FolderApp.ViewModel
         public bool ScrolledDown = true;
 
         private bool isRefreshing = true;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public bool IsRefreshing
         {
@@ -87,7 +113,7 @@ namespace FolderApp.ViewModel
             {
                 return new Command(_ =>
                 {
-                    if (!ScrolledDown)
+                    if (!ScrolledDown && !IsRefreshing)
                     {
                         UpdatePostsGeneric(page: 1, deletePrevious: true);
                     }
@@ -95,7 +121,7 @@ namespace FolderApp.ViewModel
             }
         }
 
-        protected async Task UpdatePosts(int page = 1, bool deletePrevious = false, CategoriesEnum? category = null)
+        public async Task UpdatePosts(int page = 1, bool deletePrevious = false, CategoriesEnum? category = null, string query = null)
         {
             IsRefreshing = true;
 
@@ -120,11 +146,11 @@ namespace FolderApp.ViewModel
 
             if ((int)category > 0)
             {
-                posts = await Post.GetPosts(sectionId: (int)category, page: CurrentPage, prevCount: Posts.Count);
+                posts = await Post.GetPosts(sectionId: (int)category, page: CurrentPage, prevCount: Posts.Count, query: query);
             }
             else
             {
-                posts = await Post.GetPosts(page: CurrentPage, prevCount: Posts.Count);
+                posts = await Post.GetPosts(page: CurrentPage, prevCount: Posts.Count, query: query);
             }
 
             IsRefreshing = false;
@@ -136,6 +162,6 @@ namespace FolderApp.ViewModel
 
         }
 
-        public abstract void UpdatePostsGeneric(int page = 1, bool deletePrevious = false, CategoriesEnum? category = null);
+        public abstract void UpdatePostsGeneric(int page = 1, bool deletePrevious = false, CategoriesEnum? category = null, string query = null);
     }
 }

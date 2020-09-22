@@ -4,10 +4,17 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:FolderApp.Views"
-    Visual="Material"
-    Title="{Binding TitleText}">
+    Title="{Binding TitleText}"
+    Visual="Material">
 
     <ContentPage.Content>
-        <views:PostList />
+        <StackLayout>
+            <SearchBar
+                Placeholder="Buscar"
+                SearchButtonPressed="SearchBar_SearchButtonPressed"
+                Text="{Binding Filter, Mode=TwoWay}"
+                TextChanged="SearchBar_TextChanged" />
+            <views:PostList />
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

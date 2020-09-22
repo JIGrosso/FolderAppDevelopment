@@ -9,48 +9,54 @@
     mc:Ignorable="d">
 
     <ContentView.Content>
-        <Frame
-            Padding="8"
-            BorderColor="Gray"
-            CornerRadius="10">
-            <StackLayout Margin="5">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="2" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="2" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Image
-                        Aspect="AspectFit"
-                        HeightRequest="120"
-                        HorizontalOptions="FillAndExpand"
-                        IsVisible="{Binding IsImageNotNull}"
-                        Source="{Binding PostImage.Source}" />
-                    <BoxView
-                        Grid.Row="1"
-                        HorizontalOptions="Fill"
-                        Color="Gray" />
-                    <Label
-                        Grid.Row="2"
-                        FontAttributes="Bold"
-                        FontSize="Medium"
-                        Text="{Binding Title}" />
-                    <BoxView
-                        Grid.Row="3"
-                        HorizontalOptions="Fill"
-                        Color="Gray" />
-                    <Label
-                        Grid.Row="4"
-                        FontAttributes="Bold"
-                        IsVisible="{Binding IsSectionNotNull}"
-                        Text="{Binding Section}" />
-                    <Label Grid.Row="5" Text="{Binding PostedDate}" />
-                </Grid>
-            </StackLayout>
-        </Frame>
+        <StackLayout Spacing="0">
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image
+                    Grid.Row="0"
+                    Grid.RowSpan="3"
+                    Grid.Column="0"
+                    Margin="0"
+                    Aspect="AspectFit"
+                    IsVisible="{Binding IsImageNotNull}"
+                    Source="{Binding PostImage.Source}"
+                    VerticalOptions="Start"
+                    WidthRequest="180" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,5"
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    Text="{Binding Title}"
+                    TextColor="{StaticResource purpleColor}" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    Text="{Binding Section}"
+                    VerticalOptions="Start" />
+                <Label
+                    Grid.Row="{Binding DateRow}"
+                    Grid.Column="1"
+                    Text="{Binding PostedDate}"
+                    VerticalOptions="Start" />
+            </Grid>
+            <BoxView
+                Margin="0"
+                BackgroundColor="{StaticResource purpleColor}"
+                HeightRequest="2"
+                Opacity="0.7"
+                VerticalOptions="Center" />
+        </StackLayout>
     </ContentView.Content>
 
 </ContentView>

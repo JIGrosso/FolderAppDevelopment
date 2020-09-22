@@ -2,7 +2,6 @@
 using FolderApp.Views;
 using FolderApp.Views.SideMenu;
 using System.ComponentModel;
-using System.Reflection;
 using Xamarin.Forms;
 
 namespace FolderApp.ViewModel

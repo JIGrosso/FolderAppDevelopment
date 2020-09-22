@@ -34,7 +34,14 @@ namespace FolderApp.Model
             get { return PostImage != null; }
         }
 
-        public static async Task<List<Post>> GetPosts(int? sectionId = null, int page = 1, int prevCount = 0)
+        public int DateRow { 
+            get
+            {
+                return IsSectionNotNull ? 2 : 1;
+            } 
+        }
+
+        public static async Task<List<Post>> GetPosts(int? sectionId = null, int page = 1, int prevCount = 0, string query = null)
         {
             try
             {
@@ -45,6 +52,10 @@ namespace FolderApp.Model
                 var queryBuilder = new PostsQueryBuilder();
                 queryBuilder.PerPage = 10;
                 queryBuilder.Page = page;
+                if (query != null)
+                {
+                    queryBuilder.Search = query;
+                }
                 if (sectionId != null)
                 {
                     queryBuilder.Categories = new int[] { (int)sectionId };
@@ -85,9 +96,7 @@ namespace FolderApp.Model
                 {
                     Index = prevCount + returningPosts.Count,
                     Id = aux.Id,
-                    //Title = aux.Title.Rendered.RemoveHtml(),
                     Title = aux.Title.Rendered,
-                    //Content = aux.Content.Rendered.RemoveHtml(),
                     Content = aux.Content.Rendered,
                     PostedDate = aux.Date,
                     PostImage = image,

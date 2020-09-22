@@ -5,23 +5,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:itemsviews="clr-namespace:FolderApp.Views.ItemsView">
     <ContentView.Content>
-        <StackLayout Margin="10,10,10,0">
-            <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
-                <CollectionView
-                    ItemsSource="{Binding Posts}"
-                    RemainingItemsThreshold="3"
-                    RemainingItemsThresholdReachedCommand="{Binding LoadMorePostsCommand}"
-                    Scrolled="OnCollectionViewScrolled"
-                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                    SelectionChangedCommand="{Binding ItemTapped}"
-                    SelectionMode="Single">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <itemsviews:CardView Padding="5,10,5,10" />
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </RefreshView>
-        </StackLayout>
+        <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView
+                ItemsSource="{Binding Posts}"
+                RemainingItemsThreshold="3"
+                RemainingItemsThresholdReachedCommand="{Binding LoadMorePostsCommand}"
+                Scrolled="OnCollectionViewScrolled"
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                SelectionChangedCommand="{Binding ItemTapped}"
+                SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <itemsviews:CardView />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
     </ContentView.Content>
 </ContentView>

@@ -1,6 +1,4 @@
 ﻿using FolderApp.Common;
-using FolderApp.Model;
-using System.Collections.ObjectModel;
 using Xamarin.Forms;
 
 namespace FolderApp.ViewModel.Section
@@ -15,15 +13,29 @@ namespace FolderApp.ViewModel.Section
 
         public SectionVM(CategoriesEnum category)
         {
-            Posts = new ObservableCollection<Post>();
             Category = category;
             TitleBackgroundColor = SectionParameters.GetSectionColor(category);
             TitleText = SectionParameters.GetSectionTitle(category);
         }
 
-        public override async void UpdatePostsGeneric(int page = 1, bool deletePrevious = false, CategoriesEnum? category = null)
+        public override async void UpdatePostsGeneric(int page = 1, bool deletePrevious = false, CategoriesEnum? category = null, string query = null)
         {
-            await UpdatePosts(page, deletePrevious, Category);
+            await UpdatePosts(page, deletePrevious, Category, query);
+        }
+
+        internal void OnSearchButtonPressed()
+        {
+            IsQueryList = true;
+            UpdatePostsGeneric(page: 1, deletePrevious: true, query: Filter);
+        }
+
+        internal void OnTextChanged()
+        {
+            if (string.IsNullOrEmpty(Filter))
+            {
+                IsQueryList = false;
+                QueryPosts.Clear();
+            }
         }
     }
 }

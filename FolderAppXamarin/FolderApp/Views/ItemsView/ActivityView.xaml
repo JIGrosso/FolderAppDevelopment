@@ -21,13 +21,24 @@
                     Grid.Row="0"
                     Grid.RowSpan="2"
                     Grid.Column="0"
+                    Margin="0"
                     Padding="0"
+                    BackgroundColor="{StaticResource purpleColor}"
                     CornerRadius="25"
                     HasShadow="False"
                     HeightRequest="50"
                     VerticalOptions="CenterAndExpand"
                     WidthRequest="50">
-                    <Image Aspect="AspectFill" Source="{Binding UserThumbnail.Source}" />
+                    <Frame
+                        Margin="0"
+                        Padding="0"
+                        CornerRadius="24"
+                        HeightRequest="48"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="48">
+                        <Image Aspect="AspectFill" Source="{Binding UserThumbnail.Source}" />
+                    </Frame>
                 </Frame>
                 <Label
                     Grid.Row="0"
