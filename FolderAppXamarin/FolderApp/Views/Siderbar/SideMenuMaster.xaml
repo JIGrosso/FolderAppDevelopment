@@ -12,15 +12,22 @@
 
     <Grid VerticalOptions="Fill">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="1"/>
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-            <sidebar:HeaderView Grid.Row="0"/>
-        <Label Grid.Row="1" Text="Noticias" FontSize="18" Padding="15,0" TextTransform="Uppercase" FontAttributes="Bold" TextColor="{StaticResource purpleColor}">
+        <sidebar:HeaderView Grid.Row="0" />
+        <Label
+            Grid.Row="1"
+            Padding="15,0"
+            FontAttributes="Bold"
+            FontSize="18"
+            Text="Noticias"
+            TextColor="{StaticResource purpleColor}"
+            TextTransform="Uppercase">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Noticias_TappedAsync" />
             </Label.GestureRecognizers>
@@ -28,55 +35,58 @@
         <CollectionView
             Grid.Row="2"
             HorizontalOptions="Start"
+            ItemsSource="{Binding Categories}"
             SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
             SelectionChangedCommand="{Binding ItemTapped}"
-            ItemsSource="{Binding Categories}"
             SelectionMode="Single"
             VerticalOptions="Start">
             <CollectionView.Header>
-                <Label Text="Categorías" FontSize="18" Padding="15,0" TextTransform="Uppercase"/>
+                <Label
+                    Padding="15,0"
+                    FontSize="18"
+                    Text="Categorías"
+                    TextTransform="Uppercase" />
             </CollectionView.Header>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="25,7">
-                        <Label FontSize="15" Text="{Binding Title}" TextColor="{StaticResource purpleColor}" TextTransform="Uppercase" FontAttributes="Bold"/>
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="15"
+                            Text="{Binding Title}"
+                            TextColor="{StaticResource purpleColor}"
+                            TextTransform="Uppercase" />
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <BoxView Grid.Row="3"
+        <BoxView
+            Grid.Row="3"
             HeightRequest="1"
-                 HorizontalOptions="Fill"
-                 Color="{StaticResource purpleColor}" VerticalOptions="Start"/>
+            HorizontalOptions="Fill"
+            VerticalOptions="Start"
+            Color="{StaticResource purpleColor}" />
         <CollectionView
             Grid.Row="4"
             HorizontalOptions="Start"
+            ItemsSource="{Binding MenuItems}"
             SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
             SelectionChangedCommand="{Binding ItemTapped}"
-            ItemsSource="{Binding MenuItems}"
             SelectionMode="Single"
             VerticalOptions="Start">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout>
-                        <Label Text="{Binding Title}" FontSize="18" Padding="15,5" TextColor="{StaticResource purpleColor}" TextTransform="Uppercase" FontAttributes="Bold"/>
+                        <Label
+                            Padding="15,5"
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            Text="{Binding Title}"
+                            TextColor="{StaticResource purpleColor}"
+                            TextTransform="Uppercase" />
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Label Grid.Row="5"
-               Padding="15,10"
-            x:Name="Logout"
-            FontSize="Medium"
-            HorizontalOptions="StartAndExpand"
-               VerticalOptions="End"
-            Text="Cerrar Sesión"
-               TextTransform="Uppercase"
-               FontAttributes="Bold"
-            TextColor="Gray">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Logout_TappedAsync" />
-            </Label.GestureRecognizers>
-        </Label>
     </Grid>
 </ContentPage>

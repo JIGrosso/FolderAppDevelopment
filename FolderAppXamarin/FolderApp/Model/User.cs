@@ -22,6 +22,8 @@ namespace FolderApp.Model
 
         public string AvatarUrl { get; set; }
 
+        public string Email { get; set; }
+
         public List<string> Roles { get; set; }
 
         public static async Task<bool> Login(string username, string password, bool recuerdame)
@@ -87,24 +89,20 @@ namespace FolderApp.Model
             var user = new User();
 
             var wpClient = App.client.WordPressClient;
+            var bpClient = App.client.BuddyPressClient;
 
             //Obtener datos de client y crear objeto user
-            var clientUser = await wpClient.Users.GetCurrentUser();
-            //var user2 = client.Users.GetByID(clientUser.Id).Result;
-            user.AvatarUrl = clientUser.AvatarUrls.Size48;
-            user.Username = clientUser.UserName;
-            user.Id = clientUser.Id;
-            user.Roles = (List<string>)clientUser.Roles;
+            var wpUser = await wpClient.Users.GetCurrentUser();
+            var bpUser = await bpClient.Members.GetByID(wpUser.Id, false, true);
+            user.Username = bpUser.UserLogin;
+            user.Id = wpUser.Id;
+            user.Roles = (List<string>)wpUser.Roles;
+            user.Email = wpUser.Email;
             user.Token = App.client.GetToken();
 
-            if (string.IsNullOrEmpty(clientUser.Name))
-            {
-                user.CompleteName = user.Username;
-            }
-            else
-            {
-                user.CompleteName = clientUser.Name;
-            }
+            user.AvatarUrl = bpClient.Members.GetUserAvatars(user.Id).Result.Full;
+
+            user.CompleteName = string.IsNullOrEmpty(bpUser.Name) ? bpUser.UserLogin :  bpUser.Name;
 
             return user;
         }
@@ -116,9 +114,9 @@ namespace FolderApp.Model
         }
 
         //Get user thumbnail for User instance
-        public async Task<Image> GetUserThumbnail()
+        public Task<Image> GetUserThumbnail()
         {
-            return GetAvatarOrDefault(AvatarUrl, CompleteName);
+            return Task.Run( () => GetAvatarOrDefault(AvatarUrl, CompleteName));
         }
     }
 }

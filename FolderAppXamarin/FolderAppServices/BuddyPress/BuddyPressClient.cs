@@ -58,67 +58,17 @@ namespace FolderAppServices.FolderBPClient
             /// </summary>
             public Activities Activities { get; }
 
+            /// <summary>
+            /// Members client interaction object
+            /// </summary>
+            public Members Members { get; }
+
             /*
 
             /// <summary>
             /// Authentication method
             /// </summary>
             public AuthMethod AuthMethod { get; set; }
-
-            /// <summary>
-            /// Posts client interaction object
-            /// </summary>
-            public Posts Posts { get; }
-
-            /// <summary>
-            /// Comments client interaction object
-            /// </summary>
-            public Comments Comments { get; }
-
-            /// <summary>
-            /// Tags client interaction object
-            /// </summary>
-            public Tags Tags { get; }
-
-            /// <summary>
-            /// Users client interaction object
-            /// </summary>
-            public Users Users { get; }
-
-            /// <summary>
-            /// Media client interaction object
-            /// </summary>
-            public Media Media { get; }
-
-            /// <summary>
-            /// Categories client interaction object
-            /// </summary>
-            public Categories Categories { get; }
-
-            /// <summary>
-            /// Pages client interaction object
-            /// </summary>
-            public Pages Pages { get; }
-
-            /// <summary>
-            /// Taxonomies client interaction object
-            /// </summary>
-            public Taxonomies Taxonomies { get; }
-
-            /// <summary>
-            /// Post Types client interaction object
-            /// </summary>
-            public PostTypes PostTypes { get; }
-
-            /// <summary>
-            /// Post Statuses client interaction object
-            /// </summary>
-            public PostStatuses PostStatuses { get; }
-
-            /// <summary>
-            /// Custom Request client interaction object
-            /// </summary>
-            public CustomRequest CustomRequest { get; }
 
             */
 
@@ -143,19 +93,7 @@ namespace FolderAppServices.FolderBPClient
                 _httpHelper = new HttpHelper(BuddyPressUri);
 
                 Activities = new Activities(ref _httpHelper, _defaultPath);
-
-                /*
-                Comments = new Comments(ref _httpHelper, _defaultPath);
-                Tags = new Tags(ref _httpHelper, _defaultPath);
-                Users = new Users(ref _httpHelper, _defaultPath);
-                Media = new Media(ref _httpHelper, _defaultPath);
-                Categories = new Categories(ref _httpHelper, _defaultPath);
-                Pages = new Pages(ref _httpHelper, _defaultPath);
-                Taxonomies = new Taxonomies(ref _httpHelper, _defaultPath);
-                PostTypes = new PostTypes(ref _httpHelper, _defaultPath);
-                PostStatuses = new PostStatuses(ref _httpHelper, _defaultPath);
-                CustomRequest = new CustomRequest(ref _httpHelper);
-                */
+                Members = new Members(ref _httpHelper, _defaultPath);
             }
 
             #region auth methods

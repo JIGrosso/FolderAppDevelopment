@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FolderApp.ViewModel.SideMenu;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,12 @@ namespace FolderApp.Views.Siderbar
         public HeaderView()
         {
             InitializeComponent();
+        }
+
+        private async void TapGestureRecognizer_ProfileTapped(object sender, EventArgs e)
+        {
+            await (App.Current.MainPage as MasterDetailPage).Detail.Navigation.PushAsync(new ProfilePage((BindingContext as SideMenuMasterVM).Avatar));
+            (App.Current.MainPage as MasterDetailPage).IsPresented = false;
         }
     }
 }

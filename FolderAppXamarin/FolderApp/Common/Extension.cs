@@ -95,17 +95,17 @@ namespace ExtensionMethods
         //Get avatar from uri if available or gravatar by default given userId
         public static async Task<Image> GetAvatarOrDefault(int id)
         {
-            var user = await App.client.WordPressClient.Users.GetByID(id, false, true);
+            var user = await App.client.BuddyPressClient.Members.GetByID(id, false, true);
             string username;
             if (string.IsNullOrEmpty(user.Name))
             {
-                username = user.UserName;
+                username = user.UserLogin;
             }
             else
             {
                 username = user.Name;
             }
-            return GetAvatarOrDefault(user.AvatarUrls.Size48, username);
+            return GetAvatarOrDefault(user.AvatarURLs.Thumb, username);
         }
     }
 }

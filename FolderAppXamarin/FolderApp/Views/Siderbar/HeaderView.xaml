@@ -36,6 +36,9 @@
                     CornerRadius="50"
                     HeightRequest="100"
                     WidthRequest="100">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_ProfileTapped" />
+                    </Frame.GestureRecognizers>
                     <Frame
                         Margin="0"
                         Padding="0"
@@ -53,6 +56,9 @@
                     CornerRadius="15"
                     HasShadow="True"
                     HorizontalOptions="Center">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_ProfileTapped" />
+                    </Frame.GestureRecognizers>
                     <Label
                         FontFamily="{StaticResource RalewayBold}"
                         Text="Mi Perfil"
