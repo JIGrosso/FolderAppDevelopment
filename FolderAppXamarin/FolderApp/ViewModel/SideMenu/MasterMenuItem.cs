@@ -17,5 +17,9 @@ namespace FolderApp.Views.SideMenu
         public Type TargetType { get; set; }
 
         public CategoriesEnum Category { get; set; }
+
+        public string Icon { get; set; }
+
+        public MasterMenuItem Self { get { return this; } }
     }
 }

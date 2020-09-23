@@ -3,9 +3,11 @@
     x:Class="FolderApp.Views.SideMenu.SideMenuMaster"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:FolderApp.Views.Components"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sidebar="clr-namespace:FolderApp.Views.Siderbar"
+    xmlns:sidemenuvms="clr-namespace:FolderApp.ViewModel.SideMenu"
     Title="Menu"
     Visual="Material"
     mc:Ignorable="d">
@@ -14,30 +16,23 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="200" />
+            <RowDefinition Height="230" />
             <RowDefinition Height="1" />
             <RowDefinition Height="200" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <sidebar:HeaderView Grid.Row="0" />
-        <Label
+        <components:IconTextButton
             Grid.Row="1"
             Padding="15,0"
-            FontAttributes="Bold"
-            FontSize="18"
-            Text="Noticias"
-            TextColor="{StaticResource purpleColor}"
-            TextTransform="Uppercase">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Noticias_TappedAsync" />
-            </Label.GestureRecognizers>
-        </Label>
+            Command="{Binding OnNoticiasTapped}"
+            Icon="{StaticResource articleIcon}"
+            Text="Noticias" />
         <CollectionView
             Grid.Row="2"
             HorizontalOptions="Start"
             ItemsSource="{Binding Categories}"
             SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-            SelectionChangedCommand="{Binding ItemTapped}"
             SelectionMode="Single"
             VerticalOptions="Start">
             <CollectionView.Header>
@@ -49,14 +44,12 @@
             </CollectionView.Header>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="25,7">
-                        <Label
-                            FontAttributes="Bold"
-                            FontSize="15"
-                            Text="{Binding Title}"
-                            TextColor="{StaticResource purpleColor}"
-                            TextTransform="Uppercase" />
-                    </StackLayout>
+                    <components:IconTextButton
+                        Padding="25,7"
+                        Command="{Binding ItemTapped, Source={RelativeSource AncestorType={x:Type sidemenuvms:SideMenuMasterVM}}}"
+                        Icon="{Binding Icon}"
+                        Text="{Binding Title}"
+                        Value="{Binding Self}" />
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
@@ -77,13 +70,12 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout>
-                        <Label
-                            Padding="15,5"
-                            FontAttributes="Bold"
-                            FontSize="18"
+                        <components:IconTextButton
+                            Padding="15,7"
+                            Command="{Binding ItemTapped, Source={RelativeSource AncestorType={x:Type sidemenuvms:SideMenuMasterVM}}}"
+                            Icon="{Binding Icon}"
                             Text="{Binding Title}"
-                            TextColor="{StaticResource purpleColor}"
-                            TextTransform="Uppercase" />
+                            Value="{Binding Self}" />
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

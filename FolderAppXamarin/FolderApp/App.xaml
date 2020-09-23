@@ -16,6 +16,10 @@
             <OnPlatform x:Key="RalewayBold" x:TypeArguments="x:String">
                 <On Platform="Android" Value="Raleway-Bold.ttf#Raleway-Bold" />
             </OnPlatform>
+            <OnPlatform x:Key="MaterialFontFamily" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="Material Design Icons" />
+                <On Platform="Android" Value="materialdesignicons-webfont.ttf#Material Design Icons" />
+            </OnPlatform>
 
             <!--  Color by section  -->
             <Color x:Key="purpleColor">#6f1850</Color>
@@ -58,6 +62,14 @@
                 <!--<Setter Property="FontAttributes" Value="Italic" />-->
                 <Setter Property="FontFamily" Value="{StaticResource RalewayItalic}" />
             </Style>
+
+            <!--  Icon Routes  -->
+            <x:String x:Key="articleIcon">&#xF1003;</x:String>
+            <x:String x:Key="institucionalIcon">&#xF0CE5;</x:String>
+            <x:String x:Key="rrhhIcon">&#xF0B58;</x:String>
+            <x:String x:Key="produccionIcon">&#xF0169;</x:String>
+            <x:String x:Key="capacitacionesIcon">&#xF1180;</x:String>
+            <x:String x:Key="socialIcon">&#xF0EDE;</x:String>
 
         </ResourceDictionary>
 

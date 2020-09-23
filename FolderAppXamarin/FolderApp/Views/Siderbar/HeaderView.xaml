@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentView.Content>
         <Grid
-            Padding="10"
+            Padding="10,15"
             BackgroundColor="{StaticResource purpleColor}"
             ColumnSpacing="15">
             <Grid.ColumnDefinitions>
@@ -42,17 +42,18 @@
                     <Frame
                         Margin="0"
                         Padding="0"
-                        CornerRadius="49"
-                        HeightRequest="98"
+                        CornerRadius="48"
+                        HeightRequest="96"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
-                        WidthRequest="98">
+                        WidthRequest="96">
                         <Image Aspect="AspectFill" Source="{Binding Avatar.Source}" />
                     </Frame>
                 </Frame>
                 <Frame
                     Grid.Row="1"
                     Padding="10,5"
+                    BackgroundColor="Beige"
                     CornerRadius="15"
                     HasShadow="True"
                     HorizontalOptions="Center">

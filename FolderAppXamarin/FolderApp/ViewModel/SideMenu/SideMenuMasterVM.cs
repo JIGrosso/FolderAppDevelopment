@@ -35,13 +35,14 @@ namespace FolderApp.ViewModel.SideMenu
 
         public SideMenuMasterVM()
         {
+            var resources = Application.Current.Resources;
             Categories = new ObservableCollection<MasterMenuItem>(new[]
             {
-                new MasterMenuItem { Id = 0, Title = "Institucionales", TargetType = typeof(SectionPage), Category = CategoriesEnum.Direccion },
-                new MasterMenuItem { Id = 1, Title = "Recursos Humanos", TargetType = typeof(SectionPage), Category = CategoriesEnum.RRHH },
-                new MasterMenuItem { Id = 2, Title = "Produccion", TargetType = typeof(SectionPage), Category = CategoriesEnum.Produccion },
-                new MasterMenuItem { Id = 3, Title = "Capacitaciones", TargetType = typeof(SectionPage), Category = CategoriesEnum.Capacitaciones },
-                new MasterMenuItem { Id = 4, Title = "Social", TargetType = typeof(SectionPage), Category = CategoriesEnum.Social }
+                new MasterMenuItem { Id = 0, Title = "Institucionales", TargetType = typeof(SectionPage), Category = CategoriesEnum.Direccion, Icon = (string)resources["institucionalIcon"] },
+                new MasterMenuItem { Id = 1, Title = "Recursos Humanos", TargetType = typeof(SectionPage), Category = CategoriesEnum.RRHH, Icon = (string)resources["rrhhIcon"] },
+                new MasterMenuItem { Id = 2, Title = "Produccion", TargetType = typeof(SectionPage), Category = CategoriesEnum.Produccion, Icon = (string)resources["produccionIcon"] },
+                new MasterMenuItem { Id = 3, Title = "Capacitaciones", TargetType = typeof(SectionPage), Category = CategoriesEnum.Capacitaciones, Icon = (string)resources["capacitacionesIcon"] },
+                new MasterMenuItem { Id = 4, Title = "Social", TargetType = typeof(SectionPage), Category = CategoriesEnum.Social, Icon = (string)resources["socialIcon"] }
             });
 
             MenuItems = new ObservableCollection<MasterMenuItem>(new[]
@@ -53,18 +54,26 @@ namespace FolderApp.ViewModel.SideMenu
             });
 
             Avatar = GetAvatarOrDefault(App.User.AvatarUrl, Name);
-       }
+        }
 
         public ICommand ItemTapped
         {
             get
             {
-                return new Command(_ =>
+                return new Command((object sender) =>
                 {
-                    if (SelectedItem == null)
+                    if (SelectedItem == null && sender == null)
                         return;
 
-                    Navigate(SelectedItem);
+                    if (SelectedItem == null)
+                    {
+                        Navigate((MasterMenuItem)sender);
+                    }
+                    else
+                    {
+                        Navigate(SelectedItem);
+                    }
+
                     SelectedItem = null;
                 });
             }
@@ -74,7 +83,7 @@ namespace FolderApp.ViewModel.SideMenu
 
         public async void Navigate(MasterMenuItem selectedItem)
         {
-            if(selectedItem.TargetType == typeof(SectionPage))
+            if (selectedItem.TargetType == typeof(SectionPage))
             {
                 await (App.Current.MainPage as MasterDetailPage).Detail.Navigation.PushAsync(new SectionPage(selectedItem.Category));
             }
@@ -85,5 +94,16 @@ namespace FolderApp.ViewModel.SideMenu
             (App.Current.MainPage as MasterDetailPage).IsPresented = false;
         }
 
+        public ICommand OnNoticiasTapped
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await (App.Current.MainPage as MasterDetailPage).Detail.Navigation.PushAsync(new SectionPage(CategoriesEnum.Noticias));
+                    (App.Current.MainPage as MasterDetailPage).IsPresented = false;
+                });
+            }
+        }
     }
 }
