@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using WordPressPCL.Utility;
 using Xamarin.Essentials;
+using System.Net.Http;
 using Xamarin.Forms;
 using static ExtensionMethods.MyExtensions;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
 namespace FolderApp.Model
 {
@@ -23,6 +27,8 @@ namespace FolderApp.Model
         public string AvatarUrl { get; set; }
 
         public string Email { get; set; }
+
+        public DateTime Birthday { get; set; }
 
         public List<string> Roles { get; set; }
 
@@ -92,7 +98,7 @@ namespace FolderApp.Model
             var bpClient = App.client.BuddyPressClient;
 
             //Obtener datos de client y crear objeto user
-            var wpUser = await wpClient.Users.GetCurrentUser();
+            var wpUser = await GetWpUser();
             var bpUser = await bpClient.Members.GetByID(wpUser.Id, false, true);
             user.Username = bpUser.UserLogin;
             user.Id = wpUser.Id;
@@ -117,6 +123,20 @@ namespace FolderApp.Model
         public Task<Image> GetUserThumbnail()
         {
             return Task.Run( () => GetAvatarOrDefault(AvatarUrl, CompleteName));
+        }
+        
+        public static async Task<WordPressPCL.Models.User> GetWpUser()
+        {
+            var wpClient = App.client.WordPressClient;
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", wpClient.GetToken());
+            var response = await client.GetAsync($"{wpClient.WordPressUri}wp/v2/users/me?context=edit");
+
+            var responseString = await response.Content.ReadAsStringAsync();
+            
+            var user = JsonConvert.DeserializeObject<WordPressPCL.Models.User>(responseString);
+            
+            return user;
         }
     }
 }

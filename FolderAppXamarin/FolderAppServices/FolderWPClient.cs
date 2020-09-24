@@ -1,5 +1,4 @@
 ﻿using FolderAppServices.FolderBPClient.BuddyPress;
-using System;
 using System.Threading.Tasks;
 using WordPressPCL;
 

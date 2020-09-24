@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FolderApp.Views.ProfilePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:profile="clr-namespace:FolderApp.Views.Profile"
+    Title="Mi Perfil">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <profile:ProfileHeader Grid.Row="0" />
+            <Label
+                Grid.Row="1"
+                Padding="15,10"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                HorizontalOptions="StartAndExpand"
+                Text="Cerrar Sesión"
+                TextColor="Gray"
+                TextTransform="Uppercase"
+                VerticalOptions="End">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="Logout_TappedAsync" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

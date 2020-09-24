@@ -74,6 +74,7 @@
             <x:String x:Key="equiposIcon">&#xF0B58;</x:String>
             <x:String x:Key="ticketsIcon">&#xF13AA;</x:String>
             <x:String x:Key="faqIcon">&#xF0EB4;</x:String>
+            <x:String x:Key="birthdayIcon">&#xF00E9;</x:String>
 
         </ResourceDictionary>
 

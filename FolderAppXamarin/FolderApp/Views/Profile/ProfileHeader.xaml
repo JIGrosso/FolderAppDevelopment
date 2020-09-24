@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="FolderApp.Views.Profile.ProfileHeader"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentView.Content>
+        <Grid
+            Padding="20,0,20,20"
+            BackgroundColor="{StaticResource purpleColor}"
+            ColumnSpacing="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Frame
+                Grid.Row="0"
+                Grid.RowSpan="4"
+                Grid.Column="0"
+                Margin="0"
+                Padding="0"
+                BackgroundColor="Beige"
+                CornerRadius="75"
+                HeightRequest="150"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="150">
+                <Frame
+                    Margin="0"
+                    Padding="0"
+                    CornerRadius="70"
+                    HeightRequest="140"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="140">
+                    <Image Aspect="AspectFill" Source="{Binding Avatar.Source}" />
+                </Frame>
+            </Frame>
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                FontSize="24"
+                Style="{StaticResource NameLabel}"
+                Text="{Binding Name}" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource TitleLabel}"
+                Text="{Binding Email}" />
+            <StackLayout
+                Grid.Row="2"
+                Grid.Column="1"
+                Padding="0,4"
+                Orientation="Horizontal">
+                <Label
+                    FontFamily="{StaticResource MaterialFontFamily}"
+                    FontSize="25"
+                    Text="{StaticResource birthdayIcon}"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                <Label
+                    Style="{StaticResource TitleLabel}"
+                    Text="Fecha FC"
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
