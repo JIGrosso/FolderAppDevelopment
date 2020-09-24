@@ -66,10 +66,14 @@
             <!--  Icon Routes  -->
             <x:String x:Key="articleIcon">&#xF1003;</x:String>
             <x:String x:Key="institucionalIcon">&#xF0CE5;</x:String>
-            <x:String x:Key="rrhhIcon">&#xF0B58;</x:String>
+            <x:String x:Key="rrhhIcon">&#xF02E6;</x:String>
             <x:String x:Key="produccionIcon">&#xF0169;</x:String>
             <x:String x:Key="capacitacionesIcon">&#xF1180;</x:String>
             <x:String x:Key="socialIcon">&#xF0EDE;</x:String>
+            <x:String x:Key="calendarioIcon">&#xF00ED;</x:String>
+            <x:String x:Key="equiposIcon">&#xF0B58;</x:String>
+            <x:String x:Key="ticketsIcon">&#xF13AA;</x:String>
+            <x:String x:Key="faqIcon">&#xF0EB4;</x:String>
 
         </ResourceDictionary>
 

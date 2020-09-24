@@ -16,15 +16,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="230" />
-            <RowDefinition Height="1" />
+            <RowDefinition Height="224" />
             <RowDefinition Height="200" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <sidebar:HeaderView Grid.Row="0" />
         <components:IconTextButton
             Grid.Row="1"
-            Padding="15,0"
+            Padding="10,0"
+            BoldText="True"
             Command="{Binding OnNoticiasTapped}"
             Icon="{StaticResource articleIcon}"
             Text="Noticias" />
@@ -39,28 +39,32 @@
                 <Label
                     Padding="15,0"
                     FontSize="18"
-                    Text="Categorías"
-                    TextTransform="Uppercase" />
+                    Text="Categorías" />
             </CollectionView.Header>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <components:IconTextButton
-                        Padding="25,7"
-                        Command="{Binding ItemTapped, Source={RelativeSource AncestorType={x:Type sidemenuvms:SideMenuMasterVM}}}"
-                        Icon="{Binding Icon}"
-                        Text="{Binding Title}"
-                        Value="{Binding Self}" />
+                    <StackLayout
+                        Margin="0"
+                        Padding="0"
+                        Spacing="2">
+                        <components:IconTextButton
+                            Padding="20,5"
+                            Command="{Binding ItemTapped, Source={RelativeSource AncestorType={x:Type sidemenuvms:SideMenuMasterVM}}}"
+                            Icon="{Binding Icon}"
+                            Text="{Binding Title}"
+                            Value="{Binding Self}" />
+                        <BoxView
+                            Margin="0"
+                            HeightRequest="1"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="End"
+                            Color="DimGray" />
+                    </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <BoxView
-            Grid.Row="3"
-            HeightRequest="1"
-            HorizontalOptions="Fill"
-            VerticalOptions="Start"
-            Color="{StaticResource purpleColor}" />
         <CollectionView
-            Grid.Row="4"
+            Grid.Row="3"
             HorizontalOptions="Start"
             ItemsSource="{Binding MenuItems}"
             SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
@@ -69,13 +73,23 @@
             VerticalOptions="Start">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout>
+                    <StackLayout
+                        Margin="0"
+                        Padding="0"
+                        Spacing="2">
                         <components:IconTextButton
-                            Padding="15,7"
+                            Padding="10,5"
+                            BoldText="True"
                             Command="{Binding ItemTapped, Source={RelativeSource AncestorType={x:Type sidemenuvms:SideMenuMasterVM}}}"
                             Icon="{Binding Icon}"
                             Text="{Binding Title}"
                             Value="{Binding Self}" />
+                        <BoxView
+                            Margin="0"
+                            HeightRequest="1"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="End"
+                            Color="DimGray" />
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

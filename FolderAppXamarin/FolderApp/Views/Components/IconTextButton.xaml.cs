@@ -7,6 +7,14 @@ namespace FolderApp.Views.Components
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class IconTextButton : ContentView
     {
+        public static readonly BindableProperty BoldTextProperty = BindableProperty.Create(nameof(BoldText), typeof(bool), typeof(IconTextButton));
+
+        public bool BoldText
+        {
+            get { return (bool)GetValue(BoldTextProperty); }
+            set { SetValue(BoldTextProperty, value); }
+        }
+
         public static readonly BindableProperty ValueProperty = BindableProperty.Create(nameof(Value), typeof(object), typeof(IconTextButton), null);
 
         public object Value
@@ -61,6 +69,11 @@ namespace FolderApp.Views.Components
             if (propertyName == ValueProperty.PropertyName)
             {
                 TapGestureRecognizer.CommandParameter = Value;
+            }
+            if (propertyName == BoldTextProperty.PropertyName)
+            {
+                if (BoldText) Label.FontAttributes = FontAttributes.Bold;
+                else Label.FontAttributes = FontAttributes.None;
             }
         }
 

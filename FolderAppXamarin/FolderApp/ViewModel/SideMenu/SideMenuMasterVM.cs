@@ -47,10 +47,10 @@ namespace FolderApp.ViewModel.SideMenu
 
             MenuItems = new ObservableCollection<MasterMenuItem>(new[]
             {
-                new MasterMenuItem { Id = 5, Title = "Calendario", TargetType = typeof(NoDisponiblePage)},
-                new MasterMenuItem { Id = 6, Title = "Equipos - Proyectos", TargetType = typeof(NoDisponiblePage)},
-                new MasterMenuItem { Id = 7, Title = "Tickets", TargetType = typeof(NoDisponiblePage)},
-                new MasterMenuItem { Id = 8, Title = "F.A.Q.", TargetType = typeof(NoDisponiblePage)},
+                new MasterMenuItem { Id = 5, Title = "Calendario", TargetType = typeof(NoDisponiblePage), Icon = (string)resources["calendarioIcon"]},
+                new MasterMenuItem { Id = 6, Title = "Equipos - Proyectos", TargetType = typeof(NoDisponiblePage), Icon = (string)resources["equiposIcon"]},
+                new MasterMenuItem { Id = 7, Title = "Tickets", TargetType = typeof(NoDisponiblePage), Icon = (string)resources["ticketsIcon"]},
+                new MasterMenuItem { Id = 8, Title = "F.A.Q.", TargetType = typeof(NoDisponiblePage), Icon = (string)resources["faqIcon"]},
             });
 
             Avatar = GetAvatarOrDefault(App.User.AvatarUrl, Name);
