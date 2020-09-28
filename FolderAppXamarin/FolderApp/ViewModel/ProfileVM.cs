@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Xamarin.Forms;
 
 namespace FolderApp.ViewModel
 {
@@ -20,11 +22,24 @@ namespace FolderApp.ViewModel
             }
         }
 
+        public string Birthday
+        {
+            get
+            {
+                return App.User.Birthday;
+            }
+        }
+
+        public List<KeyValuePair<string, string>> Fields { get; set; } = new List<KeyValuePair<string, string>>();
+
         public Image Avatar { get; }
 
         public ProfileVM(Image avatar)
         {
             Avatar = avatar;
+            Fields.Add(new KeyValuePair<string, string>("Fecha de Ingreso", App.User.FechaIngreso));
+            Fields.Add(new KeyValuePair<string, string>("Skype ID", App.User.SkypeId));
+            Fields.Add(new KeyValuePair<string, string>("Celular", App.User.Celular));
         }
     }
 }

@@ -39,5 +39,15 @@ namespace FolderAppServices.BuddyPress.Client
             }
             );
         }
+
+        public async Task<Member> GetCurrentMember()
+        {
+            return await Task.Run(async () =>
+            {
+                Member response = await HttpHelper.GetRequest<Member>($"{DefaultPath}{_methodPath}/me", true, true);
+                return response;
+            }
+            );
+        }
     }
 }

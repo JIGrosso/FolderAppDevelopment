@@ -45,5 +45,12 @@ namespace FolderAppServices.BuddyPress.Models
         /// <remarks>Context: embed, view, edit</remarks>
         [JsonProperty("avatar_urls")]
         public BPAvatarURL AvatarURLs { get; set; }
+
+        /// <summary>
+        /// Member xProfile groups and its fields. view, edit
+        /// </summary>
+        /// <remarks>Context: view, edit</remarks>
+        [JsonProperty("xprofile")]
+        public ExtendedProfile ExtendedProfile { get; set; }
     }
 }

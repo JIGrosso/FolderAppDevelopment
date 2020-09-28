@@ -33,9 +33,9 @@ namespace FolderAppServices
             return WordPressClient.RequestJWToken(username, password);        
         }
 
-        public Task<bool> IsValidJWToken()
+        public async Task<bool> IsValidJWToken()
         {
-            return WordPressClient.IsValidJWToken();
+            return await WordPressClient.IsValidJWToken();
         }
     }
 }

@@ -55,18 +55,16 @@
             <StackLayout
                 Grid.Row="2"
                 Grid.Column="1"
-                Padding="0,4"
                 Orientation="Horizontal">
                 <Label
                     FontFamily="{StaticResource MaterialFontFamily}"
                     FontSize="25"
                     Text="{StaticResource birthdayIcon}"
-                    TextColor="White"
-                    VerticalOptions="Center" />
+                    TextColor="White" />
                 <Label
                     Style="{StaticResource TitleLabel}"
-                    Text="Fecha FC"
-                    VerticalOptions="Center" />
+                    Text="{Binding Birthday}"
+                    VerticalOptions="CenterAndExpand" />
             </StackLayout>
         </Grid>
     </ContentView.Content>

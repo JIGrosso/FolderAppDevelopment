@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using WordPressPCL.Utility;
 using Xamarin.Essentials;
 using System.Net.Http;
 using Xamarin.Forms;
 using static ExtensionMethods.MyExtensions;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using System.Linq;
 
 namespace FolderApp.Model
 {
@@ -28,9 +27,15 @@ namespace FolderApp.Model
 
         public string Email { get; set; }
 
-        public DateTime Birthday { get; set; }
+        public string Birthday { get; set; }
+
+        public string FechaIngreso { get; set; }
+
+        public string SkypeId { get; set; }
 
         public List<string> Roles { get; set; }
+
+        public string Celular { get; set; }
 
         public static async Task<bool> Login(string username, string password, bool recuerdame)
         {
@@ -99,12 +104,20 @@ namespace FolderApp.Model
 
             //Obtener datos de client y crear objeto user
             var wpUser = await GetWpUser();
-            var bpUser = await bpClient.Members.GetByID(wpUser.Id, false, true);
+            var bpUser = bpClient.Members.GetCurrentMember().Result;
             user.Username = bpUser.UserLogin;
             user.Id = wpUser.Id;
             user.Roles = (List<string>)wpUser.Roles;
             user.Email = wpUser.Email;
             user.Token = App.client.GetToken();
+            user.Birthday = bpUser.ExtendedProfile.Groups.Where(x => x.Name == "Datos Personales").SingleOrDefault()
+                .Fields.Where(x => x.Name == "Fecha de Nacimiento").SingleOrDefault().Value.Rendered.RemoveParagraph();
+            user.FechaIngreso = bpUser.ExtendedProfile.Groups.Where(x => x.Name == "Datos Personales").SingleOrDefault()
+                .Fields.Where(x => x.Name == "Fecha de Ingreso").SingleOrDefault().Value.Rendered.RemoveParagraph();
+            user.SkypeId = (string)bpUser.ExtendedProfile.Groups.Where(x => x.Name == "Datos Personales").SingleOrDefault()
+                .Fields.Where(x => x.Name == "Skype ID").SingleOrDefault().Value.Raw;
+            user.Celular = (string)bpUser.ExtendedProfile.Groups.Where(x => x.Name == "Datos Personales").SingleOrDefault()
+                .Fields.Where(x => x.Name == "Celular").SingleOrDefault().Value.Raw;
 
             user.AvatarUrl = bpClient.Members.GetUserAvatars(user.Id).Result.Full;
 
@@ -130,7 +143,7 @@ namespace FolderApp.Model
             var wpClient = App.client.WordPressClient;
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", wpClient.GetToken());
-            var response = await client.GetAsync($"{wpClient.WordPressUri}wp/v2/users/me?context=edit");
+            var response = client.GetAsync($"{wpClient.WordPressUri}wp/v2/users/me?context=edit").Result;
 
             var responseString = await response.Content.ReadAsStringAsync();
             
