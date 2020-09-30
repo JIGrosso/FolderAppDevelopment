@@ -30,24 +30,16 @@ namespace FolderAppServices.BuddyPress.Client
         /// <param name="embed">include embed info</param>
         /// <param name="useAuth">Send request with authentication header</param>
         /// <returns>List of posts</returns>
-        public Task<BPAvatarURL> GetUserAvatars(int userId, bool embed = false, bool useAuth = false)
+        public async Task<BPAvatarURL> GetUserAvatars(int userId, bool embed = false, bool useAuth = false)
         {
-            return Task.Run(async () =>
-            {
-                BPAvatarURL[] response = await HttpHelper.GetRequest<BPAvatarURL[]>($"{DefaultPath}{_methodPath}/{userId}/avatar", embed, useAuth);
-                return response.FirstOrDefault();
-            }
-            );
+            BPAvatarURL[] response = await HttpHelper.GetRequest<BPAvatarURL[]>($"{DefaultPath}{_methodPath}/{userId}/avatar", embed, useAuth);
+            return response.FirstOrDefault();
         }
 
         public async Task<Member> GetCurrentMember()
         {
-            return await Task.Run(async () =>
-            {
-                Member response = await HttpHelper.GetRequest<Member>($"{DefaultPath}{_methodPath}/me", true, true);
-                return response;
-            }
-            );
+            Member response = await HttpHelper.GetRequest<Member>($"{DefaultPath}{_methodPath}/me", true, true);
+            return response;
         }
     }
 }

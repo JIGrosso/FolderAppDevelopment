@@ -2,7 +2,9 @@
 using FolderApp.Common;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using WordPressPCL.Models;
 using WordPressPCL.Utility;
 using Xamarin.Forms;
 
@@ -80,15 +82,30 @@ namespace FolderApp.Model
 
             var wpClient = App.client.WordPressClient;
 
+            var mediaTasks = new List<Task<MediaItem>>();
+
             foreach (var aux in posts)
             {
-                Image image = null;
                 if (aux.FeaturedMedia != null && aux.FeaturedMedia != 0)
                 {
-                    var media = await wpClient.Media.GetByID(aux.FeaturedMedia, true, true);
+                    mediaTasks.Add(wpClient.Media.GetByID(aux.FeaturedMedia, true, true));
+                }
+                else mediaTasks.Add(null);
+                    
+            }
+
+            MediaItem[] images = await Task.WhenAll(mediaTasks);
+
+            for (int i = 0; i < posts.Count(); i++)
+            {
+                var aux = posts.ElementAt(i);
+
+                Image image = null;
+                if (images[i] != null)
+                {
                     image = new Image
                     {
-                        Source = ImageSource.FromUri(new Uri(media.SourceUrl))
+                        Source = ImageSource.FromUri(new Uri(images[i].SourceUrl))
                     };
                 }
 

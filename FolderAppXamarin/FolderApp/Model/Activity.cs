@@ -3,6 +3,7 @@ using FolderAppServices.BuddyPress.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using WordPressPCL.Models;
 using Xamarin.Forms;
@@ -65,15 +66,23 @@ namespace FolderApp.Model
         private static async Task<ObservableCollection<Activity>> ListActivities(IEnumerable<FolderAppServices.BuddyPress.Models.Activity> activities)
         {
             var returningActivities = new ObservableCollection<Activity>();
-
+            var thumbnailTasks = new List<Task<Image>>();
             foreach (var aux in activities)
             {
+                thumbnailTasks.Add(User.GetUserThumbnail(aux.UserId));
+            }
+
+            Image[] images = await Task.WhenAll(thumbnailTasks);
+
+            for(int i = 0; i < activities.Count(); i++)
+            {
+                var aux = activities.ElementAt(i);
                 returningActivities.Add(new Activity()
                 {
                     Id = aux.Id,
                     Title = aux.Title,
                     Content = aux.Content.Rendered.RemoveParagraph(),
-                    UserThumbnail = await User.GetUserThumbnail(aux.UserId),
+                    UserThumbnail = images[i],
                     Date = aux.Date
                 });
             }

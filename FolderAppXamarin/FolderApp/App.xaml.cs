@@ -3,6 +3,7 @@ using FolderApp.Model;
 using FolderApp.Views;
 using FolderApp.Views.SideMenu;
 using FolderAppServices;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -28,10 +29,11 @@ namespace FolderApp
                 if (currentToken != null)
                 {
                     client.SetJWToken(currentToken);
-                    if (client.IsValidJWToken().Result)
+                    Task<bool> validateTask = Task.Run(async () => await client.IsValidJWToken());
+                    if (validateTask.Result)
                     {
-
-                        User = User.GetUserFromClient().Result;
+                        Task<User> getUserTask = Task.Run(async () => await User.GetUserFromClient());
+                        User = getUserTask.Result;
 
                         Current.MainPage = new MainView()
                         {

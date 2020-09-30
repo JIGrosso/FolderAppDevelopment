@@ -12,7 +12,7 @@ namespace FolderApp.Droid
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-             base.OnCreate(savedInstanceState);
+            base.OnCreate(savedInstanceState);
             Window.SetStatusBarColor(Android.Graphics.Color.Black);
             LoadApplication(new App());
         }

@@ -132,7 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="WordPressPCL">
-      <Version>1.7.1</Version>
+      <Version>1.7.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Azure.NotificationHubs.iOS">
       <Version>3.1.0</Version>

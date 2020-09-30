@@ -9,7 +9,7 @@ using Android.Content;
 
 namespace FolderApp.Droid
 {
-    [Activity(Label = "FolderApp", MainLauncher = true, Icon = "@mipmap/icon", Theme = "@style/SplashTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "FolderApp", MainLauncher = true, Icon = "@mipmap/icon", Theme = "@style/SplashTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, NoHistory = true)]
     public class SplashActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public const string TAG = "SplashACtivity";
