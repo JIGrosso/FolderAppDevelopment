@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using WordPressPCL.Models;
 
 namespace FolderApp.Model
 {
@@ -36,6 +37,24 @@ namespace FolderApp.Model
                 });
             }
             return comments;
+        }
+
+        public static async Task<bool> PushComment(int postId, string commentText)
+        {
+            var comment = new WordPressPCL.Models.Comment()
+            {
+                Content = new Content(commentText),
+                PostId = postId,
+                AuthorId = App.User.Id,
+                AuthorEmail = App.User.Email
+            };
+            if (await App.client.IsValidJWToken())
+            {
+                var createdComment = await App.client.WordPressClient.Comments.Create(comment);
+                if (createdComment != null) return true;
+                return false;
+            }
+            return false;
         }
     }
 }

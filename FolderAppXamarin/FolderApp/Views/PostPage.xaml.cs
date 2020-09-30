@@ -1,5 +1,6 @@
 ﻿using FolderApp.Model;
 using FolderApp.ViewModel;
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,6 +24,11 @@ namespace FolderApp.Views
 
             viewModel = new PostVM(selectedPost);
             BindingContext = viewModel;
+        }
+
+        private void Button_Clicked(object sender, System.EventArgs e)
+        {
+            viewModel.OnCommentPressed();
         }
     }
 }

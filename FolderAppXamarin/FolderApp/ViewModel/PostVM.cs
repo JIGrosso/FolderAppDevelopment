@@ -9,6 +9,8 @@ namespace FolderApp.ViewModel
 
         public ObservableCollection<Comment> CommentsList { get; set; }
 
+        public string CommentText { get; set; }
+
         public PostVM()
         {
             CommentsList = new ObservableCollection<Comment>();
@@ -20,7 +22,7 @@ namespace FolderApp.ViewModel
 
             CommentsList = new ObservableCollection<Comment>();
 
-            ReadComments(selectedPost.Id);
+            ReadComments(Post.Id);
         }
 
         private Post post;
@@ -40,6 +42,23 @@ namespace FolderApp.ViewModel
         public string Title { get; set; }
 
         public string Section { get; set; }
+
+        public async void OnCommentPressed()
+        {
+            if (string.IsNullOrEmpty(CommentText))
+            {
+                return;
+            }
+            if(await Comment.PushComment(Post.Id, CommentText))
+            {
+                CommentText = string.Empty;
+                ReadComments(Post.Id);
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "Ocurrió un error al crear el comentario, por favor intente nuevamente", "Ok");
+            }
+        }
 
         public string Content { get; set; }
 

@@ -12,12 +12,11 @@
 
     <ContentPage.Content>
         <ScrollView>
-            <Grid
-                Margin="5,10">
+            <Grid Margin="5,10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Image
                     Grid.Row="0"
@@ -26,43 +25,70 @@
                     HeightRequest="120"
                     HorizontalOptions="FillAndExpand"
                     IsVisible="{Binding Post.IsImageNotNull}"
-                    Source="{Binding Post.PostImage.Source}"/>
+                    Source="{Binding Post.PostImage.Source}" />
                 <Grid Grid.Row="1" Margin="10">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Style="{StaticResource SectionTitle}" Text="{Binding Section}" Grid.Column="0" Grid.Row="0"/>
-                    <Label HorizontalOptions="EndAndExpand" Text="{Binding PostedDate}" Grid.Column="1" Grid.Row="0" />
-                    <Label Text="{Binding Content}" TextType="Html" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" FontSize="15"/>
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Style="{StaticResource SectionTitle}"
+                        Text="{Binding Section}" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        HorizontalOptions="EndAndExpand"
+                        Text="{Binding PostedDate}" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        FontSize="15"
+                        Text="{Binding Content}"
+                        TextType="Html" />
                 </Grid>
                 <Grid Grid.Row="2" Margin="15,0,15,15">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                <Label FontFamily="{StaticResource RalewayBold}" FontSize="20" Text="Comentarios" Grid.Row="0" />
-                <StackLayout
-                    Grid.Row="1"
-                    BindableLayout.ItemsSource="{Binding CommentsList}"
-                    Orientation="Vertical"
-                    VerticalOptions="StartAndExpand">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <comment:CommentView />
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
-                <StackLayout Orientation="Vertical" VerticalOptions="End" Grid.Row="2">
-                    <Entry HorizontalOptions="FillAndExpand" Placeholder="Escriba un comentario"  />
-                    <Button Text="Comentar" BackgroundColor="{StaticResource purpleColor}" />
-                </StackLayout>
+                    <Label
+                        Grid.Row="0"
+                        FontFamily="{StaticResource RalewayBold}"
+                        FontSize="20"
+                        Text="Comentarios" />
+                    <StackLayout
+                        Grid.Row="1"
+                        BindableLayout.ItemsSource="{Binding CommentsList}"
+                        Orientation="Vertical"
+                        VerticalOptions="StartAndExpand">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <comment:CommentView />
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                    <StackLayout
+                        Grid.Row="2"
+                        Orientation="Vertical"
+                        VerticalOptions="End">
+                        <Entry
+                            HorizontalOptions="FillAndExpand"
+                            Placeholder="Escriba un comentario"
+                            Text="{Binding CommentText, Mode=TwoWay}" />
+                        <Button
+                            BackgroundColor="{StaticResource purpleColor}"
+                            Clicked="Button_Clicked"
+                            Text="Comentar" />
+                    </StackLayout>
                 </Grid>
             </Grid>
         </ScrollView>
