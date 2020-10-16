@@ -33,9 +33,12 @@ namespace FolderApp.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
+            Xamarin.Forms.Forms.SetFlags("Expander_Experimental");
+
+
             Xamarin.Essentials.Platform.Init(this, savedInstance);
-            global::Xamarin.Forms.Forms.Init(this, savedInstance);
-            global::Xamarin.Forms.FormsMaterial.Init(this, savedInstance);
+            Xamarin.Forms.Forms.Init(this, savedInstance);
+            Xamarin.Forms.FormsMaterial.Init(this, savedInstance);
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
         }
 

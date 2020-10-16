@@ -50,7 +50,7 @@ namespace FolderApp.ViewModel.SideMenu
                 new MasterMenuItem { Id = 5, Title = "Calendario", TargetType = typeof(NoDisponiblePage), Icon = (string)resources["calendarioIcon"]},
                 new MasterMenuItem { Id = 6, Title = "Equipos - Proyectos", TargetType = typeof(NoDisponiblePage), Icon = (string)resources["equiposIcon"]},
                 new MasterMenuItem { Id = 7, Title = "Tickets", TargetType = typeof(NoDisponiblePage), Icon = (string)resources["ticketsIcon"]},
-                new MasterMenuItem { Id = 8, Title = "F.A.Q.", TargetType = typeof(NoDisponiblePage), Icon = (string)resources["faqIcon"]},
+                new MasterMenuItem { Id = 8, Title = "F.A.Q.", TargetType = typeof(FAQPage), Icon = (string)resources["faqIcon"]},
             });
 
             Avatar = GetAvatarOrDefault(App.User.AvatarUrl, Name);
@@ -90,6 +90,10 @@ namespace FolderApp.ViewModel.SideMenu
             if (selectedItem.TargetType == typeof(NoDisponiblePage))
             {
                 await (App.Current.MainPage as MasterDetailPage).Detail.Navigation.PushAsync(new NoDisponiblePage(selectedItem.Title));
+            }
+            if (selectedItem.TargetType == typeof(FAQPage))
+            {
+                await (App.Current.MainPage as MasterDetailPage).Detail.Navigation.PushAsync(new FAQPage());
             }
             (App.Current.MainPage as MasterDetailPage).IsPresented = false;
         }

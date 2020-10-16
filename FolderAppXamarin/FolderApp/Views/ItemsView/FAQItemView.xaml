@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FolderApp.Views.ItemsView.FAQItemView">
+  <ContentView.Content>
+        <Expander>
+            <Expander.Header>
+                <Label Text="{Binding Title}" TextType="Html" FontFamily="{StaticResource RalewayBold}" FontSize="Medium" Padding="0,5"/>
+            </Expander.Header>
+            <Expander.Content>
+                <Label Text="{Binding Content}" TextType="Html" Padding="10,0"/>
+            </Expander.Content>
+        </Expander>
+    </ContentView.Content>
+</ContentView>
